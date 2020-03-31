@@ -1,0 +1,5 @@
+FOLDER_NAME_APPLICATIONS = '/Applications'
+FOLDER_NAME_USERS = '/Users'
+FOLDER_NAME_LIBRARY = '/Library'
+SIMPLE_LOGS = 'logs'
+CAPITAL_LOGS = 'Logs'
