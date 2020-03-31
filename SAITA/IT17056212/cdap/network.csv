@@ -1,0 +1,9 @@
+yes,yes,yes,yes,tech
+yes,no,yes,yes,tech
+no,no,yes,yes,non-tech
+no,no,no,no,non-tech
+yes,yes,no,no,tech
+no,no,yes,no,non-tech
+yes,no,yes,no,non-tech
+no,yes,no,yes,tech
+yes,no,no,yes,tech
