@@ -12,4 +12,4 @@ class MainController:
 
     def get_soft_list(self):
         db_soft_list = self.soft.get_all_software()
-        print(db_soft_list)
+        print(db_soft_list[0]['name'])
