@@ -9,7 +9,7 @@ class DBConnection(object):
         """Creates return new Singleton database connection"""
         if new or not cls.mydb:
             cls.mydb = mysql.connector.connect(
-                host="192.168.1.104",
+                host="192.168.1.102",
                 user="root",
                 passwd="passw0rd",
                 database="saita_slis_db",
