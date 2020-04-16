@@ -6,6 +6,8 @@ import log_path
 
 pattern = "*log"
 log_no_extension = []
+
+
 def get_log_no_extension():
     for root in log_path.get_log_path_list():
         for path, subdirs, files in os.walk(root):
@@ -15,6 +17,5 @@ def get_log_no_extension():
     return log_no_extension
 
 
-all_output_list = []
-all_output_list.append('\n'.join(get_log_no_extension()))
+all_output_list = ['\n'.join(get_log_no_extension())]
 access_file_details.add_log_details(all_output_list, "logNoExtension.txt")
