@@ -1,6 +1,8 @@
 import subprocess
+from StartScipt import IssuedService
 
-params = ['EventSystem']  # POWERSHELL SCRIPT PARAMETERS ( optional )
+
+params = [IssuedService]  # POWERSHELL SCRIPT PARAMETERS ( optional )
 
 script_path = "C:\\Users\\Pulasthi\\PycharmProjects\\CDAP_SAITA\\StartService.ps1"  # POWERSHELL SCRIPT PATH
 commandline_options = ["Powershell.exe", '-ExecutionPolicy', 'Unrestricted', script_path]  # INITIALIZING COMMAND
