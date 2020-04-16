@@ -1,4 +1,5 @@
 import mysql.connector
+from Veriables import *
 
 
 class DBConnection(object):
@@ -9,10 +10,10 @@ class DBConnection(object):
         """Creates return new Singleton database connection"""
         if new or not cls.mydb:
             cls.mydb = mysql.connector.connect(
-                host="192.168.1.104",
-                user="root",
-                passwd="passw0rd",
-                database="saita_slis_db",
+                host=sql_server,
+                user=sql_uname,
+                passwd=sql_password,
+                database=sql_db,
             )
 
         return cls.mydb
@@ -22,11 +23,11 @@ class DBConnection(object):
         """execute query on singleton db connection"""
         connection = cls.get_connection()
         try:
-            cursor = connection.cursor()
+            cursor = connection.cursor(dictionary=True)
         except mysql.ProgrammingError:
             connection = cls.get_connection(new=True)  # Create new connection
-            cursor = connection.cursor()
-        cursor.execute(query,value)
+            cursor = connection.cursor(dictionary=True)
+        cursor.execute(query, value)
         result = cursor.fetchall()
         cursor.close()
         return result

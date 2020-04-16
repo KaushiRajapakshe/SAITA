@@ -6,7 +6,7 @@ class Software:
 
     @classmethod
     def __init__(self):
-        self.db = db = DBConnection()
+        self.db = DBConnection()
 
 # get all software list from db
     @classmethod
@@ -16,7 +16,7 @@ class Software:
 # get all software version list from db
     @classmethod
     def get_all_version(cls, soft_id):
-        return cls.db.execute_query('Select * from version where del=%s and softId=$s', ('0', soft_id))
+        return cls.db.execute_query('Select * from Version where del=%s and softId=$s', ('0', soft_id))
 
 # get all dependency list for version from db
     @classmethod
