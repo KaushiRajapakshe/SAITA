@@ -26,7 +26,7 @@ class DBConnection(object):
             cursor = connection.cursor(dictionary=True)
         except mysql.ProgrammingError:
             connection = cls.get_connection(new=True)  # Create new connection
-            cursor = connection.cursor()
+            cursor = connection.cursor(dictionary=True)
         cursor.execute(query, value)
         result = cursor.fetchall()
         cursor.close()
