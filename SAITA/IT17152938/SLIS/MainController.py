@@ -10,6 +10,17 @@ class MainController:
         self.soft = Software()
         self.osdata = Osdata()
 
+    # get complete software data set
     def get_soft_list(self):
         db_soft_list = self.soft.get_all_software()
-        print(db_soft_list[0]['name'])
+        installed_list = self.osdata.get_installed_soft_list()
+        for app in installed_list:
+            for db_app in db_soft_list:
+                sp_len = len(app.name.split(db_app['name']))
+                if sp_len != 1:
+                    print(app.name+"\t"+db_app['name'])
+                    print(app.version)
+                    db_app['installed'] = 1
+                    break
+
+        print(db_soft_list)
