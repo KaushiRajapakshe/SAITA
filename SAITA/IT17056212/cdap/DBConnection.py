@@ -22,8 +22,8 @@ def select_query(query):
     return results
 
 
-y = select_query("SELECT nq_one,nq_two,nq_three,nq_four,category FROM network_categorizer")
-# z = select_query("SELECT error_msg,error_code,connection_type,issue_id FROM network_errors_msg")
+#y = select_query("SELECT nq_one,nq_two,nq_three,nq_four,category FROM network_categorizer")
+z = select_query("SELECT error_msg,error_code,connection_type,issue_id FROM network_errors_msg")
 # for row in results:
 #    fname = row[1]
 
