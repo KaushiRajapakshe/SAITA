@@ -18,9 +18,11 @@ class MainController:
             for db_app in db_soft_list:
                 sp_len = len(app.name.split(db_app['name']))
                 if sp_len != 1:
-                    print(app.name+"\t"+db_app['name'])
+                    print(app.name + "\t" + db_app['name'])
                     print(app.version)
                     db_app['installed'] = 1
-                    break
+                    if not 'installed_ver' in db_app:
+                        db_app['installed_ver'] = []
+                    db_app['installed_ver'].append(app.version)
 
-        print(db_soft_list)
+        return db_soft_list
