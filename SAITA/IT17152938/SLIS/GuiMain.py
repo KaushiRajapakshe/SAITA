@@ -3,6 +3,7 @@ from Software import Software
 from Veriables import *
 from win32api import GetMonitorInfo, MonitorFromPoint
 from PIL import ImageTk, Image
+from GuiCanvas import *
 
 soft = Software()
 root = Tk()
@@ -75,7 +76,7 @@ img = Image.open(logo)
 new_img_w, new_img_h = img.size
 new_img_w *= acc_ra*logo_div
 new_img_h *= acc_ra*logo_div
-img = img.resize((round(new_img_w) , round(new_img_h)))
+img = img.resize((round(new_img_w), round(new_img_h)))
 title_img = ImageTk.PhotoImage(img)
 # title_img = ImageTk.PhotoImage(Image.open(logo))
 title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg,)
@@ -118,7 +119,7 @@ def return_to_normal_state(event):
     mini_button['bg'] = title_bar_bg
 
 
-# acction bind
+# action bind
 # title_bar.bind('<B1-Motion>', move_window)
 close_button.bind('<Enter>', close_btn_on_hovering)
 close_button.bind('<Leave>', return_to_normal_state)
