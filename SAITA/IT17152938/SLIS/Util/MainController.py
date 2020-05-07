@@ -1,5 +1,5 @@
-from Software import Software
-from Osdata import Osdata
+from Util.Software import Software
+from Util.Osdata import Osdata
 
 
 class MainController:

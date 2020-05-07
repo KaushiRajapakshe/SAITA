@@ -1,4 +1,4 @@
-from DBConnection import DBConnection
+from Util.DBConnection import DBConnection
 
 
 class Software:

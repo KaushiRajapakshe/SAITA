@@ -1,5 +1,4 @@
-from Software import Software
-from Gui.GuiCanvas import *
+from Util.Software import Software
 
 soft = Software()
 root = Tk()

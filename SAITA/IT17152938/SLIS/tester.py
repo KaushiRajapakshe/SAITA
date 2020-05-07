@@ -1,6 +1,5 @@
-import winapps_change
 import tkinter as tkr
-from MainController import MainController
+from Util.MainController import MainController
 
 
 maincon = MainController()
