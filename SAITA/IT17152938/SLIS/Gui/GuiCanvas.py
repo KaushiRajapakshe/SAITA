@@ -3,6 +3,8 @@ from win32api import GetMonitorInfo, MonitorFromPoint, EnumDisplayMonitors
 from PIL import ImageTk, Image
 from Data.Veriables import *
 from Data.Log import *
+from Util.MainController import MainController
+import math
 
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -88,13 +90,18 @@ def create_body_show_window(full_window):
     body_window_canves.pack(expand=1, fill=BOTH)
     body_window_canves.create_window((0, 0), window=body_window, anchor='nw')
     body_window.bind("<Configure>", scroll_all)
-    create_body_data()
+    main_con = MainController()
+    soft_list = main_con.get_soft_list()
+    create_body_data(soft_list)
     return main_body_window
 
 
 def search_soft(event):
     global i, search_box
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
+    main_con = MainController()
+    soft_list = main_con.get_soft_list()
+    create_body_data(soft_list)
 
 
 def search_button_hover_in(event):
@@ -112,12 +119,31 @@ def search_button_hover_out(event):
 def scroll_all(event):
     global body_window_canves
     add_log(log_types[2], "GuiCanvas.py", "scroll_all : " + str(event))
-    body_window_canves.configure(scrollregion=body_window_canves.bbox("all"), width=200, height=200)
+    body_window_canves.configure(scrollregion=body_window_canves.bbox("all"))
 
 
-def create_body_data():
-    global body_window
-    for i in range(50):
-        Label(body_window, text=i, bg=body_window_color).grid(row=i, column=0)
-        Label(body_window, text="my text" + str(i), bg=body_window_color).grid(row=i, column=1)
-        Label(body_window, text="..........", bg=body_window_color).grid(row=i, column=2)
+def create_body_data(soft_list):
+    global body_window,work_area
+    wid = round((work_area[2]-(round(20 * acc_ra) *12))/coll_count)
+    print(round(20 * acc_ra) *5)
+    add_log(log_types[2], "GuiCanvas.py", "create_body_data : " + str(soft_list))
+    ch = 0
+    x_range =math.ceil(len(soft_list) / coll_count)
+    # x_range = 50
+    for x in range(x_range):
+        # row_frame = Frame(body_window, bg=body_window_color, highlightthickness=0)
+        for y in range(coll_count):
+            if ch == len(soft_list):
+                break
+            else:
+                singal_frame = Frame(body_window, bg=body_window_color, highlightthickness=0, padx=20 * acc_ra, pady=20 * acc_ra)
+                singal_frame_in= Canvas(singal_frame, bg=cell_bg, highlightthickness=0, width=wid, height=wid)
+                soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color, font="bold")
+                singal_frame.grid(row=x, column=y)
+                singal_frame_in.grid(row=0, column=0)
+                # singal_frame.grid_propagate(False)
+                singal_frame_in.grid_propagate(False)
+                soft_topic.grid(row=0, column=0)
+                soft_topic.grid_propagate(False)
+                ch += 1
+        # row_frame.pack(fill=X)
