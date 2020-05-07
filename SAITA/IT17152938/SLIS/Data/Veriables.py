@@ -1,8 +1,10 @@
+log_enable = True
 sql_server = "192.168.1.101"
 sql_db = "saita_slis_db"
 sql_uname = "root"
 sql_password = "passw0rd"
-logo = "..\Icon\logo.ico"
+log_file = "slis.log"
+logo = "../Icon/logo.ico"
 logo_div = 0.3
 title_bar_bg = "#3a3a3a"
 window_bg = "#ffffff"
