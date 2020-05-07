@@ -1,4 +1,6 @@
-log_enable = True
+log_enable_all = True
+log_enable_error = True
+log_enable_warning = True
 sql_server = "192.168.1.101"
 sql_db = "saita_slis_db"
 sql_uname = "root"
