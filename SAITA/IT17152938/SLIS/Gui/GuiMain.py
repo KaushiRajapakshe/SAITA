@@ -1,6 +1,5 @@
-from Util.Software import Software
+from Gui.GuiCanvas import *
 
-soft = Software()
 root = Tk()
 # turns off title bar
 root.overrideredirect(True)
@@ -11,7 +10,7 @@ root.iconbitmap(logo)
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
 work_area = monitor_fo.get("Work")
-acc_ra = work_area[3]/work_area[2]
+acc_ra = work_area[3] / work_area[2]
 screen_size = "{}x{}".format(work_area[2], work_area[3])
 
 # set new geometry
@@ -69,12 +68,12 @@ title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_
 # title bar img
 img = Image.open(logo)
 new_img_w, new_img_h = img.size
-new_img_w *= acc_ra*logo_div
-new_img_h *= acc_ra*logo_div
+new_img_w *= acc_ra * logo_div
+new_img_h *= acc_ra * logo_div
 img = img.resize((round(new_img_w), round(new_img_h)))
 title_img = ImageTk.PhotoImage(img)
 # title_img = ImageTk.PhotoImage(Image.open(logo))
-title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg,)
+title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg, )
 
 # a canvas for the main area of the window
 window = Canvas(root, bg="white", highlightthickness=0)
