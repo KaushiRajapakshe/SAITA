@@ -7,10 +7,6 @@ root.overrideredirect(True)
 # set taskbar icon
 root.iconbitmap(logo)
 
-# get monitor working aria size
-monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
-work_area = monitor_fo.get("Work")
-acc_ra = work_area[3] / work_area[2]
 screen_size = "{}x{}".format(work_area[2], work_area[3])
 
 # set new geometry
@@ -76,7 +72,7 @@ title_img = ImageTk.PhotoImage(img)
 title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg, )
 
 # a canvas for the main area of the window
-window = Canvas(root, bg="white", highlightthickness=0)
+window = create_full_show_window(root)
 
 # pack the widgets
 title_bar.pack(fill=X)
