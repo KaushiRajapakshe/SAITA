@@ -1,9 +1,5 @@
-from tkinter import *
 from Software import Software
-from Veriables import *
-from win32api import GetMonitorInfo, MonitorFromPoint
-from PIL import ImageTk, Image
-from GuiCanvas import *
+from Gui.GuiCanvas import *
 
 soft = Software()
 root = Tk()
