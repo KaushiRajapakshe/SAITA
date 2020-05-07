@@ -1,5 +1,5 @@
 import mysql.connector
-from Veriables import *
+from Data.Veriables import *
 
 
 class DBConnection(object):
