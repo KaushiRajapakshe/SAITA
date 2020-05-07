@@ -13,12 +13,14 @@ screen_size = "{}x{}".format(work_area[2], work_area[3])
 root.geometry(screen_size + '+0+0')
 
 
-def mini_screen():
+def mini_screen(event):
     root.overrideredirect(False)
+    add_log(log_types[2], "GuiMain.py", "mini_screen : " + str(event))
     root.iconify()
 
 
 def max_screen(event):
+    add_log(log_types[2], "GuiMain.py", "max_screen : " + str(event))
     root.overrideredirect(True)
 
 
@@ -46,7 +48,6 @@ close_button = Button(title_bar,
 # minimuice button
 mini_button = Button(title_bar,
                      text='-',
-                     command=mini_screen,
                      bg=title_bar_bg,
                      padx=5,
                      pady=2,
@@ -59,7 +60,7 @@ mini_button = Button(title_bar,
                      )
 
 # window title
-title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_txt_color)
+title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_txt_color, font="bold")
 
 # title bar img
 img = Image.open(logo)
@@ -89,22 +90,26 @@ y_axis = None
 
 
 def move_window(event):
+    add_log(log_types[2], "GuiMain.py", "Move Window : "+str(event))
     root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
 
 
 def close_btn_on_hovering(event):
     global close_button
+    add_log(log_types[2], "GuiMain.py", "close_btn_on_hovering : " + str(event))
     close_button['bg'] = close_but_acc_bg
 
 
 def mini_btn_on_hovering(event):
     global mini_button
+    add_log(log_types[2], "GuiMain.py", "mini_btn_on_hovering : " + str(event))
     mini_button['bg'] = mini_but_acc_bg
 
 
 def return_to_normal_state(event):
     global close_button
     global mini_button
+    add_log(log_types[2], "GuiMain.py", "return_to_normal_state : " + str(event))
     close_button['bg'] = title_bar_bg
     mini_button['bg'] = title_bar_bg
 
@@ -116,4 +121,5 @@ close_button.bind('<Leave>', return_to_normal_state)
 mini_button.bind('<Enter>', mini_btn_on_hovering)
 mini_button.bind('<Leave>', return_to_normal_state)
 title_bar.bind('<Map>', max_screen)
+mini_button.bind('<Button-1>', mini_screen)
 root.mainloop()
