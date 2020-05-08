@@ -1,6 +1,7 @@
 import mysql.connector
 from Data.Veriables import sql_server, sql_db, sql_uname, sql_password
 from Data.Log import *
+from mysql.connector.errors import *
 
 
 class DBConnection(object):
@@ -8,15 +9,23 @@ class DBConnection(object):
 
     @classmethod
     def get_connection(cls, new=False):
-        """Creates return new Singleton database connection"""
         if new or not cls.mydb:
-            cls.mydb = mysql.connector.connect(
-                host=sql_server,
-                user=sql_uname,
-                passwd=sql_password,
-                database=sql_db,
-            )
-            add_log(log_types[2], "DBConnection", "Create new DB object")
+            try:
+                cls.mydb = mysql.connector.connect(
+                    host=sql_server,
+                    user=sql_uname,
+                    passwd=sql_password,
+                    database=sql_db,
+                )
+                add_log(log_types[2], "DBConnection", "Create new DB object")
+            except TimeoutError as err:
+                add_log(log_types[0], "DBConnection", "TimeoutError : "+str(err))
+            except InterfaceError as err:
+                add_log(log_types[0], "DBConnection", "InterfaceError : " + str(err))
+            except AttributeError as err:
+                add_log(log_types[0], "DBConnection", "AttributeError : " + str(err))
+            except ProgrammingError as err:
+                add_log(log_types[0], "DBConnection", "ProgrammingError : " + str(err))
 
         return cls.mydb
 
