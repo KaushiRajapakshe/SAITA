@@ -1,3 +1,4 @@
+import urllib
 from tkinter import *
 from win32api import GetMonitorInfo, MonitorFromPoint, EnumDisplayMonitors
 from PIL import ImageTk, Image
@@ -43,14 +44,14 @@ def create_head_show_window(full_window):
                        bg=main_search_color_bg,
                        fg=main_search_color_txt,
                        font="bold",
-                       width=round(50 * acc_ra)
+                       width=round(main_search_width * acc_ra)
                        )
     search_box.pack(
         side=LEFT,
-        padx=20 * acc_ra,
-        pady=20 * acc_ra,
-        ipadx=20 * acc_ra,
-        ipady=20 * acc_ra
+        padx=pad_val * acc_ra,
+        pady=pad_val * acc_ra,
+        ipadx=pad_val * acc_ra,
+        ipady=pad_val * acc_ra
 
     )
 
@@ -67,10 +68,10 @@ def create_head_show_window(full_window):
 
     search_but.pack(
         side=LEFT,
-        padx=20 * acc_ra,
-        pady=20 * acc_ra,
-        ipadx=20 * acc_ra,
-        ipady=20 * acc_ra
+        padx=pad_val * acc_ra,
+        pady=pad_val * acc_ra,
+        ipadx=pad_val * acc_ra,
+        ipady=pad_val * acc_ra
 
     )
 
@@ -84,8 +85,8 @@ def create_head_show_window(full_window):
 
 def create_body_show_window(full_window):
     global body_window, body_window_canves
-    main_body_window = Frame(full_window, bg=body_window_color, highlightthickness=0, padx=20 * acc_ra,
-                             pady=20 * acc_ra)
+    main_body_window = Frame(full_window, bg=body_window_color, highlightthickness=0, padx=pad_val * acc_ra,
+                             pady=pad_val * acc_ra)
     body_window_canves = Canvas(main_body_window, bg=body_window_color, highlightthickness=0)
     body_window = Frame(body_window_canves, bg=body_window_color)
     body_scrollbar = Scrollbar(main_body_window, orient="vertical", command=body_window_canves.yview)
@@ -129,8 +130,9 @@ def scroll_all(event):
 def create_body_data(soft_list):
     global body_window, work_area, acc_ra, soft_img_array
     soft_img_array = []
-    wid = round((work_area[2] - (round(20 * acc_ra) * coll_count)) / coll_count)
-    print(round(20 * acc_ra) * 5)
+    wid = round((work_area[2] - (round(pad_val * acc_ra) * coll_count)) / coll_count)
+    soft_title_f_size = round((soft_title_f_size_dev / coll_count) / acc_ra)
+    soft_ver_f_size = round((soft_ver_f_size_dev / coll_count) / acc_ra)
     add_log(log_types[2], "GuiCanvas.py", "create_body_data : " + str(soft_list))
     ch = 0
     x_range = math.ceil(len(soft_list) / coll_count)
@@ -142,7 +144,7 @@ def create_body_data(soft_list):
                 break
             else:
                 singal_frame = Frame(row_frame, bg=body_window_color, highlightthickness=0, width=wid, height=wid,
-                                     padx=20 * acc_ra, pady=20 * acc_ra)
+                                     padx=pad_val * acc_ra, pady=pad_val * acc_ra)
                 singal_frame_in = Frame(singal_frame, bg=cell_bg, width=wid, height=wid,
                                         relief='raised',
                                         bd=0)
@@ -152,11 +154,17 @@ def create_body_data(soft_list):
                 singal_frame_in.pack_propagate(0)
 
                 # soft image
-                url_img = 'http://192.168.1.102/SLIS/jdk/img/icon.png'
-                soft_img = Image.open(urlopen(url_img))
+                url_img = img_location + soft_list[ch]['img']
+                soft_img = None
+                try:
+                    soft_img = Image.open(urlopen(url_img))
+                except urllib.error.HTTPError as err:
+                    add_log(log_types[1], "GuiCanvas.py", "Image not found in : " + url_img+" error : "+str(err))
+                    soft_img = Image.open(not_found_img)
+
                 soft_img_w, soft_img_h = soft_img.size
-                soft_img_w *= acc_ra * soft_img_dev
-                soft_img_h *= acc_ra * soft_img_dev
+                soft_img_w /= (coll_count * soft_img_dev)
+                soft_img_h /= (coll_count * soft_img_dev)
                 soft_img = soft_img.resize((round(soft_img_w), round(soft_img_h)))
                 soft_img_get = ImageTk.PhotoImage(soft_img)
                 soft_img_array.append(soft_img_get)
@@ -164,8 +172,44 @@ def create_body_data(soft_list):
                 soft_img_labal.pack(expand=True, fill='x')
                 # soft name
                 soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color,
-                                   font="bold")
+                                   font="bold", pady=0)
+                soft_topic.config(font=("arial", soft_title_f_size))
                 soft_topic.pack(expand=True, fill='x')
+
+                # -------------------version frame---------------------
+                ver_frame = Frame(singal_frame_in, bg=cell_bg,
+                                  relief='raised',
+                                  bd=0)
+                ver_frame.pack(expand=True, fill=X)
+                # version Labal
+                soft_ver_la = Label(ver_frame, text="Version : ", bg=cell_bg, fg=cell_topic_txt_color,
+                                    font="bold", )
+                soft_ver_la.config(font=("arial", soft_ver_f_size))
+                soft_ver_la.pack(expand=True, side=LEFT)
+
+                # version Box
+                soft_ver_box = Label(ver_frame, text="Version : ", bg=cell_bg, fg=cell_topic_txt_color,
+                                     font="bold", )
+                soft_ver_box.config(font=("arial", soft_ver_f_size))
+                soft_ver_box.pack(expand=True, side=LEFT)
+
+                # ----------------------------------------
+
+                # add button
+                soft_add_butt = Button(singal_frame_in,
+                                       text='+',
+                                       bg=title_bar_bg,
+                                       padx=5,
+                                       pady=2,
+                                       activebackground=close_but_acc_bg,
+                                       bd=0,
+                                       font="bold",
+                                       fg=title_bar_but_txt_color,
+                                       activeforeground=title_bar_but_txt_color,
+                                       highlightthickness=0
+                                       )
+                soft_add_butt.config(font=("arial", soft_title_f_size * 2))
+                soft_add_butt.pack(expand=True, fill=X)
 
                 ch += 1
         row_frame.pack(fill=X)
