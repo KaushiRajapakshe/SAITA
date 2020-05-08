@@ -1,7 +1,7 @@
 log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
-sql_server = "192.168.1.101"
+sql_server = "192.168.1.102"
 sql_db = "saita_slis_db"
 sql_uname = "root"
 sql_password = "passw0rd"
@@ -28,3 +28,4 @@ main_search_but_txt = "Search"
 cell_bg = "#3a3a3a"
 cell_topic_txt_color = "#ffffff"
 coll_count = 4
+soft_img_dev = 0.3

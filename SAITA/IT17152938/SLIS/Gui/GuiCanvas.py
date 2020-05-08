@@ -5,6 +5,7 @@ from Data.Veriables import *
 from Data.Log import *
 from Util.MainController import MainController
 import math
+from urllib.request import urlopen
 
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -21,6 +22,9 @@ search_but = None
 # body
 body_window = None
 body_window_canves = None
+
+# img array
+soft_img_array = None
 
 
 def create_full_show_window(win_root):
@@ -97,7 +101,7 @@ def create_body_show_window(full_window):
 
 
 def search_soft(event):
-    global i, search_box
+    global search_box
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
     main_con = MainController()
     soft_list = main_con.get_soft_list()
@@ -123,27 +127,45 @@ def scroll_all(event):
 
 
 def create_body_data(soft_list):
-    global body_window,work_area
-    wid = round((work_area[2]-(round(20 * acc_ra) *12))/coll_count)
-    print(round(20 * acc_ra) *5)
+    global body_window, work_area, acc_ra, soft_img_array
+    soft_img_array = []
+    wid = round((work_area[2] - (round(20 * acc_ra) * coll_count)) / coll_count)
+    print(round(20 * acc_ra) * 5)
     add_log(log_types[2], "GuiCanvas.py", "create_body_data : " + str(soft_list))
     ch = 0
-    x_range =math.ceil(len(soft_list) / coll_count)
+    x_range = math.ceil(len(soft_list) / coll_count)
     # x_range = 50
     for x in range(x_range):
-        # row_frame = Frame(body_window, bg=body_window_color, highlightthickness=0)
+        row_frame = Frame(body_window, bg=body_window_color, highlightthickness=0)
         for y in range(coll_count):
             if ch == len(soft_list):
                 break
             else:
-                singal_frame = Frame(body_window, bg=body_window_color, highlightthickness=0, padx=20 * acc_ra, pady=20 * acc_ra)
-                singal_frame_in= Canvas(singal_frame, bg=cell_bg, highlightthickness=0, width=wid, height=wid)
-                soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color, font="bold")
-                singal_frame.grid(row=x, column=y)
-                singal_frame_in.grid(row=0, column=0)
-                # singal_frame.grid_propagate(False)
-                singal_frame_in.grid_propagate(False)
-                soft_topic.grid(row=0, column=0)
-                soft_topic.grid_propagate(False)
+                singal_frame = Frame(row_frame, bg=body_window_color, highlightthickness=0, width=wid, height=wid,
+                                     padx=20 * acc_ra, pady=20 * acc_ra)
+                singal_frame_in = Frame(singal_frame, bg=cell_bg, width=wid, height=wid,
+                                        relief='raised',
+                                        bd=0)
+                singal_frame.pack(side=LEFT, )
+                singal_frame.pack_propagate(0)
+                singal_frame_in.pack(side=LEFT, expand=True)
+                singal_frame_in.pack_propagate(0)
+
+                # soft image
+                url_img = 'http://192.168.1.102/SLIS/jdk/img/icon.png'
+                soft_img = Image.open(urlopen(url_img))
+                soft_img_w, soft_img_h = soft_img.size
+                soft_img_w *= acc_ra * soft_img_dev
+                soft_img_h *= acc_ra * soft_img_dev
+                soft_img = soft_img.resize((round(soft_img_w), round(soft_img_h)))
+                soft_img_get = ImageTk.PhotoImage(soft_img)
+                soft_img_array.append(soft_img_get)
+                soft_img_labal = Label(singal_frame_in, image=soft_img_array[ch], bg=cell_bg, )
+                soft_img_labal.pack(expand=True, fill='x')
+                # soft name
+                soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color,
+                                   font="bold")
+                soft_topic.pack(expand=True, fill='x')
+
                 ch += 1
-        # row_frame.pack(fill=X)
+        row_frame.pack(fill=X)
