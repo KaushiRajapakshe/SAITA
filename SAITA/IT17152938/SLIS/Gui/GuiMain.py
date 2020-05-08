@@ -90,7 +90,7 @@ y_axis = None
 
 
 def move_window(event):
-    add_log(log_types[2], "GuiMain.py", "Move Window : "+str(event))
+    add_log(log_types[2], "GuiMain.py", "Move Window : " + str(event))
     root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
 
 
@@ -123,3 +123,4 @@ mini_button.bind('<Leave>', return_to_normal_state)
 title_bar.bind('<Map>', max_screen)
 mini_button.bind('<Button-1>', mini_screen)
 root.mainloop()
+

@@ -63,16 +63,15 @@ def create_head_show_window(full_window):
                         font="bold",
                         fg=main_search_but_txt_color,
                         activeforeground=main_search_but_txt_color,
-                        highlightthickness=0
+                        highlightthickness=0,
                         )
 
     search_but.pack(
         side=LEFT,
         padx=pad_val * acc_ra,
         pady=pad_val * acc_ra,
-        ipadx=pad_val * acc_ra,
-        ipady=pad_val * acc_ra
-
+        ipadx=40 * acc_ra,
+        ipady=11 * acc_ra,
     )
 
     # bind search key to event
@@ -159,7 +158,7 @@ def create_body_data(soft_list):
                 try:
                     soft_img = Image.open(urlopen(url_img))
                 except urllib.error.HTTPError as err:
-                    add_log(log_types[1], "GuiCanvas.py", "Image not found in : " + url_img+" error : "+str(err))
+                    add_log(log_types[1], "GuiCanvas.py", "Image not found in : " + url_img + " error : " + str(err))
                     soft_img = Image.open(not_found_img)
 
                 soft_img_w, soft_img_h = soft_img.size
@@ -213,3 +212,6 @@ def create_body_data(soft_list):
 
                 ch += 1
         row_frame.pack(fill=X)
+
+
+
