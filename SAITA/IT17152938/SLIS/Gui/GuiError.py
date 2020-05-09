@@ -1,6 +1,7 @@
-from tkinter import *
+# from tkinter import *
 from Data.Veriables import logo, error_str_size
-
+import tkinter as tk
+from tkinter import messagebox
 
 class GuiError:
     error_root = None
@@ -10,21 +11,14 @@ class GuiError:
 
     # show error dialog
     def show(self):
-        self.error_root = Tk()
-        self.error_root.iconbitmap(logo)
-        self.error_root.title("Error")
-        Label(self.error_root, text=self.create_error(), font="bold").pack(expand=True, fill='x')
-        close_but = Button(self.error_root,
-                           text='Close',
-                           font="bold",
-                           )
-        close_but.pack(expand=True, fill='x')
-        close_but.bind('<Button-1>', GuiError.close_event)
-        self.error_root.mainloop()
+        MsgBox = tk.messagebox.showerror('Error : Exit App', self.create_error())
+        GuiError.close_event
+
 
     @staticmethod
-    def close_event(event):
+    def close_event():
         exit()
+
 
     def create_error(self):
         str_err = ""
