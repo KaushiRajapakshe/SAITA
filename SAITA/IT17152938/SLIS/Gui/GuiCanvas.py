@@ -1,12 +1,15 @@
 import urllib
 from tkinter import *
-from win32api import GetMonitorInfo, MonitorFromPoint, EnumDisplayMonitors
+from tkinter.ttk import Combobox
+
+from win32api import GetMonitorInfo, MonitorFromPoint
 from PIL import ImageTk, Image
 from Data.Veriables import *
 from Data.Log import *
 from Util.MainController import MainController
 import math
 from urllib.request import urlopen
+from Util.Software import Software
 
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -26,6 +29,12 @@ body_window_canves = None
 
 # img array
 soft_img_array = None
+
+# add_button_array
+add_button_array = None
+
+# select_box_array
+select_box_array = None
 
 
 def create_full_show_window(win_root):
@@ -70,14 +79,16 @@ def create_head_show_window(full_window):
         side=LEFT,
         padx=pad_val * acc_ra,
         pady=pad_val * acc_ra,
-        ipadx=40 * acc_ra,
-        ipady=11 * acc_ra,
+        ipadx=main_search_but_ipadx * acc_ra,
+        ipady=main_search_but_ipady * acc_ra,
     )
 
     # bind search key to event
     search_but.bind("<Button-1>", search_soft)
     search_but.bind("<Enter>", search_button_hover_in)
     search_but.bind("<Leave>", search_button_hover_out)
+    search_box.bind("<Return>", search_soft)
+    search_box.bind("<KeyRelease>", search_key_enter)
 
     return head_window
 
@@ -95,16 +106,25 @@ def create_body_show_window(full_window):
     body_window_canves.create_window((0, 0), window=body_window, anchor='nw')
     body_window.bind("<Configure>", scroll_all)
     main_con = MainController()
-    soft_list = main_con.get_soft_list()
+    soft_list = main_con.get_soft_list_full()
     create_body_data(soft_list)
     return main_body_window
+
+
+def search_key_enter(event):
+    global search_box
+    if search_box.get() == "":
+        add_log(log_types[2], "GuiCanvas.py", "search_key_enter : " + str(event) + "  Data : Empty search bar")
+        main_con = MainController()
+        soft_list = main_con.get_soft_list_full()
+        create_body_data(soft_list)
 
 
 def search_soft(event):
     global search_box
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
     main_con = MainController()
-    soft_list = main_con.get_soft_list()
+    soft_list = main_con.get_soft_list_search(search_box.get())
     create_body_data(soft_list)
 
 
@@ -127,8 +147,13 @@ def scroll_all(event):
 
 
 def create_body_data(soft_list):
-    global body_window, work_area, acc_ra, soft_img_array
+    global body_window, work_area, acc_ra, soft_img_array, add_button_array ,select_box_array
+    # soft_img_array = None
     soft_img_array = []
+    # add_button_array = None
+    add_button_array = []
+    # select_box_array = None
+    select_box_array = []
     wid = round((work_area[2] - (round(pad_val * acc_ra) * coll_count)) / coll_count)
     soft_title_f_size = round((soft_title_f_size_dev / coll_count) / acc_ra)
     soft_ver_f_size = round((soft_ver_f_size_dev / coll_count) / acc_ra)
@@ -136,6 +161,10 @@ def create_body_data(soft_list):
     ch = 0
     x_range = math.ceil(len(soft_list) / coll_count)
     # x_range = 50
+    # clear body window
+    for widget in body_window.winfo_children():
+        widget.destroy()
+
     for x in range(x_range):
         row_frame = Frame(body_window, bg=body_window_color, highlightthickness=0)
         for y in range(coll_count):
@@ -187,14 +216,15 @@ def create_body_data(soft_list):
                 soft_ver_la.pack(expand=True, side=LEFT)
 
                 # version Box
-                soft_ver_box = Label(ver_frame, text="Version : ", bg=cell_bg, fg=cell_topic_txt_color,
-                                     font="bold", )
-                soft_ver_box.config(font=("arial", soft_ver_f_size))
-                soft_ver_box.pack(expand=True, side=LEFT)
+                soft_ver_box = create_Combobox(ver_frame, soft_list[ch])
+                select_box_array.append(soft_ver_box)
+                select_box_array[ch].config(font=("arial", soft_ver_f_size))
+                select_box_array[ch].pack(expand=True, side=LEFT)
 
                 # ----------------------------------------
 
                 # add button
+
                 soft_add_butt = Button(singal_frame_in,
                                        text='+',
                                        bg=title_bar_bg,
@@ -207,11 +237,30 @@ def create_body_data(soft_list):
                                        activeforeground=title_bar_but_txt_color,
                                        highlightthickness=0
                                        )
+
                 soft_add_butt.config(font=("arial", soft_title_f_size * 2))
                 soft_add_butt.pack(expand=True, fill=X)
-
+                add_button_array.append(soft_add_butt)
+                add_button_array[ch].bind("<Button-1>", lambda eff, soft_id_get=soft_list[ch]['id'], array_id_pass=ch:
+                add_click(eff, soft_id=soft_id_get, array_id=array_id_pass))
                 ch += 1
         row_frame.pack(fill=X)
 
 
+def add_click(event, soft_id, array_id):
+    global select_box_array
+    select_text=select_box_array[array_id].get()
+    print(select_text)
+    select_text_split=select_text.split(" , ")
+    print(select_text_split)
+    select_ver_id =select_text_split[0]
+    print(select_ver_id)
+    print(soft_id, array_id)
 
+def create_Combobox(frame,object):
+    ver_array=[]
+    for ver in Software().get_all_version(object['id']):
+        ver_array.append(str(ver['id'])+" , "+ver['v_no']+" , "+ver['v_name'])
+
+    com_box = Combobox(frame, values=ver_array, font="bold")
+    return com_box;

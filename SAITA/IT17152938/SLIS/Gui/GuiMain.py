@@ -1,16 +1,29 @@
 from Gui.GuiCanvas import *
 
 root = Tk()
+# root = Toplevel(top)
+# top.attributes("-alpha", 0.0)
 # turns off title bar
 root.overrideredirect(True)
 
 # set taskbar icon
+# top.iconbitmap(logo)
 root.iconbitmap(logo)
 
 screen_size = "{}x{}".format(work_area[2], work_area[3])
 
 # set new geometry
 root.geometry(screen_size + '+0+0')
+
+
+def show_task(event):
+    root.overrideredirect(False)
+    add_log(log_types[2], "GuiMain.py", "show_task : " + str(event))
+
+
+def unshow_task(event):
+    root.overrideredirect(True)
+    add_log(log_types[2], "GuiMain.py", "unshow_task : " + str(event))
 
 
 def mini_screen(event):
@@ -22,6 +35,8 @@ def mini_screen(event):
 def max_screen(event):
     add_log(log_types[2], "GuiMain.py", "max_screen : " + str(event))
     root.overrideredirect(True)
+    # top.overrideredirect(False)
+    # top.iconify()
 
 
 # make a frame for the title bar
@@ -114,6 +129,13 @@ def return_to_normal_state(event):
     mini_button['bg'] = title_bar_bg
 
 
+# def onRootIconify(event):
+#     root.withdraw()
+#     top.iconify()
+# top.bind("<Unmap>", onRootIconify)
+# def onRootDeiconify(event):
+#     root.deiconify()
+# top.bind("<Map>", onRootDeiconify)
 # action bind
 # title_bar.bind('<B1-Motion>', move_window)
 close_button.bind('<Enter>', close_btn_on_hovering)
@@ -122,5 +144,8 @@ mini_button.bind('<Enter>', mini_btn_on_hovering)
 mini_button.bind('<Leave>', return_to_normal_state)
 title_bar.bind('<Map>', max_screen)
 mini_button.bind('<Button-1>', mini_screen)
-root.mainloop()
+# top.bind("<Map>", max_screen)
+# root.bind('<FocusOut>', mini_screen2)
+# root.bind('<Map>', unshow_task)
 
+root.mainloop()
