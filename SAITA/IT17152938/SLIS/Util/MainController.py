@@ -11,8 +11,14 @@ class MainController:
         self.osdata = Osdata()
 
     # get complete software data set
-    def get_soft_list(self):
-        db_soft_list = self.soft.get_all_software()
+    def get_soft_list_full(self):
+        return self.get_soft_list(self.soft.get_all_software())
+
+    # get serch software data set
+    def get_soft_list_search(self, soft):
+        return self.get_soft_list(self.soft.get_search_software(soft))
+
+    def get_soft_list(self, db_soft_list):
         installed_list = self.osdata.get_installed_soft_list()
         for app in installed_list:
             for db_app in db_soft_list:
