@@ -1,7 +1,8 @@
 import urllib
 from tkinter import *
 from tkinter.ttk import Combobox
-
+from urllib.error import *
+from tkinter.messagebox import *
 from win32api import GetMonitorInfo, MonitorFromPoint
 from PIL import ImageTk, Image
 from Data.Veriables import *
@@ -36,6 +37,7 @@ add_button_array = None
 # select_box_array
 select_box_array = None
 select_box_value_array = None
+
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
@@ -187,8 +189,11 @@ def create_body_data(soft_list):
                 soft_img = None
                 try:
                     soft_img = Image.open(urlopen(url_img))
-                except urllib.error.HTTPError as err:
+                except HTTPError as err:
                     add_log(log_types[1], "GuiCanvas.py", "Image not found in : " + url_img + " error : " + str(err))
+                    soft_img = Image.open(not_found_img)
+                except URLError as err:
+                    add_log(log_types[0], "GuiCanvas.py", "Cant connect resources server : " + str(err))
                     soft_img = Image.open(not_found_img)
 
                 soft_img_w, soft_img_h = soft_img.size
@@ -219,8 +224,11 @@ def create_body_data(soft_list):
                 # version Box
                 soft_ver_box = create_combobox(ver_frame, soft_list[ch])
                 select_box_array.append(soft_ver_box)
-                select_box_array[ch].config(font=("arial", round(soft_ver_f_size*0.7)))
+                select_box_array[ch].config(font=("arial", round(soft_ver_f_size * 0.7)))
                 select_box_array[ch].pack(expand=True, side=LEFT)
+                select_box_array[ch].bind("<<ComboboxSelected>>",
+                                          lambda eff, array_id_pass=ch, get_soft_name=soft_list[ch]['name']:
+                                          select_box_change(eff, array_id=array_id_pass, soft_name=get_soft_name))
 
                 # ----------------------------------------
 
@@ -228,33 +236,50 @@ def create_body_data(soft_list):
 
                 soft_add_butt = Button(singal_frame_in,
                                        text='+',
-                                       bg=title_bar_bg,
-                                       activebackground=close_but_acc_bg,
+                                       bg=soft_add_butt_bg,
+                                       activebackground=soft_add_butt_acc,
                                        bd=0,
                                        font="bold",
-                                       fg=title_bar_but_txt_color,
-                                       activeforeground=title_bar_but_txt_color,
+                                       fg=soft_add_butt_txt,
+                                       activeforeground=soft_add_butt_txt,
                                        highlightthickness=0
                                        )
 
                 soft_add_butt.config(font=("arial", round(soft_title_f_size * 1.5)))
-                soft_add_butt.pack(expand=True)
+                soft_add_butt.pack(expand=True, fill=X)
                 add_button_array.append(soft_add_butt)
                 add_button_array[ch].bind("<Button-1>", lambda eff, soft_id_get=soft_list[ch]['id'], array_id_pass=ch:
                 add_click(eff, soft_id=soft_id_get, array_id=array_id_pass))
+                add_button_array[ch].bind("<Enter>", lambda eff, array_id_pass=ch:
+                add_btn_on_hovering(eff, add_id=array_id_pass))
+                add_button_array[ch].bind("<Leave>", lambda eff, array_id_pass=ch:
+                add_but_return_to_normal_state(eff, add_id=array_id_pass))
                 ch += 1
         row_frame.pack(fill=X)
+
+
+def select_box_change(event, array_id, soft_name):
+    global select_box_array
+    select_text_point = select_box_array[array_id].current()
+    if select_text_point != -1:
+        select_text = select_box_array[array_id].get()
+        select_text_split = select_text.split('installed')
+        if len(select_text_split) > 1:
+            select_box_array[array_id].set('')
+            showwarning("Warning", soft_name+" "+select_text_split[0]+"already installed")
 
 
 def add_click(event, soft_id, array_id):
     global select_box_array, select_box_value_array
     select_text_point = select_box_array[array_id].current()
-    print("sws   ",select_text_point)
-    ver_id_array = select_box_value_array[array_id]
-    if len(ver_id_array)> 0:
-        ver_id = ver_id_array[select_text_point]
-        print(ver_id)
-        print(soft_id, array_id)
+    if select_text_point != -1:
+        add_log(log_types[2], "GuiCanvas.py",
+                "add_click  soft_id : " + str(soft_id) + " event : " + str(event) + " array_id : " + str(array_id))
+        ver_id_array = select_box_value_array[array_id]
+        if len(ver_id_array) > 0:
+            ver_id = ver_id_array[select_text_point]
+            print(ver_id)
+            print(soft_id, array_id)
 
 
 def create_combobox(frame, object):
@@ -269,24 +294,36 @@ def create_combobox(frame, object):
         if 'installed_ver' in object:
             for inst_ver in object['installed_ver']:
                 inst_split = inst_ver.split('.')
-                inst_ok=None
+                inst_ok = None
                 v_no_split = str(ver['v_no']).split('.')
                 v_no_ok = None
-                if len(inst_split)>1:
-                    inst_ok=inst_split[0]+"."+inst_split[1]
+                if len(inst_split) > 1:
+                    inst_ok = inst_split[0] + "." + inst_split[1]
                 else:
                     inst_ok = inst_split[0] + ".0"
 
-                if len(v_no_split)>1:
-                    v_no_ok=v_no_split[0]+"."+v_no_split[1]
+                if len(v_no_split) > 1:
+                    v_no_ok = v_no_split[0] + "." + v_no_split[1]
                 else:
                     v_no_ok = v_no_split[0] + ".0"
 
                 if inst_ok == v_no_ok:
-                    txt +="  installed"
+                    txt += "  installed"
         ver_array.append(txt)
         ver_id_array.append(ver['id'])
 
     select_box_value_array.append(ver_id_array)
-    com_box = Combobox(frame, values=ver_array, font="bold",state="readonly")
+    com_box = Combobox(frame, values=ver_array, font="bold", state="readonly")
     return com_box
+
+
+def add_btn_on_hovering(event, add_id):
+    global add_button_array
+    add_log(log_types[2], "GuiMain.py", "add_btn_on_hovering : " + str(event))
+    add_button_array[add_id]['bg'] = soft_add_butt_hover
+
+
+def add_but_return_to_normal_state(event, add_id):
+    global add_button_array
+    add_log(log_types[2], "GuiMain.py", "add_but_return_to_normal_state : " + str(event))
+    add_button_array[add_id]['bg'] = soft_add_butt_bg
