@@ -1,0 +1,38 @@
+2020-05-10 14:58:33 : GuiCanvas.py
+	Info : Monitor info : {'Monitor': (0, 0, 1536, 864), 'Work': (0, 0, 1536, 824), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
+2020-05-10 14:58:33 : GuiCanvas.py
+	Info : set acc_ra: 0.5364583333333334
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0',)  query :  Select * from Software where del=%s
+2020-05-10 14:58:33 : DBConnection
+	Info : Create new DB object
+2020-05-10 14:58:33 : GuiCanvas.py
+	Info : create_body_data : [{'id': 1, 'name': 'Java', 'img': 'jdk/img/icon.png', 'del': 0, 'installed': 1, 'installed_ver': ['12.0.1.0', '8.0.1210.13']}, {'id': 2, 'name': 'Eclipse', 'img': 'eclipse/img/icon.png', 'del': 0}, {'id': 3, 'name': 'PHP', 'img': 'php/img/icon.png', 'del': 0}, {'id': 4, 'name': 'Composer', 'img': 'composer/img/icon.png', 'del': 0}, {'id': 5, 'name': 'PuTTY', 'img': 'putty/img/icon.png', 'del': 0, 'installed': 1, 'installed_ver': ['0.73.0.0']}]
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0', '1')  query :  Select * from Version where del=%s and soft_id=%s order by id desc
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0', '2')  query :  Select * from Version where del=%s and soft_id=%s order by id desc
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0', '3')  query :  Select * from Version where del=%s and soft_id=%s order by id desc
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0', '4')  query :  Select * from Version where del=%s and soft_id=%s order by id desc
+2020-05-10 14:58:33 : DBConnection
+	Info : values : ('0', '5')  query :  Select * from Version where del=%s and soft_id=%s order by id desc
+2020-05-10 14:58:33 : GuiCanvas.py
+	Info : scroll_all : <Configure event x=0 y=0 width=1492 height=374>
+2020-05-10 14:58:33 : GuiCanvas.py
+	Info : scroll_all : <Configure event x=0 y=0 width=1492 height=746>
+2020-05-10 14:58:34 : GuiMain.py
+	Info : max_screen : <Map event>
+2020-05-10 14:58:42 : GuiMain.py
+	Info : add_btn_on_hovering : <Enter event state=Mod1 focus=False x=349 y=6>
+2020-05-10 14:58:43 : GuiMain.py
+	Info : add_but_return_to_normal_state : <Leave event state=Mod1 focus=False x=265 y=81>
+2020-05-10 14:58:53 : GuiMain.py
+	Info : add_btn_on_hovering : <Enter event state=Mod1 focus=False x=241 y=79>
+2020-05-10 14:58:53 : GuiMain.py
+	Info : add_but_return_to_normal_state : <Leave event state=Mod1 focus=False x=197 y=-3>
+2020-05-10 14:58:53 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=0 y=29>
+2020-05-10 14:58:56 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=25 y=39>
