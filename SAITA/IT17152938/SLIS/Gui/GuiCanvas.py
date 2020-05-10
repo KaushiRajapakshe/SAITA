@@ -35,7 +35,7 @@ add_button_array = None
 
 # select_box_array
 select_box_array = None
-
+select_box_value_array = None
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
@@ -147,13 +147,14 @@ def scroll_all(event):
 
 
 def create_body_data(soft_list):
-    global body_window, work_area, acc_ra, soft_img_array, add_button_array ,select_box_array
+    global body_window, work_area, acc_ra, soft_img_array, add_button_array, select_box_array, select_box_value_array
     # soft_img_array = None
     soft_img_array = []
     # add_button_array = None
     add_button_array = []
     # select_box_array = None
     select_box_array = []
+    select_box_value_array = []
     wid = round((work_area[2] - (round(pad_val * acc_ra) * coll_count)) / coll_count)
     soft_title_f_size = round((soft_title_f_size_dev / coll_count) / acc_ra)
     soft_ver_f_size = round((soft_ver_f_size_dev / coll_count) / acc_ra)
@@ -210,15 +211,15 @@ def create_body_data(soft_list):
                                   bd=0)
                 ver_frame.pack(expand=True, fill=X)
                 # version Labal
-                soft_ver_la = Label(ver_frame, text="Version : ", bg=cell_bg, fg=cell_topic_txt_color,
+                soft_ver_la = Label(ver_frame, text="Version :", bg=cell_bg, fg=cell_topic_txt_color,
                                     font="bold", )
                 soft_ver_la.config(font=("arial", soft_ver_f_size))
                 soft_ver_la.pack(expand=True, side=LEFT)
 
                 # version Box
-                soft_ver_box = create_Combobox(ver_frame, soft_list[ch])
+                soft_ver_box = create_combobox(ver_frame, soft_list[ch])
                 select_box_array.append(soft_ver_box)
-                select_box_array[ch].config(font=("arial", soft_ver_f_size))
+                select_box_array[ch].config(font=("arial", round(soft_ver_f_size*0.7)))
                 select_box_array[ch].pack(expand=True, side=LEFT)
 
                 # ----------------------------------------
@@ -228,8 +229,6 @@ def create_body_data(soft_list):
                 soft_add_butt = Button(singal_frame_in,
                                        text='+',
                                        bg=title_bar_bg,
-                                       padx=5,
-                                       pady=2,
                                        activebackground=close_but_acc_bg,
                                        bd=0,
                                        font="bold",
@@ -238,8 +237,8 @@ def create_body_data(soft_list):
                                        highlightthickness=0
                                        )
 
-                soft_add_butt.config(font=("arial", soft_title_f_size * 2))
-                soft_add_butt.pack(expand=True, fill=X)
+                soft_add_butt.config(font=("arial", round(soft_title_f_size * 1.5)))
+                soft_add_butt.pack(expand=True)
                 add_button_array.append(soft_add_butt)
                 add_button_array[ch].bind("<Button-1>", lambda eff, soft_id_get=soft_list[ch]['id'], array_id_pass=ch:
                 add_click(eff, soft_id=soft_id_get, array_id=array_id_pass))
@@ -248,19 +247,46 @@ def create_body_data(soft_list):
 
 
 def add_click(event, soft_id, array_id):
-    global select_box_array
-    select_text=select_box_array[array_id].get()
-    print(select_text)
-    select_text_split=select_text.split(" , ")
-    print(select_text_split)
-    select_ver_id =select_text_split[0]
-    print(select_ver_id)
-    print(soft_id, array_id)
+    global select_box_array, select_box_value_array
+    select_text_point = select_box_array[array_id].current()
+    print("sws   ",select_text_point)
+    ver_id_array = select_box_value_array[array_id]
+    if len(ver_id_array)> 0:
+        ver_id = ver_id_array[select_text_point]
+        print(ver_id)
+        print(soft_id, array_id)
 
-def create_Combobox(frame,object):
-    ver_array=[]
+
+def create_combobox(frame, object):
+    global select_box_value_array
+    ver_array = []
+    ver_id_array = []
     for ver in Software().get_all_version(object['id']):
-        ver_array.append(str(ver['id'])+" , "+ver['v_no']+" , "+ver['v_name'])
+        txt = "Ver : " + str(ver['v_no'])
+        # if ver['v_name'] != "":
+        #     txt += " , Name: " + ver['v_name']
 
-    com_box = Combobox(frame, values=ver_array, font="bold")
-    return com_box;
+        if 'installed_ver' in object:
+            for inst_ver in object['installed_ver']:
+                inst_split = inst_ver.split('.')
+                inst_ok=None
+                v_no_split = str(ver['v_no']).split('.')
+                v_no_ok = None
+                if len(inst_split)>1:
+                    inst_ok=inst_split[0]+"."+inst_split[1]
+                else:
+                    inst_ok = inst_split[0] + ".0"
+
+                if len(v_no_split)>1:
+                    v_no_ok=v_no_split[0]+"."+v_no_split[1]
+                else:
+                    v_no_ok = v_no_split[0] + ".0"
+
+                if inst_ok == v_no_ok:
+                    txt +="  installed"
+        ver_array.append(txt)
+        ver_id_array.append(ver['id'])
+
+    select_box_value_array.append(ver_id_array)
+    com_box = Combobox(frame, values=ver_array, font="bold",state="readonly")
+    return com_box

@@ -3,6 +3,7 @@ from Data.Veriables import logo, error_str_size
 import tkinter as tk
 from tkinter import messagebox
 
+
 class GuiError:
     error_root = None
 
@@ -14,11 +15,9 @@ class GuiError:
         MsgBox = tk.messagebox.showerror('Error : Exit App', self.create_error())
         GuiError.close_event
 
-
     @staticmethod
     def close_event():
         exit()
-
 
     def create_error(self):
         str_err = ""
