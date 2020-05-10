@@ -38,6 +38,9 @@ add_button_array = None
 select_box_array = None
 select_box_value_array = None
 
+# install list = []
+install_list = []
+
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
@@ -266,11 +269,11 @@ def select_box_change(event, array_id, soft_name):
         select_text_split = select_text.split('installed')
         if len(select_text_split) > 1:
             select_box_array[array_id].set('')
-            showwarning("Warning", soft_name+" "+select_text_split[0]+"already installed")
+            showwarning("Warning", soft_name + " " + select_text_split[0] + "already installed")
 
 
 def add_click(event, soft_id, array_id):
-    global select_box_array, select_box_value_array
+    global select_box_array, select_box_value_array, install_list, add_button_array
     select_text_point = select_box_array[array_id].current()
     if select_text_point != -1:
         add_log(log_types[2], "GuiCanvas.py",
@@ -278,8 +281,16 @@ def add_click(event, soft_id, array_id):
         ver_id_array = select_box_value_array[array_id]
         if len(ver_id_array) > 0:
             ver_id = ver_id_array[select_text_point]
-            print(ver_id)
-            print(soft_id, array_id)
+            cr_array = {'soft_id': soft_id, 'ver_id': ver_id, 'select_text_point': select_text_point}
+            if add_button_array[array_id]['text'] == '+':
+                add_button_array[array_id]['text'] = '-'
+                install_list.append(cr_array)
+            else:
+                add_button_array[array_id]['text'] = '+'
+                install_list.remove(cr_array)
+            print(install_list)
+    else:
+        showinfo("Warning", "Select Software version")
 
 
 def create_combobox(frame, object):
