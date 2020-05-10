@@ -1,5 +1,5 @@
-import access_file_details
-import log_path
+import access_file_detail
+from logidentity import log_path
 
 log_extension = []
 
@@ -14,6 +14,5 @@ def get_log_extension():
     return log_extension
 
 
-all_output_list = []
-all_output_list.append('\n'.join(get_log_extension()))
-access_file_details.add_log_details(all_output_list, "logExtension.txt")
+all_output_list = ['\n'.join(get_log_extension())]
+access_file_detail.add_log_details(all_output_list, "../textfile/logExtension.txt")

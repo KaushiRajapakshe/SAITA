@@ -1,6 +1,8 @@
 # Program to show various ways to read and
 # write data in a file.
 # append mode change "a" Append-adds at last
+
+
 def add_log_details(line, file_name):
     file1 = open(file_name, "w")  # write mode
     # \n is placed to indicate EOL (End of Line)

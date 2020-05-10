@@ -1,4 +1,4 @@
-import constants
+from constant import constants
 
 
 def get_log_path_list():
