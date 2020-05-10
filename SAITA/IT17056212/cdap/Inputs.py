@@ -1,20 +1,102 @@
-"""Inputs for Categorizing component to categorize the issue as technical or non technical"""
-"""va1 = 'no'
-va2 = 'yes'
-va3 = 'no'
-va4 = 'yes'
-component = 'categorizing'
-category = 'network'
-input_array = [[va1, va2, va3, va4, 'non-tech']]"""
+class Input(object):
+    myInput = None
+    error_msg = None
+    error_code = None
+    connection_type = None
+    component = None
+    category = None
+    question1 = None
+    question2 = None
+    question3 = None
+    question4 = None
 
-# input_array = [[va1, va2, va3, va4, va1, va2, va3, va4, 'non-tech']]
+    @classmethod
+    def get_input(cls, new=False):
+        if new or not cls.myInput:
+            cls.myInput = Input()
 
+        return cls.myInput
 
-"""Inputs for issue identify component"""
-error_msg = 'the workstation driver is not installed'
-error_code = '2102'
-connection_type = 'intranet'
+    @classmethod
+    def get_category(cls):
+        # print(cls.category)
+        return cls.category
 
-component = 'identifying'
-category = 'network'
-input_array = [[error_msg, error_code, connection_type, 1]]
+    @classmethod
+    def set_category(cls, cat):
+        cls.category = cat
+
+    @classmethod
+    def get_component(cls):
+        # print(cls.component)
+        return cls.component
+
+    @classmethod
+    def set_component(cls, comp):
+        cls.component = comp
+
+    @classmethod
+    def get_input_array(cls):
+        if cls.component == 'identifying':
+            input_array = [[cls.error_msg, cls.error_code, cls.connection_type, 1]]
+            return input_array
+        if cls.component == 'categorizing':
+            input_array = [[cls.question1, cls.question2, cls.question3, cls.question4, 'non-tech']]
+            return input_array
+
+    @classmethod
+    def get_error_msg(cls):
+        return cls.error_msg
+
+    @classmethod
+    def set_error_msg(cls, msg):
+        cls.error_msg = msg
+
+    @classmethod
+    def get_error_code(cls):
+        return cls.error_code
+
+    @classmethod
+    def set_error_code(cls, code):
+        cls.error_code = code
+
+    @classmethod
+    def get_type(cls):
+        return cls.connection_type
+
+    @classmethod
+    def set_type(cls, type):
+        cls.connection_type = type
+
+    @classmethod
+    def get_question1(cls):
+        return cls.question1
+
+    @classmethod
+    def set_question1(cls, question):
+        cls.question1 = question
+
+    @classmethod
+    def get_question2(cls):
+        return cls.question2
+
+    @classmethod
+    def set_question2(cls, question):
+        cls.question2 = question
+
+    @classmethod
+    def get_question3(cls):
+        return cls.question3
+
+    @classmethod
+    def set_question3(cls, question):
+        cls.question3 = question
+
+    @classmethod
+    def get_question4(cls):
+        return cls.question4
+
+    @classmethod
+    def set_question4(cls, question):
+        cls.question4 = question
+

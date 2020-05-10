@@ -1,7 +1,5 @@
 from __future__ import print_function
-import Datasets
-import Questions
-import Inputs
+
 
 # Column labels.
 # These are used only to print the tree.
@@ -212,37 +210,3 @@ def print_leaf(counts):
     return probs
 
 
-if __name__ == '__main__':
-    if Inputs.component == 'categorizing':
-        if Inputs.category == 'network':
-            training_data = Datasets.network_category_data
-            header = Questions.network_categorizing_questions
-        elif Inputs.category == 'directory':
-            training_data = Datasets.directory_category_data
-            header = Questions.directory_categorizing_questions
-        else:
-            header = []
-    elif Inputs.component == 'identifying':
-        if Inputs.category == 'network':
-            training_data = Datasets.network_identify_data
-            header = Questions.network_identifying_questions
-        elif Inputs.category == 'directory':
-            training_data = Datasets.directory_identify_data
-            header = Questions.directory_identifying_questions
-        else:
-            header = []
-    else:
-        header = []
-
-    testing_data = Inputs.input_array
-
-    my_tree = build_tree(training_data)
-
-    print_tree(my_tree)
-    # print(questions_array)
-    # Evaluate
-    testing_data = Inputs.input_array
-
-    for row in testing_data:
-        print("Actual: %s. Predicted: %s" %
-              (row[-1], print_leaf(classify(row, my_tree))))

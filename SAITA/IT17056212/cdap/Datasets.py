@@ -1,26 +1,28 @@
 import csv
 import CategorizerData
 import IdentifyingData
-import Inputs
+from Inputs import Input
+
 
 results = []
+
 with open("network.csv") as csvfile:
     reader = csv.reader(csvfile, quoting=csv.QUOTE_MINIMAL)  # change contents to floats
     for row in reader:  # each row is a list
         results.append(row)
 
-if Inputs.component == 'categorizing':
-    #network_category_data = results
-    network_category_data = CategorizerData.net_arr
-elif Inputs.component == 'identifying':
-    network_identify_data = IdentifyingData.net_arr
 
-
-
+def check_com():
+    inp = Input.get_input()
+    if inp.get_component() == 'categorizing':
+        # network_category_data = results
+        return CategorizerData.get_netarr()
+    elif inp.get_component() == 'identifying':
+        return IdentifyingData.get_netarr()
 
 
 # print(results)
-#network_identify_data = []
+# network_identify_data = []
 
 directory_category_data = [
     ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'non-tech'],
