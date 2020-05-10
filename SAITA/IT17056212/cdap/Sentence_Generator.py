@@ -1,4 +1,3 @@
-
 import pprint
 
 import pandas as pd
@@ -7,21 +6,18 @@ data = pd.read_pickle('data_pkl.pkl')
 data
 
 # Extract only restart paragraph
-selected_text = data['restart']
+selected_text = data['Restating-PC']
 selected_text[:200]
-
 
 from collections import defaultdict
 
 
 def markov_chain(text):
-
     # Tokenize the text by word, though including punctuation
     words = text.split(' ')
 
     # Initialize a default dictionary to hold all of the words and next words
     d_dict = defaultdict(list)
-
 
     # Create a zipped list of all the possible combinations of words
     for current_word, next_word in zip(words[0:-1], words[1:]):
@@ -32,18 +28,17 @@ def markov_chain(text):
     print(d_dict)
     return d_dict
 
+
 # Create the dictionary.
 new_dict = markov_chain(selected_text)
 new_dict
-
 
 import random
 
 
 def generate_sentence(chain, count=5):
-
     # Capitalize the first word
-    word1 = 'Restating-service'
+    word1 = 'Restating-PC'
     sentence = word1.capitalize()
 
     # Generate the second word from the value list. Set the new word as the first word. Repeat.
@@ -54,9 +49,11 @@ def generate_sentence(chain, count=5):
 
     # End it with a period
     sentence += '.'
-    return (sentence)
-
-
+    sentence_split = sentence.split('.')
+    sentence1 = sentence_split[0]
+    sentence = sentence1
+    sentence += '.'
+    return sentence
 
 
 pprint.pprint('Prediction: ' + generate_sentence(new_dict))

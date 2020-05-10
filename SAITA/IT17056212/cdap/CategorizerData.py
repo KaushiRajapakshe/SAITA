@@ -1,20 +1,27 @@
-import DBConnection
-import Inputs
+from Query import Queries
+from Inputs import Input
 
-if Inputs.component == 'categorizing':
-    net_arr = []
 
-    # query = "SELECT a,b,c,d,result FROM net"
+def get_netarr():
+    inp = Input.get_input()
+    if inp.get_component() == 'categorizing':
+        if inp.get_category() == 'network':
+            #print("cat cat" + inp.get_component())
+            #print("cat cat" + inp.get_category())
+            net_arr = []
 
-    result = DBConnection.y
+            # query = "SELECT a,b,c,d,result FROM net"
 
-    for x in result:
+            result = Queries.get_all_networks_solution_category()
 
-        pre_split_field = x[3]
-        split_field = pre_split_field.split("/")
-        # print(len(split_field))
-        for y in split_field:
-            a = [x[0], x[1], x[2], y, x[4]]
-            net_arr.append(a)
+            for x in result:
 
-    print(net_arr)
+                pre_split_field = x[3]
+                split_field = pre_split_field.split("/")
+                # print(len(split_field))
+                for y in split_field:
+                    a = [x[0], x[1], x[2], y, x[4]]
+                    net_arr.append(a)
+
+            print(net_arr)
+            return net_arr
