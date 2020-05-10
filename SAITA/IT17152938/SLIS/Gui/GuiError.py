@@ -13,7 +13,8 @@ class GuiError:
     # show error dialog
     def show(self):
         MsgBox = tk.messagebox.showerror('Error : Exit App', self.create_error())
-        GuiError.close_event
+        if MsgBox == 'ok':
+            GuiError.close_event()
 
     @staticmethod
     def close_event():
