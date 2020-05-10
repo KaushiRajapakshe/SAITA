@@ -1,18 +1,16 @@
-import winapps_change
-from MainController import MainController
+import tkinter as tkr
+from Util.MainController import MainController
 
 
 maincon = MainController()
-maincon.get_soft_list()
+print(maincon.get_soft_list())
 
-# for app in winapps_change.list_installed():
-#     print(app.name+"\t"+app.install_date.__str__())
-#
-# print('\n')
-#
-# # for app in winapps_change.search_installed('Asus Sonic Radar 3'):
-# #     print(app)
-#
-# [ap] = winapps_change.search_installed('jetAudio Basic')
-# print(ap)
+root = tkr.Tk()
+root.geometry("400x200")
 
+# remove title bar from window
+root.overrideredirect(True)
+
+# create custom title bar
+tit_bar = tkr.Frame(root, bg="medium blue")
+root.mainloop()
