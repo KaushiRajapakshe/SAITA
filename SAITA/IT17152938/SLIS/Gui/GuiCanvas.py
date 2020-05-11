@@ -187,6 +187,12 @@ def create_body_data(soft_list):
                 singal_frame_in.pack(side=LEFT, expand=True)
                 singal_frame_in.pack_propagate(0)
 
+                # soft name
+                soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color,
+                                   font="bold", pady=0)
+                soft_topic.config(font=("arial", soft_title_f_size))
+                soft_topic.pack(expand=True, fill='x')
+
                 # soft image
                 url_img = img_location + soft_list[ch]['img']
                 soft_img = None
@@ -199,19 +205,50 @@ def create_body_data(soft_list):
                     add_log(log_types[0], "GuiCanvas.py", "Cant connect resources server : " + str(err))
                     soft_img = Image.open(not_found_img)
 
+                img_frame = Frame(singal_frame_in, bg=cell_bg,
+                                  relief='raised',
+                                  bd=0)
+                img_frame.pack(expand=True, fill=X)
+
                 soft_img_w, soft_img_h = soft_img.size
                 soft_img_w /= (coll_count * soft_img_dev)
                 soft_img_h /= (coll_count * soft_img_dev)
                 soft_img = soft_img.resize((round(soft_img_w), round(soft_img_h)))
                 soft_img_get = ImageTk.PhotoImage(soft_img)
                 soft_img_array.append(soft_img_get)
-                soft_img_labal = Label(singal_frame_in, image=soft_img_array[ch], bg=cell_bg, )
-                soft_img_labal.pack(expand=True, fill='x')
-                # soft name
-                soft_topic = Label(singal_frame_in, text=soft_list[ch]['name'], bg=cell_bg, fg=cell_topic_txt_color,
-                                   font="bold", pady=0)
-                soft_topic.config(font=("arial", soft_title_f_size))
-                soft_topic.pack(expand=True, fill='x')
+                soft_img_labal = Label(img_frame, image=soft_img_array[ch], bg=cell_bg, )
+                soft_img_labal.pack(expand=True, side=LEFT)
+                if 'installed' in soft_list[ch]:
+
+                    in_show_form = Frame(img_frame, bg=soft_add_butt_acc,
+                                      relief='raised',
+                                      bd=0)
+                    in_show_form.pack(expand=True, side=LEFT)
+
+                    instaled = Label(in_show_form, text='Installed :', bg=soft_add_butt_acc, fg=cell_topic_txt_color, font="bold")
+                    instaled.config(font=("arial", round(soft_title_f_size / 1.5)))
+                    instaled.pack(expand=True, fill=X)
+
+                    in_in_show_form = Frame(in_show_form, bg=cell_bg,
+                                         relief='raised',
+                                         bd=0)
+                    in_in_show_form.pack(expand=True, side=LEFT)
+                    tx =""
+                    for v in soft_list[ch]['installed_ver']:
+                        v_no_split = str(v).split('.')
+                        v_no_ok = None
+                        if len(v_no_split) > 1:
+                            v_no_ok = v_no_split[0] + "." + v_no_split[1]
+                        else:
+                            v_no_ok = v_no_split[0] + ".0"
+
+                        tx += v_no_ok + "\n"
+
+                    instaled = Label(in_in_show_form, text=tx, bg=soft_add_butt_acc, fg=cell_topic_txt_color,font="bold", justify='left')
+                    instaled.config(font=("arial", round(soft_title_f_size/1.8)))
+                    instaled.pack(side=LEFT)
+
+
 
                 # -------------------version frame---------------------
                 ver_frame = Frame(singal_frame_in, bg=cell_bg,
