@@ -41,6 +41,12 @@ select_box_value_array = None
 # install list = []
 install_list = []
 
+# cart_lable
+cart_lable_img = None
+cart_lable_txt = None
+cart_img = None
+cart_form = None
+
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
@@ -52,14 +58,15 @@ def create_full_show_window(win_root):
 
 
 def create_head_show_window(full_window):
-    global search_box, search_but
+    global search_box, search_but, cart_lable_txt, cart_lable_img, cart_form
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
     search_box = Entry(head_window,
                        bg=main_search_color_bg,
-                       fg=main_search_color_txt,
+                       fg=main_search_color_txt_hint,
                        font="bold",
                        width=round(main_search_width * acc_ra)
                        )
+
     search_box.pack(
         side=LEFT,
         padx=pad_val * acc_ra,
@@ -68,6 +75,7 @@ def create_head_show_window(full_window):
         ipady=pad_val * acc_ra
 
     )
+    search_box.insert(0, search_box_txt)
 
     search_but = Button(head_window,
                         text=main_search_but_txt,
@@ -87,6 +95,15 @@ def create_head_show_window(full_window):
         ipadx=main_search_but_ipadx * acc_ra,
         ipady=main_search_but_ipady * acc_ra,
     )
+    cart_form = Frame(head_window, bg=main_search_but_bg)
+    cart_form.pack(side=RIGHT, padx=pad_val * acc_ra, pady=pad_val * acc_ra, )
+
+    cart_lable_img = Label(cart_form, text="Version :", bg=head_window_color)
+    cart_lable_img.pack(side=RIGHT, padx=2, pady=2)
+
+    cart_lable_txt = Label(cart_form, text="", bg=main_search_but_bg, fg=cart_txt_color,
+                           font="bold", )
+    cart_lable_txt.pack(side=RIGHT, padx=2)
 
     # bind search key to event
     search_but.bind("<Button-1>", search_soft)
@@ -94,8 +111,77 @@ def create_head_show_window(full_window):
     search_but.bind("<Leave>", search_button_hover_out)
     search_box.bind("<Return>", search_soft)
     search_box.bind("<KeyRelease>", search_key_enter)
-
+    cart_form.bind("<Enter>", cart_labal_horver_in)
+    cart_form.bind("<Leave>", cart_labal_horver_out)
+    search_box.bind("<FocusIn>", set_plase_holder_in)
+    search_box.bind("<FocusOut>", set_plase_holder_out)
+    create_cart_labal()
     return head_window
+
+
+def set_plase_holder_out(event):
+    global search_box
+    if search_box.get() == "":
+        search_box.insert(0, search_box_txt)
+        search_box['fg'] = main_search_color_txt_hint
+
+
+def set_plase_holder_in(event):
+    global search_box
+    if search_box.get() == search_box_txt:
+        search_box.delete(0, "end")
+        search_box['fg'] = main_search_color_txt
+
+
+def create_cart_labal():
+    global cart_lable_img, cart_img, cart_lable_txt
+    if len(install_list) > 0:
+        c_img = Image.open(img_hand_down_cart)
+        cart_lable_txt['text'] = str(len(install_list))
+    else:
+        c_img = Image.open(img_cart)
+        cart_lable_txt['text'] = ""
+
+    c_img_w, c_img_h = c_img.size
+    c_img_w *= acc_ra * cart_img_div
+    c_img_h *= acc_ra * cart_img_div
+    c_img = c_img.resize((round(c_img_w), round(c_img_h)))
+    cart_img = ImageTk.PhotoImage(c_img)
+    cart_lable_img['image'] = cart_img
+
+
+def cart_labal_horver_in(event):
+    global cart_lable_img, cart_img, cart_form
+    if len(install_list) > 0:
+        c_img = Image.open(img_hand_up_cart)
+    else:
+        c_img = Image.open(img_cart)
+
+    c_img_w, c_img_h = c_img.size
+    c_img_w *= acc_ra * cart_img_div
+    c_img_h *= acc_ra * cart_img_div
+    c_img = c_img.resize((round(c_img_w), round(c_img_h)))
+    cart_img = ImageTk.PhotoImage(c_img)
+    cart_lable_img['image'] = cart_img
+    cart_form['bg'] = main_search_but_hover
+    cart_lable_txt['bg'] = main_search_but_hover
+
+
+def cart_labal_horver_out(event):
+    global cart_lable_img, cart_img, cart_form
+    if len(install_list) > 0:
+        c_img = Image.open(img_hand_down_cart)
+    else:
+        c_img = Image.open(img_cart)
+
+    c_img_w, c_img_h = c_img.size
+    c_img_w *= acc_ra * cart_img_div
+    c_img_h *= acc_ra * cart_img_div
+    c_img = c_img.resize((round(c_img_w), round(c_img_h)))
+    cart_img = ImageTk.PhotoImage(c_img)
+    cart_lable_img['image'] = cart_img
+    cart_form['bg'] = main_search_but_bg
+    cart_lable_txt['bg'] = main_search_but_bg
 
 
 def create_body_show_window(full_window):
@@ -220,20 +306,21 @@ def create_body_data(soft_list):
                 soft_img_labal.pack(expand=True, side=LEFT)
                 if 'installed' in soft_list[ch]:
 
-                    in_show_form = Frame(img_frame, bg=soft_add_butt_acc,
-                                      relief='raised',
-                                      bd=0)
+                    in_show_form = Frame(img_frame, bg=installed_box_bg,
+                                         relief='raised',
+                                         bd=0)
                     in_show_form.pack(expand=True, side=LEFT)
 
-                    instaled = Label(in_show_form, text='Installed :', bg=soft_add_butt_acc, fg=cell_topic_txt_color, font="bold")
+                    instaled = Label(in_show_form, text='Installed :', bg=installed_box_bg, fg=cell_topic_txt_color,
+                                     font="bold")
                     instaled.config(font=("arial", round(soft_title_f_size / 1.5)))
                     instaled.pack(expand=True, fill=X)
 
-                    in_in_show_form = Frame(in_show_form, bg=cell_bg,
-                                         relief='raised',
-                                         bd=0)
-                    in_in_show_form.pack(expand=True, side=LEFT)
-                    tx =""
+                    in_in_show_form = Frame(in_show_form, bg=installed_box_bg,
+                                            relief='raised',
+                                            bd=0)
+                    in_in_show_form.pack(expand=True, fill=X)
+                    tx = ""
                     for v in soft_list[ch]['installed_ver']:
                         v_no_split = str(v).split('.')
                         v_no_ok = None
@@ -244,11 +331,12 @@ def create_body_data(soft_list):
 
                         tx += v_no_ok + "\n"
 
-                    instaled = Label(in_in_show_form, text=tx, bg=soft_add_butt_acc, fg=cell_topic_txt_color,font="bold", justify='left')
-                    instaled.config(font=("arial", round(soft_title_f_size/1.8)))
-                    instaled.pack(side=LEFT)
-
-
+                    instaled = Label(in_in_show_form, text=tx, bg=installed_box_bg, fg=cell_topic_txt_color,
+                                     font="bold", justify='right')
+                    instaled.config(font=("arial", round(soft_title_f_size / 1.8)))
+                    instaled.pack(side=RIGHT,
+                                  padx=pad_val * acc_ra,
+                                  )
 
                 # -------------------version frame---------------------
                 ver_frame = Frame(singal_frame_in, bg=cell_bg,
@@ -285,7 +373,7 @@ def create_body_data(soft_list):
                                        highlightthickness=0
                                        )
 
-                soft_add_butt.config(font=("arial", round(soft_title_f_size * 1.5)))
+                soft_add_butt.config(font=("arial", round(soft_title_f_size * 1.8)))
                 soft_add_butt.pack(expand=True, fill=X)
                 add_button_array.append(soft_add_butt)
                 add_button_array[ch].bind("<Button-1>", lambda eff, soft_id_get=soft_list[ch]['id'], array_id_pass=ch:
@@ -294,6 +382,10 @@ def create_body_data(soft_list):
                 add_btn_on_hovering(eff, add_id=array_id_pass))
                 add_button_array[ch].bind("<Leave>", lambda eff, array_id_pass=ch:
                 add_but_return_to_normal_state(eff, add_id=array_id_pass))
+
+                if str(select_box_array[ch]['state']) == 'disabled':
+                    add_button_array[ch]['text'] = '-'
+
                 ch += 1
         row_frame.pack(fill=X)
 
@@ -322,10 +414,13 @@ def add_click(event, soft_id, array_id):
             if add_button_array[array_id]['text'] == '+':
                 add_button_array[array_id]['text'] = '-'
                 install_list.append(cr_array)
+                select_box_array[array_id]['state'] = "disabled"
             else:
                 add_button_array[array_id]['text'] = '+'
                 install_list.remove(cr_array)
+                select_box_array[array_id]['state'] = "readonly"
             print(install_list)
+        create_cart_labal()
     else:
         showinfo("Warning", "Select Software version")
 
@@ -362,6 +457,13 @@ def create_combobox(frame, object):
 
     select_box_value_array.append(ver_id_array)
     com_box = Combobox(frame, values=ver_array, font="bold", state="readonly")
+
+    for add_soft in install_list:
+        if add_soft['soft_id'] == object['id']:
+            com_box.current(add_soft['select_text_point'])
+            com_box['state'] = 'disabled'
+            break
+
     return com_box
 
 
