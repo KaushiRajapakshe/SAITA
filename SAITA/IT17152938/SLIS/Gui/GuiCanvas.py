@@ -1,23 +1,4 @@
-import urllib
-from tkinter import *
-from tkinter.ttk import Combobox
-from urllib.error import *
-from tkinter.messagebox import *
-from win32api import GetMonitorInfo, MonitorFromPoint
-from PIL import ImageTk, Image
-from Data.Veriables import *
-from Data.Log import *
-from Util.MainController import MainController
-import math
-from urllib.request import urlopen
-from Util.Software import Software
-
-# get monitor working aria size
-monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
-add_log(log_types[2], "GuiCanvas.py", "Monitor info : " + str(monitor_fo))
-work_area = monitor_fo.get("Work")
-acc_ra = work_area[3] / work_area[2]
-add_log(log_types[2], "GuiCanvas.py", "set acc_ra: " + str(acc_ra))
+from Gui.GuiCart import *
 
 # search box
 search_box = None
@@ -37,9 +18,6 @@ add_button_array = None
 # select_box_array
 select_box_array = None
 select_box_value_array = None
-
-# install list = []
-install_list = []
 
 # cart_lable
 cart_lable_img = None
@@ -107,6 +85,9 @@ def create_head_show_window(full_window):
 
     # bind search key to event
     search_but.bind("<Button-1>", search_soft)
+    cart_form.bind("<Button-1>", open_cart)
+    cart_lable_img.bind("<Button-1>", open_cart)
+    cart_lable_txt.bind("<Button-1>", open_cart)
     search_but.bind("<Enter>", search_button_hover_in)
     search_but.bind("<Leave>", search_button_hover_out)
     search_box.bind("<Return>", search_soft)
