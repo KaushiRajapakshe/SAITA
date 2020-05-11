@@ -50,5 +50,6 @@ cart_txt_color = "#ffffff"
 cart_img_div = 0.25
 search_box_txt = "Software Name"
 installed_box_bg = "#4C4C4C"
+cart_title = "SAITA - Software Cart"
 
 

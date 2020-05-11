@@ -16,16 +16,6 @@ screen_size = "{}x{}".format(work_area[2], work_area[3])
 root.geometry(screen_size + '+0+0')
 
 
-def show_task(event):
-    root.overrideredirect(False)
-    add_log(log_types[2], "GuiMain.py", "show_task : " + str(event))
-
-
-def unshow_task(event):
-    root.overrideredirect(True)
-    add_log(log_types[2], "GuiMain.py", "unshow_task : " + str(event))
-
-
 def mini_screen(event):
     root.overrideredirect(False)
     add_log(log_types[2], "GuiMain.py", "mini_screen : " + str(event))
@@ -35,8 +25,6 @@ def mini_screen(event):
 def max_screen(event):
     add_log(log_types[2], "GuiMain.py", "max_screen : " + str(event))
     root.overrideredirect(True)
-    # top.overrideredirect(False)
-    # top.iconify()
 
 
 # make a frame for the title bar
@@ -77,14 +65,9 @@ mini_button = Button(title_bar,
 # window title
 title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_txt_color, font="bold")
 
-# title bar img
-img = Image.open(logo)
-new_img_w, new_img_h = img.size
-new_img_w *= acc_ra * logo_div
-new_img_h *= acc_ra * logo_div
-img = img.resize((round(new_img_w), round(new_img_h)))
-title_img = ImageTk.PhotoImage(img)
+
 # title_img = ImageTk.PhotoImage(Image.open(logo))
+title_img = ImageTk.PhotoImage(img)
 title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg, )
 
 # a canvas for the main area of the window
@@ -122,8 +105,7 @@ def mini_btn_on_hovering(event):
 
 
 def return_to_normal_state(event):
-    global close_button
-    global mini_button
+    global close_button, mini_button
     add_log(log_types[2], "GuiMain.py", "return_to_normal_state : " + str(event))
     close_button['bg'] = title_bar_bg
     mini_button['bg'] = title_bar_bg
