@@ -25,14 +25,71 @@ cart_lable_txt = None
 cart_img = None
 cart_form = None
 
+# scale
+scale_get = None
+scale = None
+
+# coll_count
+coll_count = init_coll_count;
+
+# zoom img
+zoom_in_img = None
+zoom_out_img = None
+
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
     head_show_window = create_head_show_window(full_show_window)
     body_show_window = create_body_show_window(full_show_window)
+    footer_show_window = create_footer_show_window(full_show_window)
     head_show_window.pack(fill=X)
     body_show_window.pack(expand=1, fill=BOTH)
+    footer_show_window.pack(fill=X)
     return full_show_window
+
+
+def create_footer_show_window(full_window):
+    global scale_get, scale, zoom_in_img, zoom_out_img
+    footer_window = Frame(full_window, bg=footer_window_color, highlightthickness=0)
+
+    zoom_out_img = ImageTk.PhotoImage(create_img(img_zoom_out))
+    zoomout = Label(footer_window, bg=footer_window_color, image=zoom_out_img, )
+
+    zoomout.pack(
+        side=RIGHT,
+
+    )
+
+
+    scale_get = IntVar()
+    scale = Scale(footer_window, variable=scale_get, troughcolor=title_bar_bg, from_=2, to=10, fg=main_search_color_txt,
+                  orient=HORIZONTAL,
+                  bg=footer_window_color)
+    scale.pack(side=RIGHT)
+
+    zoom_in_img = ImageTk.PhotoImage(create_img(img_zoom_in))
+    zoomin = Label(footer_window,
+                   image=zoom_in_img,
+                   bg=footer_window_color,
+
+                   )
+    zoomin.pack(
+        side=RIGHT,
+
+    )
+
+    scale.bind("<ButtonRelease-1>", set_scale_col_size)
+    scale.set(init_coll_count)
+    return footer_window
+
+
+def create_img(path):
+    z_img = Image.open(path)
+    n_img_w, n_img_h = z_img.size
+    n_img_w *= acc_ra * zoom_dev
+    n_img_h *= acc_ra * zoom_dev
+    z_img = z_img.resize((round(n_img_w), round(n_img_h)))
+    return z_img
 
 
 def create_head_show_window(full_window):
@@ -73,6 +130,7 @@ def create_head_show_window(full_window):
         ipadx=main_search_but_ipadx * acc_ra,
         ipady=main_search_but_ipady * acc_ra,
     )
+
     cart_form = Frame(head_window, bg=main_search_but_bg)
     cart_form.pack(side=RIGHT, padx=pad_val * acc_ra, pady=pad_val * acc_ra, )
 
@@ -84,6 +142,7 @@ def create_head_show_window(full_window):
     cart_lable_txt.pack(side=RIGHT, padx=2)
 
     # bind search key to event
+
     search_but.bind("<Button-1>", search_soft)
     cart_form.bind("<Button-1>", open_cart)
     cart_lable_img.bind("<Button-1>", open_cart)
@@ -98,6 +157,12 @@ def create_head_show_window(full_window):
     search_box.bind("<FocusOut>", set_plase_holder_out)
     create_cart_labal()
     return head_window
+
+
+def set_scale_col_size(event):
+    global coll_count
+    coll_count = scale_get.get()
+    search_normel()
 
 
 def set_plase_holder_out(event):
@@ -193,10 +258,17 @@ def search_key_enter(event):
 
 
 def search_soft(event):
-    global search_box
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
+    search_normel()
+
+
+def search_normel():
+    global search_box
+    tx = search_box.get()
+    if tx == search_box_txt:
+        tx = ""
     main_con = MainController()
-    soft_list = main_con.get_soft_list_search(search_box.get())
+    soft_list = main_con.get_soft_list_search(tx)
     create_body_data(soft_list)
 
 
@@ -219,7 +291,7 @@ def scroll_all(event):
 
 
 def create_body_data(soft_list):
-    global body_window, work_area, acc_ra, soft_img_array, add_button_array, select_box_array, select_box_value_array
+    global body_window, work_area, acc_ra, soft_img_array, add_button_array, select_box_array, select_box_value_array, coll_count
     # soft_img_array = None
     soft_img_array = []
     # add_button_array = None
