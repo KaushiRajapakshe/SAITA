@@ -99,20 +99,29 @@ def _none_on_value_not_set(value: Any) -> Any:
 
 
 def _get_date(value: Any) -> Any:
-    try:
-        return datetime.strptime(value, '%Y%m%d').date()
-    except:
+    # check fromtimestamp (1561800857) format
+    if len(str(value)) == 10 and str(value).isdigit():
         try:
-            return datetime.strptime(value, '%m/%d/%Y').date()
+            return datetime.fromtimestamp(int(value)).date()
         except:
             return None
+    else:
+        try:
+            # try %Y%m%d (20191001) format
+            return datetime.strptime(value, '%Y%m%d').date()
+        except:
+            try:
+                # try %m/%d/%Y (8/31/2019) format
+                return datetime.strptime(value, '%m/%d/%Y').date()
+            except:
+                return None
 
 
 _REGISTRY_KEY_TO_APPLICATION_FIELD_DICT: Mapping[str, Optional[Callable]] = defaultdict(lambda: None, **{
     'DisplayName': lambda value: ('name', _none_on_value_not_set(value)),
     'DisplayVersion': lambda value: ('version', _none_on_value_not_set(str(value))),
     'InstallDate': lambda value: (
-    'install_date', _none_on_value_not_set(value) and _get_date(value)),
+        'install_date', _none_on_value_not_set(value) and _get_date(value)),
     'InstallLocation': lambda value: ('install_location', _none_on_value_not_set(value) and Path(value)),
     'InstallSource': lambda value: ('install_source', _none_on_value_not_set(value) and Path(value)),
     'ModifyPath': lambda value: ('modify_path', _none_on_value_not_set(value)),
