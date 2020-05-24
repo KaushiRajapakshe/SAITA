@@ -1,22 +1,5 @@
-from tkinter import *
-from tkinter.ttk import Combobox
-from urllib.error import *
-from tkinter.messagebox import *
-from win32api import GetMonitorInfo, MonitorFromPoint
-from PIL import ImageTk, Image
-from Data.Veriables import *
-from Data.Log import *
-from Util.MainController import MainController
-import math
-from urllib.request import urlopen
-from Util.Software import Software
+from Gui.GuiCartBody import *
 
-# get monitor working aria size
-monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
-add_log(log_types[2], "GuiCart.py", "Monitor info : " + str(monitor_fo))
-work_area = monitor_fo.get("Work")
-acc_ra = work_area[3] / work_area[2]
-add_log(log_types[2], "GuiCart.py", "set acc_ra: " + str(acc_ra))
 
 # title bar img
 img = Image.open(logo)
@@ -26,8 +9,6 @@ new_img_h *= acc_ra * logo_div
 img = img.resize((round(new_img_w), round(new_img_h)))
 cart_title_img = None
 
-# install list = []
-install_list = []
 
 cart_root = None
 cart_close_button = None
@@ -86,7 +67,7 @@ def open_cart(event):
     cart_title_img_set = Label(cart_title_bar, image=cart_title_img, bg=title_bar_bg, )
 
     cart_window = Frame(cart_root, bg=title_bar_bg, )
-    cart_in_window = Frame(cart_window)
+    cart_in_window = create_cart_windiw(cart_window)
 
     cart_title_bar.pack(fill=X)
     cart_title_img_set.pack(side=LEFT)
