@@ -1,5 +1,6 @@
 from Util.Software import Software
 from Util.Osdata import Osdata
+from Data.Log import *
 
 
 class MainController:
@@ -30,3 +31,19 @@ class MainController:
                     db_app['installed_ver'].append(app.version)
 
         return db_soft_list
+
+    def get_soft_name_by_id(self, soft_id):
+        soft_name = self.soft.get_soft_name_by_id(soft_id)
+        for soft in soft_name:
+            return soft['name']
+
+        add_log(log_types[1], "MainController", "get_soft_name_by_id : " + str(soft_id)+" id not found")
+        return ""
+
+    def get_soft_version_by_id(self, soft_ver):
+        soft_ver = self.soft.get_soft_ver_by_id(soft_ver)
+        for soft in soft_ver:
+            return soft['v_no']
+
+        add_log(log_types[1], "MainController", "get_soft_version_by_id : " + str(soft_ver)+" id not found")
+        return ""

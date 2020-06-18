@@ -1,5 +1,6 @@
 from tkinter import *
-from tkinter.ttk import Combobox
+from tkinter import ttk
+from tkinter.ttk import Combobox, Treeview
 from urllib.error import *
 from tkinter.messagebox import *
 from win32api import GetMonitorInfo, MonitorFromPoint
@@ -21,6 +22,63 @@ add_log(log_types[2], "GuiCart.py", "set acc_ra: " + str(acc_ra))
 # install list = []
 install_list = []
 
+#install button
+install_but = None
 
-def create_cart_windiw(cart_root_body):
-    return Frame(cart_root_body)
+
+def create_cart_window(cart_root_body):
+    full_cart_frame = Frame(cart_root_body, bg=cart_full_window_color, highlightthickness=0)
+    header_cart_frame = create_cart_header_window(full_cart_frame)
+    body_cart_frame = create_cart_body_window(full_cart_frame)
+    footer_cart_frame = create_cart_footer_window(full_cart_frame)
+    header_cart_frame.pack(fill=X)
+    body_cart_frame.pack(expand=1, fill=BOTH)
+    footer_cart_frame.pack(fill=X)
+    return full_cart_frame
+
+
+def create_cart_header_window(cart_frame):
+    return Frame(cart_frame, bg=cart_header_color)
+
+
+def create_cart_body_window(cart_frame):
+    global install_list
+    cart_body_frame = Frame(cart_frame, bg=cart_body_color)
+    body_table_col_name = ('Name', 'Version')
+    cart_table = Treeview(cart_body_frame, columns=body_table_col_name, show='headings')
+    style = ttk.Style()
+    style.theme_use("clam")
+    style.configure("Treeview.Heading", font=(None, 20))
+    style.configure("Treeview", font=(None, 15), rowheight=40)
+    for col in body_table_col_name:
+        cart_table.heading(col, text=col)
+    cart_table.pack(fill=BOTH, expand=1)
+    maincon = MainController()
+    for soft in install_list:
+        cart_table.insert("", "end",
+                          values=(maincon.get_soft_name_by_id(soft['soft_id']), maincon.get_soft_version_by_id(soft['ver_id'])))
+    return cart_body_frame
+
+
+def create_cart_footer_window(cart_frame):
+    global install_but
+    cart_footer_form = Frame(cart_frame, bg=cart_footer_color)
+    install_but = Button(cart_footer_form,
+                        text=install_button_text,
+                        bg=main_search_but_bg,
+                        activebackground=main_search_but_acc,
+                        bd=2,
+                        font="bold",
+                        fg=main_search_but_txt_color,
+                        activeforeground=main_search_but_txt_color,
+                        highlightthickness=0,
+                        )
+
+    install_but.pack(
+
+        padx=pad_val * acc_ra,
+        pady=pad_val * acc_ra,
+        ipadx=main_search_but_ipadx * acc_ra,
+        ipady=main_search_but_ipady * acc_ra,
+    )
+    return cart_footer_form
