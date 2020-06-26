@@ -375,13 +375,13 @@ def create_body_data(soft_list):
                     in_in_show_form.pack(expand=True, fill=X)
                     tx = ""
                     for v in soft_list[ch]['installed_ver']:
-                        v_no_split = str(v).split('.')
-                        v_no_ok = None
-                        if len(v_no_split) > 1:
-                            v_no_ok = v_no_split[0] + "." + v_no_split[1]
-                        else:
-                            v_no_ok = v_no_split[0] + ".0"
-
+                        # v_no_split = str(v).split('.')
+                        # v_no_ok = None
+                        # if len(v_no_split) > 1:
+                        #     v_no_ok = v_no_split[0] + "." + v_no_split[1]
+                        # else:
+                        #     v_no_ok = v_no_split[0] + ".0"
+                        v_no_ok=v
                         tx += v_no_ok + "\n"
 
                     instaled = Label(in_in_show_form, text=tx, bg=installed_box_bg, fg=cell_topic_txt_color,
