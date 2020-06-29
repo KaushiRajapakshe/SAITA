@@ -257,14 +257,21 @@ def search_key_enter(event):
         create_body_data(soft_list)
 
 
+
 def search_soft(event):
+    global body_window_canves
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
+    # body_scrollbar.set(0.0, 0.0)
     search_normel()
+    body_window_canves.yview_moveto(0.0)
+    # scroll_all(event)
 
 
 def search_normel():
     global search_box
     tx = search_box.get()
+    # body_window_canves.delete("all")
+
     if tx == search_box_txt:
         tx = ""
     main_con = MainController()
@@ -375,14 +382,9 @@ def create_body_data(soft_list):
                     in_in_show_form.pack(expand=True, fill=X)
                     tx = ""
                     for v in soft_list[ch]['installed_ver']:
-                        # v_no_split = str(v).split('.')
-                        # v_no_ok = None
-                        # if len(v_no_split) > 1:
-                        #     v_no_ok = v_no_split[0] + "." + v_no_split[1]
-                        # else:
-                        #     v_no_ok = v_no_split[0] + ".0"
+
                         v_no_ok=v
-                        tx += v_no_ok + "\n"
+                        tx += str(v_no_ok) + "\n"
 
                     instaled = Label(in_in_show_form, text=tx, bg=installed_box_bg, fg=cell_topic_txt_color,
                                      font="bold", justify='right')
