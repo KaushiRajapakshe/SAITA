@@ -60,7 +60,6 @@ def create_footer_show_window(full_window):
 
     )
 
-
     scale_get = IntVar()
     scale = Scale(footer_window, variable=scale_get, troughcolor=title_bar_bg, from_=2, to=10, fg=main_search_color_txt,
                   orient=HORIZONTAL,
@@ -249,34 +248,31 @@ def create_body_show_window(full_window):
 
 
 def search_key_enter(event):
-    global search_box
+    global search_box, body_window_canves
     if search_box.get() == "":
         add_log(log_types[2], "GuiCanvas.py", "search_key_enter : " + str(event) + "  Data : Empty search bar")
         main_con = MainController()
         soft_list = main_con.get_soft_list_full()
         create_body_data(soft_list)
-
+        body_window_canves.config(scrollregion=body_window_canves.bbox("all"))
 
 
 def search_soft(event):
     global body_window_canves
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
-    # body_scrollbar.set(0.0, 0.0)
     search_normel()
     body_window_canves.yview_moveto(0.0)
-    # scroll_all(event)
 
 
 def search_normel():
-    global search_box
+    global search_box, body_window_canves
     tx = search_box.get()
-    # body_window_canves.delete("all")
-
     if tx == search_box_txt:
         tx = ""
     main_con = MainController()
     soft_list = main_con.get_soft_list_search(tx)
     create_body_data(soft_list)
+    body_window_canves.config(scrollregion=body_window_canves)
 
 
 def search_button_hover_in(event):
@@ -382,9 +378,17 @@ def create_body_data(soft_list):
                     in_in_show_form.pack(expand=True, fill=X)
                     tx = ""
                     for v in soft_list[ch]['installed_ver']:
-
-                        v_no_ok=v
-                        tx += str(v_no_ok) + "\n"
+                        # v_no_split = str(v).split('.')
+                        # v_no_ok = None
+                        # if len(v_no_split) > 1:
+                        #     v_no_ok = v_no_split[0] + "." + v_no_split[1]
+                        # else:
+                        #     v_no_ok = v_no_split[0] + ".0"
+                        v_no_ok = v
+                        if v_no_ok is None:
+                            tx += "undefined" + "\n"
+                        else:
+                            tx += str(v_no_ok) + "\n"
 
                     instaled = Label(in_in_show_form, text=tx, bg=installed_box_bg, fg=cell_topic_txt_color,
                                      font="bold", justify='right')
