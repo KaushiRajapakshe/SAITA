@@ -47,3 +47,6 @@ class MainController:
 
         add_log(log_types[1], "MainController", "get_soft_version_by_id : " + str(soft_ver)+" id not found")
         return ""
+
+    def create_setup(self,install_list):
+        print(install_list)
