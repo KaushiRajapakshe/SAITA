@@ -477,7 +477,7 @@ def add_click(event, soft_id, array_id):
                 add_button_array[array_id]['text'] = '+'
                 install_list.remove(cr_array)
                 select_box_array[array_id]['state'] = "readonly"
-            print(install_list)
+            # print(install_list)
         create_cart_labal()
     else:
         showinfo("Warning", "Select Software version")
