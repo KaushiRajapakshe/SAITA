@@ -11,7 +11,7 @@ class Software:
 # get all software list from db
     @classmethod
     def get_all_software(cls):
-        return cls.db.execute_query('Select * from Software where del=%s', ('0',))
+        return cls.db.execute_query('Select * from Software where del=%s order by id', ('0',))
 
 # get search software list from db
     @classmethod
