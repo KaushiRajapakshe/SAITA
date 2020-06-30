@@ -272,7 +272,6 @@ def search_normel():
     main_con = MainController()
     soft_list = main_con.get_soft_list_search(tx)
     create_body_data(soft_list)
-    body_window_canves.config(scrollregion=body_window_canves)
 
 
 def search_button_hover_in(event):
