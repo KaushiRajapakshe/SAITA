@@ -494,6 +494,8 @@ def create_combobox(frame, object):
 
         if 'installed_ver' in object:
             for inst_ver in object['installed_ver']:
+                if inst_ver is None:
+                    continue
                 inst_split = inst_ver.split('.')
                 inst_ok = None
                 v_no_split = str(ver['v_no']).split('.')
