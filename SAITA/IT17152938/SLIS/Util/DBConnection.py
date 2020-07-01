@@ -30,17 +30,22 @@ class DBConnection(object):
         return cls.mydb
 
     @classmethod
-    def execute_query(cls, query, value):
+    def execute_query(cls, query, value, dic=True):
         """execute query on singleton db connection"""
         add_log(log_types[2], "DBConnection", "values : "+str(value)+"  query :  "+str(query))
         connection = cls.get_connection()
         try:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor(dictionary=dic)
         except mysql.ProgrammingError:
             add_log(log_types[0], "DBConnection", "Get cursor so create new connection")
             connection = cls.get_connection(new=True)  # Create new connection
             cursor = connection.cursor(dictionary=True)
-        cursor.execute(query, value)
-        result = cursor.fetchall()
+        try:
+            cursor.execute(query, value)
+            result = cursor.fetchall()
+        except ProgrammingError as err:
+            add_log(log_types[0], "DBConnection", "ProgrammingError : " + str(err))
+            result = ""
+
         cursor.close()
         return result
