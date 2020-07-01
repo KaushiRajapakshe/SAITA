@@ -4,12 +4,12 @@ import IdentifyingData
 from Inputs import Input
 
 
-results = []
+"""results = []
 
 with open("network.csv") as csvfile:
     reader = csv.reader(csvfile, quoting=csv.QUOTE_MINIMAL)  # change contents to floats
     for row in reader:  # each row is a list
-        results.append(row)
+        results.append(row)"""
 
 
 def check_com():

@@ -1,13 +1,9 @@
-"""import os
-os.system('Decision_tree.py')"""
-
-from subprocess import call
-
 from Inputs import Input
 from Decisiontree_controller import DecisiontreeController
 from Query import Queries
+from Sentence_Controller import SentenceController
 
-inp = Input.get_input();
+inp = Input.get_input()
 
 if __name__ == '__main__':
 
@@ -57,10 +53,18 @@ if __name__ == '__main__':
             print(key2)
             solution_type = key2
             if solution_type == "non-tech":
-                solution_id = Queries.get_nontech_solution_id_by_issue_id(issue_id)
+                solution_id = Queries.get_network_nontech_solution_id_by_issue_id(issue_id)
+
+                print(solution_id[0][0])
+                nontech_keyward = Queries.get_keywards_by_nontech_solution_id(solution_id[0][0])
+                sentence = SentenceController.sentence_generator_results(nontech_keyward)
+                print("Main Output: " + sentence)
+
             elif solution_type == "tech":
-                solution_id = Queries.get_tech_solution_id_by_issue_id(issue_id)
-            print(solution_id)
+                solution_id = Queries.get_network_tech_solution_id_by_issue_id(issue_id)
+
+
+
     # print(predicted_issue_ids)
     # split_by_issue = predicted_issue_ids.split(",")
 

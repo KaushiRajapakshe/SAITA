@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-
 # Column labels.
 # These are used only to print the tree.
 header = []
