@@ -1,4 +1,6 @@
 {
-    "Restating-PC": "Restating-PC is recomanded. Restarting-PC is a good solution when solving service and device related issues. While certain problems require a complete restart because the operating system or a hardware driver has stopped working, not every problem does. Some problems might fixable without restating, though the Restating-PC may be the easiest option."
-
+    "Restarting-Server": "Restarting-Server is recommended. because it resets connection. Restarting-Server should solve the issue. because it would restore all operations. Restarting-Server would be a option. Because rebooting should reboot the network.",
+    "Wikipedia": "Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted. Wikipedia Foundation host it.",
+    "Disabling-firewall": "Disabling-firewall recommended. Disabling-firewall is a good solution because a program can't access your computer or the Internet, try to allow the program through the firewall first.",
+    "Drive-letter":"Drive-letter should be unique. because it is invalid using an existing letter. Drive-letter must be unused letter. because to prevent conflicts. Drive-letter need to be unequaled. because the otherwise can cause errors."
 }

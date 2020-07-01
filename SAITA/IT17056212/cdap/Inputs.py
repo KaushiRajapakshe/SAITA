@@ -1,5 +1,6 @@
 class Input(object):
     myInput = None
+    keywords = []
     error_msg = None
     error_code = None
     connection_type = None
@@ -100,3 +101,10 @@ class Input(object):
     def set_question4(cls, question):
         cls.question4 = question
 
+    @classmethod
+    def get_keyword(cls):
+        return cls.keywords
+
+    @classmethod
+    def set_keyword(cls, word):
+        cls.keywords = word
