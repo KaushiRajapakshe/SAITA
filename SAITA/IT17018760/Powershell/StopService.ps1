@@ -17,7 +17,7 @@ function Custom-Stop-Service ($ServiceInput)
 			Write-Host "Dependent of $($ServiceInput.Name): $($Service.Name)"
 			If ($Service.Status -eq "Running")
 			{
-				Write-Host "$($Service.Name) is running."
+				Write-Host "$($Service.Name) is running now."
 				$CurrentService = Get-Service -Name $Service.Name
 				
 				Custom-Stop-Service $CurrentService
