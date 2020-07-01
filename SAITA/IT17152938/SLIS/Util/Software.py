@@ -11,7 +11,7 @@ class Software:
 # get all software list from db
     @classmethod
     def get_all_software(cls):
-        return cls.db.execute_query('Select * from Software where del=%s', ('0',))
+        return cls.db.execute_query('Select * from Software where del=%s order by id', ('0',))
 
 # get search software list from db
     @classmethod
@@ -27,7 +27,7 @@ class Software:
 # get all dependency list for version from db
     @classmethod
     def get_dependency(cls, ver_id):
-        return cls.db.execute_query('Select * from dependency where del=%s and verId=%s', ('0', ver_id))
+        return cls.db.execute_query('Select depend_soft_id from dependency where del=%s and v_id=%s', ('0', ver_id))
 
 # get all path list for version from db
     @classmethod
@@ -38,3 +38,18 @@ class Software:
     @classmethod
     def get_install_step(cls, ver_id):
         return cls.db.execute_query('Select * from path where del=%s and verId=%s', ('0', ver_id))
+
+# get software name using software id
+    @classmethod
+    def get_soft_name_by_id(cls, soft_id):
+        return cls.db.execute_query('Select `name` from Software where del=%s and id=%s', ('0', str(soft_id)))
+
+# get software version number using version id
+    @classmethod
+    def get_soft_ver_by_id(cls, ver_id):
+        return cls.db.execute_query('Select v_no from Version where del=%s and id=%s', ('0', str(ver_id)))
+
+# get software version data using version id
+    @classmethod
+    def get_soft_ver_data_by_id(cls, ver_id):
+        return cls.db.execute_query('Select * from Version where del=%s and id=%s', ('0', str(ver_id)))
