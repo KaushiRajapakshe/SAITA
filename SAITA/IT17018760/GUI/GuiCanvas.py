@@ -48,7 +48,7 @@ def create_head_show_window(full_window):
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
 
     clock = Label(head_window, font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white")
-    clock.place(x=720,y=5)
+    clock.pack(padx=130, pady=0, side=TOP)
 
     def tick():
         global time1
@@ -67,82 +67,62 @@ def create_head_show_window(full_window):
 
 
 
-
-#Text field input getter
-    def retrieve_input():
-        global msg
-        msg = EntryBox.get("1.0", 'end-1c').strip()
-        EntryBox.delete("0.0", END)
-        if msg != '':
-            ChatLog.config(state=NORMAL)
-            ChatLog.insert(END, "You: " + msg + '\n\n\n\n')
-            ChatLog.config(selectforeground="Blue", font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white")
-            print(msg)
-            ChatLog.configure(state='disabled')
-
-            hello = ["hi", "hello", "hai"]
-
-            if any(word in msg for word in hello):
-                label7 = tk.Label(head_window, text="Please Enter your Issue: SAITA  ", font=("Square721 BT", 11, 'bold'), fg="white", bg='gray29',width='35').place(x=1000, y=150)
-
-
-
-
-
-
-
-
-
-
-
-    EntryBox = Text(head_window, height=2, width=60)
-    EntryBox.place(x=740, y=635)
-
-
-
-    search_but = Button(head_window,
-                        text="Send",
-                        bg=main_search_but_bg,
-                        activebackground=main_search_but_acc,
-                        bd=2,
-                        font="bold",
-                        fg=main_search_but_txt_color,
-                        activeforeground=main_search_but_txt_color,
-                        highlightthickness=0,
-                        height='1',width='9',command=lambda: retrieve_input()).place(x=1250, y=635)
-
-    file_in = 'E:/SLIIT/4 year/CDAP/Presentation/SAITA.png'
+    file_in = 'E:/SLIIT/4year/CDAP/Presentation/SAITA.png'
     pil_image = Image.open(file_in)
     image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS)
     tk_image1 = ImageTk.PhotoImage(image200x100)
     global img_show
     img_show = tk_image1
-    label2 = tk.Label(head_window, image=img_show,bg="white").place(x=80, y=60)
+    label2 = tk.Label(head_window, image=img_show,bg="white").pack(padx=80, pady=0, side=tk.LEFT)
 
-    now = datetime.datetime.now()
-    label6 = tk.Label(head_window, text=now, font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white").place(x=1255, y=5)
-
-    label1 = tk.Label(head_window, text="Chat Me ", font=("Helvetica", 16, 'bold'), fg="gray29",bg="white").place(x=980, y=60)
     label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29",bg="white").place(x=230, y=550)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
                       font=("Square721 BT", 14, 'bold'), fg="gray29",bg="white").place(x=90, y=640)
-    label3 = tk.Label(head_window, width=1, height=58, bg="gray29").place(x=700,y=0)
+    label3 = tk.Label(head_window, width=1, height=58, bg="gray29").pack(padx=20, pady=0, side=tk.LEFT)
+
+    def send():
+        msg = EntryBox.get("1.0", 'end-1c').strip()
+        EntryBox.delete("0.0", END)
+
+        if msg != '':
+            ChatLog.config(state=NORMAL)
+            ChatLog.insert(END, "You: " + msg + '\n\n')
+            ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
+            print(msg)
 
 
+            # res = chatbot_response(msg)
+            ChatLog.insert(END, "SAITA : " '\n\n')
+
+            ChatLog.config(state=DISABLED)
+            ChatLog.yview(END)
 
 
-    ChatLog = Text(head_window, bd=0, bg="White", width="55", font="Arial", fg="Blue",state='disabled')
-    ChatLog.grid(row=2, column=0)
-    ChatLog.pack(side=RIGHT)
-    ChatLog.configure(state='normal')
+    # Create Chat window
+    ChatLog = Text(head_window, bd=0, bg="white", height="8", width="50", font=("Square721 BT", 11, 'bold'), )
+    ChatLog.config(state=DISABLED)
 
     # Bind scrollbar to Chat window
-    scrollbar = Scrollbar(head_window, orient="vertical", command=ChatLog.yview)
-    scroll_x = Scrollbar(head_window, orient="horizontal", command=ChatLog.xview)
-    ChatLog.configure(yscrollcommand=scrollbar.set, xscrollcommand=scroll_x.set,state='disabled')
+    scrollbar = Scrollbar(head_window, command=ChatLog.yview, cursor="heart")
+    ChatLog['yscrollcommand'] = scrollbar.set
+
+    # Create Button to send message
+    SendButton = Button(head_window, font=("Verdana", 12, 'bold'), text="Send", width="12", height=5,
+                        bd=0, bg="gray29", activebackground="#3c9d9b", fg='#ffffff',
+                        command=send)
+
+    # Create the box to enter message
+    EntryBox = Text(head_window, bd=0, bg="gray74", width="29", height="5", font=("Square721 BT", 11, 'bold'))
+    label4 = tk.Label(head_window, text="SAITA : Enter Your Issue with service name ", font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white").place(x=726, y=46)
 
 
 
+
+    # Place all components on the screen
+    scrollbar.place(x=1326, y=90, height=506)
+    ChatLog.place(x=726, y=90, height=506, width=570)
+    EntryBox.place(x=720, y=630, height=30, width=470)
+    SendButton.place(x=1200, y=630, height=30)
 
 
 

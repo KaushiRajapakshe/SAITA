@@ -6,6 +6,8 @@ $ServiceInput = ""
 $CurrentService = ""
 $Service = ""
 
+
+
 function Custom-Start-Service ($ServiceInput)
 {
 	Write-Host "Name of `$ServiceInput: $($ServiceInput.Name)"
@@ -17,7 +19,7 @@ function Custom-Start-Service ($ServiceInput)
 			Write-Host "Dependent of $($ServiceInput.Name): $($Service.Name)"
 			If ($Service.Status -eq "Stopped")
 			{
-				Write-Host "$($Service.Name) is Stopped."
+				Write-Host "$($Service.Name) is stopped now."
 				$CurrentService = Get-Service -Name $Service.Name
 				
 				Custom-Start-Service $CurrentService
