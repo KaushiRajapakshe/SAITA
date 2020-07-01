@@ -243,7 +243,7 @@ def create_body_show_window(full_window):
     body_window.bind("<Configure>", scroll_all)
     main_con = MainController()
     soft_list = main_con.get_soft_list_full()
-    create_body_data(soft_list)
+    create_body_data(soft_list, main_con.get_insalled_list())
     return main_body_window
 
 
@@ -253,7 +253,7 @@ def search_key_enter(event):
         add_log(log_types[2], "GuiCanvas.py", "search_key_enter : " + str(event) + "  Data : Empty search bar")
         main_con = MainController()
         soft_list = main_con.get_soft_list_full()
-        create_body_data(soft_list)
+        create_body_data(soft_list, main_con.get_insalled_list())
         body_window_canves.config(scrollregion=body_window_canves.bbox("all"))
 
 
@@ -271,7 +271,7 @@ def search_normel():
         tx = ""
     main_con = MainController()
     soft_list = main_con.get_soft_list_search(tx)
-    create_body_data(soft_list)
+    create_body_data(soft_list, main_con.get_insalled_list())
 
 
 def search_button_hover_in(event):
@@ -292,8 +292,9 @@ def scroll_all(event):
     body_window_canves.configure(scrollregion=body_window_canves.bbox("all"))
 
 
-def create_body_data(soft_list):
+def create_body_data(soft_list, installed_list):
     global body_window, work_area, acc_ra, soft_img_array, add_button_array, select_box_array, select_box_value_array, coll_count
+
     # soft_img_array = None
     soft_img_array = []
     # add_button_array = None
@@ -408,7 +409,7 @@ def create_body_data(soft_list):
                 soft_ver_la.pack(expand=True, side=LEFT)
 
                 # version Box
-                soft_ver_box = create_combobox(ver_frame, soft_list[ch])
+                soft_ver_box = create_combobox(ver_frame, soft_list[ch], installed_list)
                 select_box_array.append(soft_ver_box)
                 select_box_array[ch].config(font=("arial", round(soft_ver_f_size * 0.7)))
                 select_box_array[ch].pack(expand=True, side=LEFT)
@@ -483,35 +484,17 @@ def add_click(event, soft_id, array_id):
         showinfo("Warning", "Select Software version")
 
 
-def create_combobox(frame, object):
+def create_combobox(frame, soft, installed_list):
     global select_box_value_array
     ver_array = []
     ver_id_array = []
-    for ver in Software().get_all_version(object['id']):
+    for ver in Software().get_all_version(soft['id']):
         txt = "Ver : " + str(ver['v_no'])
-        # if ver['v_name'] != "":
-        #     txt += " , Name: " + ver['v_name']
-
-        if 'installed_ver' in object:
-            for inst_ver in object['installed_ver']:
-                if inst_ver is None:
-                    continue
-                inst_split = inst_ver.split('.')
-                inst_ok = None
-                v_no_split = str(ver['v_no']).split('.')
-                v_no_ok = None
-                if len(inst_split) > 1:
-                    inst_ok = inst_split[0] + "." + inst_split[1]
-                else:
-                    inst_ok = inst_split[0] + ".0"
-
-                if len(v_no_split) > 1:
-                    v_no_ok = v_no_split[0] + "." + v_no_split[1]
-                else:
-                    v_no_ok = v_no_split[0] + ".0"
-
-                if inst_ok == v_no_ok:
-                    txt += "  installed"
+        try:
+            installed_list.index(ver['id'])
+            txt += "  installed"
+        except:
+            txt += ""
         ver_array.append(txt)
         ver_id_array.append(ver['id'])
 
@@ -519,7 +502,7 @@ def create_combobox(frame, object):
     com_box = Combobox(frame, values=ver_array, font="bold", state="readonly")
 
     for add_soft in install_list:
-        if add_soft['soft_id'] == object['id']:
+        if add_soft['soft_id'] == soft['id']:
             com_box.current(add_soft['select_text_point'])
             com_box['state'] = 'disabled'
             break
