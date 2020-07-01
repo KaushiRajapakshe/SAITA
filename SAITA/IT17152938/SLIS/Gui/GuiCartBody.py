@@ -112,4 +112,11 @@ def create_cart_footer_window(cart_frame):
         ipadx=main_search_but_ipadx * acc_ra,
         ipady=main_search_but_ipady * acc_ra,
     )
+    install_but.bind('<Button-1>', setup_create)
     return cart_footer_form
+
+
+def setup_create(event):
+    global install_list
+    m_con = MainController()
+    m_con.create_setup(install_list)
