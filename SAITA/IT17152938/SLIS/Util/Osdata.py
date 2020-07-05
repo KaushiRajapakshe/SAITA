@@ -4,6 +4,7 @@ import platform
 import subprocess
 from Data.Veriables import powershellcode_floder_location
 from Data.Log import *
+import ctypes as ct
 
 
 class Osdata:
@@ -39,7 +40,7 @@ class Osdata:
             restore_point[key] = line
         return restore_point
 
-    def get_restorepoint_sequenceNumber(self,point_name):
+    def get_restorepoint_sequenceNumber(self, point_name):
         code = "Get-ComputerRestorePoint "
         code += "|Where-Object {$_.Description -eq \"" + point_name + "\"} "
         code += "| Select-Object -ExpandProperty SequenceNumber"
@@ -59,7 +60,7 @@ class Osdata:
             self.del_restorepoint(point_name)
             return self._create_restorepoint_in(point_name)
 
-    def _create_restorepoint_in(self,point_name):
+    def _create_restorepoint_in(self, point_name):
         code = "Checkpoint-Computer -Description \"" + point_name + "\" -RestorePointType APPLICATION_INSTALL "
         process = subprocess.Popen(["powershell",
                                     code],
@@ -74,18 +75,11 @@ class Osdata:
         # first get sequenceNumber for restorepoint using Description
         sequence_number = self.get_restorepoint_sequenceNumber(point_name)
         if str(sequence_number) == "'":
-            add_log(log_types[3], "Osdata", "Can't find sequenceNumber for Restore Point Description "+point_name)
+            add_log(log_types[3], "Osdata", "Can't find sequenceNumber for Restore Point Description " + point_name)
             return False
         # call delete ps1
-        code = "powershell -ExecutionPolicy ByPass -File  " \
-               + powershellcode_floder_location + \
-               "Delete-RestorePoint.ps1 " + \
-               sequence_number
-        process = subprocess.Popen(["powershell",
-                                    code],
-                                   shell=True, stdout=subprocess.PIPE)
-        result = process.stdout.readline()
-        if not str(result) == "b'0\\r\\n'":
+        libc = ct.cdll.Srclient
+        if not str(libc.SRRemoveRestorePoint(int(sequence_number))) == "0":
             add_log(log_types[3], "Osdata", "Fail to delete Restore Point")
             return False
 
