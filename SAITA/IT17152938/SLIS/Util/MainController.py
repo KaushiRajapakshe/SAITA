@@ -7,7 +7,7 @@ from Util.Osdata import Osdata
 class MainController:
     soft = None
     osdata = None
-    install_soft_list=[]
+    install_soft_list = []
 
     def __init__(self):
         self.install_soft_list = []
@@ -27,7 +27,7 @@ class MainController:
         installed_list = self.osdata.get_installed_soft_list()
         for app in installed_list:
             for db_app in db_soft_list:
-                sp_len = len(app.name.split(db_app['name']))
+                sp_len = len(app.name.lower().split(str(db_app['name']).lower()))
                 if sp_len != 1:
                     db_app['installed'] = 1
                     if not 'installed_ver' in db_app:
@@ -78,7 +78,6 @@ class MainController:
 
     def get_insalled_list(self):
         return self.install_soft_list
-
 
     def create_setup(self, install_list):
         self.get_soft_list_full()
