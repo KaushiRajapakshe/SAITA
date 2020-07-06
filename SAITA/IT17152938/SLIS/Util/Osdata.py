@@ -35,9 +35,7 @@ class Osdata:
                                         code],
                                        shell=True, stdout=subprocess.PIPE)
             result = process.stdout.readline()
-            line = str(result).replace("b'", "")
-            line = line.replace("\\r\\n'", "")
-            restore_point[key] = line
+            restore_point[key] = str(result).replace("b'", "").replace("\\r\\n'", "")
         return restore_point
 
     def get_restorepoint_sequenceNumber(self, point_name):
@@ -49,8 +47,7 @@ class Osdata:
                                    shell=True, stdout=subprocess.PIPE)
         result = process.stdout.readline()
 
-        line = str(result).replace("b'", "")
-        return line.replace("\\r\\n'", "")
+        return str(result).replace("b'", "").replace("\\r\\n'", "")
 
     def create_restorepoint(self, point_name):
         sequence_number = self.get_restorepoint_sequenceNumber(point_name)
@@ -84,3 +81,35 @@ class Osdata:
             return False
 
         return True
+
+    def get_environment_variable(self, variable_name):
+        code = "[Environment]::GetEnvironmentVariable('" + variable_name + "', 'Machine')"
+        process = subprocess.Popen(["powershell",
+                                    code],
+                                   shell=True, stdout=subprocess.PIPE)
+        result = process.stdout.readline()
+        return str(result).replace("b'", "").replace("\\r\\n'", "").replace("\\\\", "\\").split(';')
+
+    def add_environment_variable(self, variable_name, variable):
+        var_array = self.get_environment_variable(variable_name)
+        new_var = variable + ';'
+        for var in var_array:
+            new_var += var + ';'
+        new_var = new_var.replace(";;", ";")
+        code = "[Environment]::SetEnvironmentVariable('" + variable_name + "', '" + new_var + "', 'Machine')"
+        process = subprocess.Popen(["powershell",
+                                    code],
+                                   shell=True, stdout=subprocess.PIPE)
+        result = process.stdout.readline()
+        if not str(result) == "b''":
+            add_log(log_types[3], "Osdata", "can't add environment variable" + str(result))
+            return False
+        return True
+
+    def search_environment_variable(self, variable_name, variable):
+        var_array = self.get_environment_variable(variable_name)
+        search = []
+        for var in var_array:
+            if len(var.lower().split(str(variable).lower())) != 1:
+                search.append(var)
+        return search
