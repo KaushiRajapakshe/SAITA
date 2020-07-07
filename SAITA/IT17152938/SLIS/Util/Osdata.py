@@ -2,7 +2,6 @@ import os
 import winapps_change
 import platform
 import subprocess
-from Data.Veriables import powershellcode_floder_location
 from Data.Log import *
 import ctypes as ct
 
