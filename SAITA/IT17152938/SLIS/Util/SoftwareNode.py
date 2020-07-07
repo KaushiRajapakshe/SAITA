@@ -8,6 +8,9 @@ class SoftwareNode:
     setup_link = None
     setup_type = None
     __dependency = []
+    soft_id = None
+    ver = None
+    soft_name = None
 
     def __init__(self, ver_id, osbit):
         self.__dependency = []
@@ -25,13 +28,16 @@ class SoftwareNode:
                 self.setup_link = softver['x86_path']
 
             self.setup_type = softver['execute']
+            self.soft_id = softver['soft_id']
+            self.ver = softver['v_no']
+            self.soft_name = soft.get_soft_name_by_id(self.soft_id)[0]['name']
 
     def __set_dependency(self, soft):
         for depan in soft.get_dependency(self.ver_id):
             self.__dependency.append(depan['depend_soft_id'])
 
     def print_node(self):
-        print(self.ver_id, self.osbit, self.setup_link, self.setup_type, self.__dependency)
+        print(self.ver_id, self.osbit, self.setup_link, self.setup_type, self.__dependency, self.soft_id, self.ver, self.soft_name)
 
     def get_dependency_len(self):
         return len(self.__dependency)
