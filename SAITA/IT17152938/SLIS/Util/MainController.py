@@ -84,7 +84,6 @@ class MainController:
         per_install_softwares = list(dict.fromkeys(self.get_insalled_list()))
         soft_tree = SoftwareTreeCreator()
         tree = soft_tree.create_tree(install_list)
-        temp_tree = tree
         for node_array in tree:
             for node in node_array:
                 try:
