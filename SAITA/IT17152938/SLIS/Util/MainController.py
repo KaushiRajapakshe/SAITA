@@ -81,8 +81,15 @@ class MainController:
 
     def create_setup(self, install_list):
         self.get_soft_list_full()
-        print(self.get_insalled_list())
+        per_install_softwares = list(dict.fromkeys(self.get_insalled_list()))
         soft_tree = SoftwareTreeCreator()
-        tr = soft_tree.create_tree(install_list)
-        for t in tr:
-            t.print_node()
+        tree = soft_tree.create_tree(install_list)
+        temp_tree = tree
+        for node_array in tree:
+            for node in node_array:
+                try:
+                    per_install_softwares.index(node.get_ver_id())
+                    node.set_do_install(False)
+                except:
+                    node.set_do_install(True)
+        return tree
