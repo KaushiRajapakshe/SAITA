@@ -56,3 +56,12 @@ class SoftwareNode:
 
     def get_dependency(self):
         return self.__dependency
+
+    def get_soft_id(self):
+        return self.soft_id
+
+    def get_ver(self):
+        return self.ver
+
+    def get_soft_name(self):
+        return self.soft_name
