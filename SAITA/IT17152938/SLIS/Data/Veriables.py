@@ -1,4 +1,4 @@
-log_enable_all = True
+log_enable_all = False
 log_enable_error = True
 log_enable_warning = True
 error_str_size = 100
@@ -7,7 +7,7 @@ sql_db = "saita_slis_db"
 sql_uname = "root"
 sql_password = ""
 img_location = "http://localhost/SLIS/"
-log_file = "../Log/slis.log"
+log_file = "Log/slis.log"
 logo = "../Icon/logo.ico"
 not_found_img = "../Icon/imgnot.png"
 img_cart = "../Icon/cart.png"
