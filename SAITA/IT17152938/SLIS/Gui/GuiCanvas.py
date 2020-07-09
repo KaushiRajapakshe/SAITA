@@ -39,8 +39,12 @@ zoom_out_img = None
 
 time1 = None
 
+root = None
+
 
 def create_full_show_window(win_root):
+    global root
+    root = win_root
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
     head_show_window = create_head_show_window(full_show_window)
     separator_window = create_separator_window_window(full_show_window)
@@ -79,7 +83,6 @@ def create_footer_show_window(full_window):
         clock.after(200, tick)
 
     clock.config(text="CLOCK:" + str(tick()))
-
 
     zoom_in_img = ImageTk.PhotoImage(create_img(img_zoom_in))
     zoomin = Label(footer_window,
@@ -122,6 +125,7 @@ def create_img(path):
 
 def create_head_show_window(full_window):
     global search_box, search_but, cart_lable_txt, cart_lable_img, cart_form
+    # print(root)
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
     search_box = Entry(head_window,
                        bg=main_search_color_bg,
@@ -185,6 +189,11 @@ def create_head_show_window(full_window):
     search_box.bind("<FocusOut>", set_plase_holder_out)
     create_cart_labal()
     return head_window
+
+
+def open_cart(event):
+    global root
+    open_cart_window(root)
 
 
 def set_scale_col_size(event):
