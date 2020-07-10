@@ -70,7 +70,7 @@ def open_cart_window(root_win):
         cart_title_img_set = Label(cart_title_bar, image=cart_title_img, bg=title_bar_bg, )
 
         cart_window = Frame(cart_root, bg=title_bar_bg, )
-        cart_in_window = create_cart_window(cart_window, cart_root)
+        cart_in_window = create_cart_window(cart_window, cart_root,root)
 
         cart_title_bar.pack(fill=X)
         cart_title_img_set.pack(side=LEFT)
