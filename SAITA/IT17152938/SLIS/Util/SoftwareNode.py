@@ -12,6 +12,8 @@ class SoftwareNode:
     ver = None
     soft_name = None
     do_install = None
+    installed_path = None
+    file_path = None
 
     def __init__(self, ver_id, osbit):
         self.__dependency = []
@@ -21,6 +23,8 @@ class SoftwareNode:
         self.__set_setup_link(soft)
         self.__set_dependency(soft)
         self.do_install = None
+        self.file_path = None
+        self.installed_path = None
 
     def __set_setup_link(self, soft):
         for softver in soft.get_soft_ver_data_by_id(self.ver_id):
@@ -74,3 +78,15 @@ class SoftwareNode:
 
     def get_do_install(self):
         return self.do_install
+
+    def get_installed_path(self):
+        return self.installed_path
+
+    def set_installed_path(self, path):
+        self.installed_path = path
+
+    def get_file_path(self):
+        return self.file_path
+
+    def set_file_path(self, path):
+        self.file_path = path
