@@ -6,6 +6,7 @@ from Data.Log import *
 import ctypes as ct
 
 from Gui.GuiPopupWindow import GuiPopupWindow
+import zipfile
 
 
 class Osdata:
@@ -128,3 +129,43 @@ class Osdata:
             if len(var.lower().split(str(variable).lower())) != 1:
                 search.append(var)
         return search
+
+    def run_installer(self, node, root, acc_ra, work_area):
+        self.minimize_all()
+        me = "Waiting for install " + node.get_soft_name() + " version : " + node.get_ver()
+        massage = GuiPopupWindow(root,
+                                 acc_ra,
+                                 work_area,
+                                 "Wait",
+                                 [me],
+                                 [0.4615, 0.5, 0.2702, 5],
+                                 type="wait",
+                                 close=False,
+                                 )
+        massage.top.update()
+        massage.top.deiconify()
+        if node.get_setup_type() == 1:
+            comand = "Start-Process \"" + node.get_file_path() + \
+                 "\" -argumentlist \"/silent /norestart\" -wait"
+            process = subprocess.Popen(["powershell", comand], shell=True, stdout=subprocess.PIPE)
+            massage.top.deiconify()
+            while process.poll() is None:
+                massage.top.update()
+                massage.top.deiconify()
+                # print('waiting')
+            massage.top.destroy()
+        else:
+            with zipfile.ZipFile(node.get_file_path(), 'r') as zip_ref:
+                for member in zip_ref.infolist():
+                    zip_ref.extract(member, "../Temp/test/")
+                    massage.top.update()
+                # zip_ref.
+            massage.top.destroy()
+
+
+        # result = process.stdout.readlines()
+
+    def minimize_all(self):
+        code = " (New-Object -ComObject Shell.Application).MinimizeAll()"
+        process = subprocess.Popen(["powershell", code], shell=True, stdout=subprocess.PIPE)
+        process.wait()
