@@ -6,6 +6,7 @@ from Data.Veriables import *
 
 from Data.Log import *
 from Gui.GuiGifShow import AnimatedGIF
+from tkinter import ttk
 
 
 class GuiPopupWindow:
@@ -15,8 +16,11 @@ class GuiPopupWindow:
     checkbox_array_val = []
     data = None
     acc = None
+    progress_num = None
+    progress = None
 
-    def __init__(self, master, acc_ra, work_area, massage_tital, data_in, poin_val, close=True, type="soft",btn_txt=""):
+    def __init__(self, master, acc_ra, work_area, massage_tital, data_in, poin_val, close=True, type="soft",
+                 btn_txt=""):
         self.checkbox_array = []
         self.checkbox_array_val = []
         self.data = data_in
@@ -70,18 +74,23 @@ class GuiPopupWindow:
             self.dependencies_select_body()
         elif type == "wait":
             self.creat_wait_body()
-        self.but = Button(self.top_in_window_footer,
-                          text=btn_txt,
-                          bg=main_search_but_bg,
-                          command=self.cleanup,
-                          activebackground=main_search_but_acc,
-                          bd=2,
-                          font="bold",
-                          fg=main_search_but_txt_color,
-                          activeforeground=main_search_but_txt_color,
-                          highlightthickness=0,
-                          )
+        elif type == "download":
+            self.creat_download_body()
+        elif type == "show":
+            self.creat_show_body()
         if close:
+            self.but = Button(self.top_in_window_footer,
+                              text=btn_txt,
+                              bg=main_search_but_bg,
+                              command=self.cleanup,
+                              activebackground=main_search_but_acc,
+                              bd=2,
+                              font="bold",
+                              fg=main_search_but_txt_color,
+                              activeforeground=main_search_but_txt_color,
+                              highlightthickness=0,
+                              )
+
             self.but.pack(
 
                 padx=pad_val * acc_ra / 2,
@@ -90,8 +99,8 @@ class GuiPopupWindow:
                 ipady=main_search_but_ipady * acc_ra / 2,
             )
 
-        self.but.bind("<Enter>", self.but_hover_in)
-        self.but.bind("<Leave>", self.but_hover_out)
+            self.but.bind("<Enter>", self.but_hover_in)
+            self.but.bind("<Leave>", self.but_hover_out)
 
         self.top_in_window_body.pack(expand=1, fill=BOTH)
         self.top_in_window_footer.pack(fill=X)
@@ -169,5 +178,23 @@ class GuiPopupWindow:
         self.massage.config(font=("arial", fontsize))
         self.massage.pack(fill=X)
         animate = AnimatedGIF(self.top_in_window_body, loader_icon)
-        animate.pack(fill=BOTH,pady=10)
+        animate.pack(fill=BOTH, pady=10)
 
+    def creat_download_body(self):
+        self.top_in_window_body = Frame(self.top_in_window, bg=message_body_color, highlightthickness=0)
+        fontsize = round(self.acc / 1.5)
+        self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
+        self.massage.config(font=("arial", fontsize))
+        self.massage.pack(fill=X, pady=10)
+        self.progress = ttk.Progressbar(self.top_in_window_body, orient="horizontal", mode="determinate")
+        self.progress.pack(fill=X,padx=10,pady=10)
+        self.progress_num = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
+        self.progress_num.config(font=("arial", fontsize))
+        self.progress_num.pack(fill=X, pady=10)
+
+    def creat_show_body(self):
+        self.top_in_window_body = Frame(self.top_in_window, bg=message_body_color, highlightthickness=0)
+        fontsize = round(self.acc / 1.5)
+        self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
+        self.massage.config(font=("arial", fontsize))
+        self.massage.pack(fill=X, pady=10)
