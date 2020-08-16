@@ -1,5 +1,5 @@
-import access_file_detail
-from logidentity import log_path
+import SAITA.IT16178700.access_file_detail as access_file_detail
+from SAITA.IT16178700.logidentity import log_path
 
 log_extension = []
 

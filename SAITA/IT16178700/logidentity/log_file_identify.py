@@ -1,6 +1,6 @@
 import os
-from constant import constants
-import access_file_detail
+from SAITA.IT16178700.constant import constants
+import SAITA.IT16178700.access_file_detail as access_file_detail
 
 
 def dir_list_folder(head_dir, dir_name):

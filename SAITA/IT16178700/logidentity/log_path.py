@@ -1,4 +1,4 @@
-from constant import constants
+from SAITA.IT16178700.constant import constants
 
 
 def get_log_path_list():

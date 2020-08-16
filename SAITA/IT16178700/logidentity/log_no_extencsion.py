@@ -1,8 +1,8 @@
 import os
 from fnmatch import fnmatch
 
-import access_file_detail
-from logidentity import log_path
+import SAITA.IT16178700.access_file_detail as access_file_detail
+from SAITA.IT16178700.logidentity import log_path
 
 pattern = "*log"
 log_no_extension = []

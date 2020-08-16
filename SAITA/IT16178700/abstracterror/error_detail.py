@@ -1,6 +1,6 @@
-from logidentity import log_path
-from model import Error
-from model import ESubDetail
+from SAITA.IT16178700.logidentity import log_path
+from SAITA.IT16178700.model import Error
+from SAITA.IT16178700.model import ESubDetail
 
 
 def error_details(stack_trace, infile):
