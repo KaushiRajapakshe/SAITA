@@ -46,9 +46,12 @@ for logs in log_files:
                             if phrase in line:
                                 count = 1
                 length = 0
-            except IOError:
+            except (IOError, PermissionError, UnicodeDecodeError) as e:
+                # print("Error : ", e) // want to write log
                 pass
 
 for p in important:
     for line in p:
         print(line)
+    print('##########################################################################################################')
+
