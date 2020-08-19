@@ -1,5 +1,5 @@
 import datetime
-from SAITA.IT17018760.Data.Veriables import log_file, log_enable_all, log_enable_error, log_enable_warning
+from Data.Veriables import log_file, log_enable_all, log_enable_error, log_enable_warning
 
 
 log_types = ["Error", "Warning", "Info"]
