@@ -377,12 +377,16 @@ def create_body_data(soft_list, installed_list):
                 url_img = img_location + soft_list[ch]['img']
                 soft_img = None
                 try:
+                    print(url_img)
                     soft_img = Image.open(urlopen(url_img))
                 except HTTPError as err:
                     add_log(log_types[1], "GuiCanvas.py", "Image not found in : " + url_img + " error : " + str(err))
                     soft_img = Image.open(not_found_img)
                 except URLError as err:
                     add_log(log_types[0], "GuiCanvas.py", "Cant connect resources server : " + str(err))
+                    soft_img = Image.open(not_found_img)
+                except Exception as err:
+                    add_log(log_types[1], "GuiCanvas.py", "EXCEPTION in : " + url_img + " error : " + str(err))
                     soft_img = Image.open(not_found_img)
 
                 img_frame = Frame(singal_frame_in, bg=cell_bg,

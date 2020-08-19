@@ -21,11 +21,18 @@ acc_ra = work_area[3] / work_area[2]
 add_log(log_types[2], "GuiCart.py", "set acc_ra: " + str(acc_ra))
 
 # install list = []
-# install_list = []
-install_list = [{'soft_id': 17, 'ver_id': 84, 'select_text_point': 0},
-                {'soft_id': 27, 'ver_id': 115, 'select_text_point': 1},
-                {'soft_id': 13, 'ver_id': 68, 'select_text_point': 1},
-                {'soft_id': 19, 'ver_id': 94, 'select_text_point': 1}]
+install_list = []
+# install_list = [{'soft_id': 17, 'ver_id': 84, 'select_text_point': 0},
+#                 {'soft_id': 27, 'ver_id': 115, 'select_text_point': 1},
+#                 {'soft_id': 13, 'ver_id': 68, 'select_text_point': 1},
+#                 {'soft_id': 19, 'ver_id': 94, 'select_text_point': 1}]
+# install_list = [{'soft_id': 6, 'ver_id': 47, 'select_text_point': 0},
+#                 {'soft_id': 16, 'ver_id': 82, 'select_text_point': 0},
+#                 {'soft_id': 27, 'ver_id': 115, 'select_text_point': 1},]
+# install_list = [{'soft_id': 6, 'ver_id': 47, 'select_text_point': 0},
+#                 {'soft_id': 16, 'ver_id': 82, 'select_text_point': 0},]
+# install_list = [{'soft_id': 2, 'ver_id': 12, 'select_text_point': 0},
+#                 {'soft_id': 16, 'ver_id': 82, 'select_text_point': 0},]
 
 # install button
 install_but = None
