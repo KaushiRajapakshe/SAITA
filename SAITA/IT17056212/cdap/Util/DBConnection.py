@@ -1,5 +1,5 @@
 import pymysql
-from Variables import *
+from Data.Variables import *
 
 
 class DBConnection(object):

@@ -1,29 +1,28 @@
-import pprint
-
 import pandas as pd
-import Sentence_PostProcessor
+from Util import Sentence_PostProcessor
 from collections import defaultdict
 import random
-from Inputs import Input
+from Models.Inputs import Input
 
-#keywords = ['Drive-letter', 'because']
 
+# keywords = ['Drive-letter', 'because']
 
 
 def get_key_words():
     inp = Input.get_input()
-    keywords=[]
-    #keywords = ['Drive-letter', 'because']
+    keywords = []
+    # keywords = ['Drive-letter', 'because']
     key = inp.keywords
     keywords.append(key)
     keywords.append("because")
     return keywords
 
+
 def get_selected_text():
-    data = pd.read_pickle('data_pkl.pkl')
+    data = pd.read_pickle('../Data/data_pkl.pkl')
 
     # Extract only restart paragraph
-    key_w=get_key_words()
+    key_w = get_key_words()
     selected_text = data[key_w[0]]
     return selected_text[:300]
 
@@ -54,7 +53,7 @@ def create_dict():
 def generate_sentence(chain, k_word, count):
     # Capitalize the first word
     word1 = k_word
-    unrepeated_word = word1
+    unrepeated_word = k_word
     sentence = word1.capitalize()
 
     # Generate the second word from the value list. Set the new word as the first word. Repeat.
@@ -91,11 +90,11 @@ def sentence_verifier(k_word):
 
             y = 1
             while y == 1:
-                created_dict=create_dict()
+                created_dict = create_dict()
                 pred = generate_sentence(created_dict, k_word, 10)
                 validation = Sentence_PostProcessor.sentence_validate(pred)
                 if validation == "correct":
-                    print('Prediction: ' + pred)
+                    # print('Prediction: ' + pred)
                     y = 0
                     return pred
                 elif validation == "incorrect":
@@ -112,8 +111,7 @@ def get_final_sentence():
     final_sen = ""
     for key_no in get_key_words():
         final_sen += sentence_verifier(key_no)
-    print("Output Sentence: " + final_sen)
+    # print("Output Sentence: " + final_sen)
     return final_sen
 
-
-#get_final_sentence()
+# get_final_sentence()

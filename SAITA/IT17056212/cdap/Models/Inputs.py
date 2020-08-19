@@ -1,6 +1,7 @@
 class Input(object):
     myInput = None
     keywords = []
+    name_para = None
     error_msg = None
     error_code = None
     connection_type = None
@@ -59,7 +60,7 @@ class Input(object):
 
     @classmethod
     def set_error_code(cls, code):
-        cls.error_code = code
+        cls.error_code = code.lower()
 
     @classmethod
     def get_type(cls):
@@ -67,7 +68,7 @@ class Input(object):
 
     @classmethod
     def set_type(cls, type):
-        cls.connection_type = type
+        cls.connection_type = type.lower()
 
     @classmethod
     def get_question1(cls):
@@ -108,3 +109,11 @@ class Input(object):
     @classmethod
     def set_keyword(cls, word):
         cls.keywords = word
+
+    @classmethod
+    def get_name_para(cls):
+        return cls.name_para
+
+    @classmethod
+    def set_name_para(cls, name_para):
+        cls.name_para = name_para

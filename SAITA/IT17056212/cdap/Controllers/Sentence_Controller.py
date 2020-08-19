@@ -1,5 +1,5 @@
-from Inputs import Input
-from Sentence_Generator import get_final_sentence
+from Models.Inputs import Input
+from Util.Sentence_Generator import get_final_sentence
 
 
 class SentenceController:
