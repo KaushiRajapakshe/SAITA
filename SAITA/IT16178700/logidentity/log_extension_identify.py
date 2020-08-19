@@ -1,11 +1,11 @@
-import access_file_detail
-from logidentity import log_path
+import SAITA.IT16178700.access_file_detail as access_file_detail
+import SAITA.IT16178700.scheduler.drives_list as drives_list
 
 log_extension = []
 
 
 def get_log_extension():
-    for head_dir in log_path.get_log_path_list():
+    for head_dir in drives_list.get_os_drives_list():
         import os
         for root, dirs, files in os.walk(head_dir):
             for file in files:

@@ -1,15 +1,15 @@
 import os
 from fnmatch import fnmatch
 
-import access_file_detail
-from logidentity import log_path
+import SAITA.IT16178700.access_file_detail as access_file_detail
+import SAITA.IT16178700.scheduler.drives_list as drives_list
 
 pattern = "*log"
 log_no_extension = []
 
 
 def get_log_no_extension():
-    for root in log_path.get_log_path_list():
+    for root in drives_list.get_os_drives_list():
         for path, subdirs, files in os.walk(root):
             for name in files:
                 if fnmatch(name, pattern):

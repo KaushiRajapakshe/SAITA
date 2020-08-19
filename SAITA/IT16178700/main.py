@@ -1,9 +1,9 @@
 import os
 import re
 
-import access_file_detail
-import phrases
-from abstracterror import error_detail
+import SAITA.IT16178700.access_file_detail as access_file_detail
+import SAITA.IT16178700.phrases as phrases
+from SAITA.IT16178700.abstracterror import error_detail
 
 log_files = []  # set logs txt file list
 log_files = access_file_detail.view_log_details("textfile/logNoExtension.txt")
@@ -46,9 +46,12 @@ for logs in log_files:
                             if phrase in line:
                                 count = 1
                 length = 0
-            except IOError:
+            except (IOError, PermissionError, UnicodeDecodeError) as e:
+                # print("Error : ", e) // want to write log
                 pass
 
 for p in important:
     for line in p:
         print(line)
+    print('##########################################################################################################')
+
