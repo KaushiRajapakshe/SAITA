@@ -1,6 +1,6 @@
 from tkinter import*
-from SAITA.IT17018760.Data.Veriables import *
-from SAITA.IT17018760.GUI.GuiCanvas import *
+from Data.Veriables import *
+from GUI.GuiCanvas import *
 
 root = Tk()
 # turns off title bar

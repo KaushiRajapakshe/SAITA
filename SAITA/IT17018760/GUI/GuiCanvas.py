@@ -1,8 +1,8 @@
 import urllib
 from tkinter import *
 from win32api import GetMonitorInfo, MonitorFromPoint, EnumDisplayMonitors
-from SAITA.IT17018760.Data.Veriables import *
-from SAITA.IT17018760.Data.Log import *
+from Data.Veriables import *
+from Data.Log import *
 from tkinter import*
 import datetime
 from random import choice
@@ -92,7 +92,7 @@ def create_head_show_window(full_window):
 
 
             # res = chatbot_response(msg)
-            ChatLog.insert(END, "SAITA : " '\n\n')
+            ChatLog.insert(END, "SAITA : Please Wait ! SAITA trying to solving your issue. " '\n\n')
 
             ChatLog.config(state=DISABLED)
             ChatLog.yview(END)
@@ -113,7 +113,7 @@ def create_head_show_window(full_window):
 
     # Create the box to enter message
     EntryBox = Text(head_window, bd=0, bg="gray74", width="29", height="5", font=("Square721 BT", 11, 'bold'))
-    label4 = tk.Label(head_window, text="SAITA : Enter Your Issue with service name ", font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white").place(x=726, y=46)
+    label4 = tk.Label(head_window, text="SAITA :Please explain your service issue with service name: ", font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white").place(x=726, y=46)
 
 
 
