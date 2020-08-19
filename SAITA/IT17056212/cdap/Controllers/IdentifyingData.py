@@ -1,5 +1,5 @@
-from Query import Queries
-from Inputs import Input
+from Controllers.Query import Queries
+from Models.Inputs import Input
 from difflib import SequenceMatcher
 
 
@@ -18,7 +18,7 @@ def get_netarr():
                 # compare similarity ratio
                 errormsg = x[0]
                 ratio = SequenceMatcher(None, errormsg, inp.get_error_msg()).ratio()
-                if ratio > 0.9:
+                if ratio > 0.5:
                     x = list(x)
                     x[0] = inp.get_error_msg()
                     x = tuple(x)

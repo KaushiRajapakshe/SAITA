@@ -1,5 +1,5 @@
-from Query import Queries
-from Inputs import Input
+from Controllers.Query import Queries
+from Models.Inputs import Input
 
 
 def get_netarr():

@@ -1,6 +1,6 @@
-import Decision_tree
-import Datasets
-import Questions
+from Util import Decision_tree
+from Controllers import Datasets
+from Data import Questions
 
 
 class DecisiontreeController:

@@ -1,7 +1,5 @@
-import csv
-import CategorizerData
-import IdentifyingData
-from Inputs import Input
+from Controllers import CategorizerData, IdentifyingData
+from Models.Inputs import Input
 
 
 """results = []
