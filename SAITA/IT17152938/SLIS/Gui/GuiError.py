@@ -16,6 +16,10 @@ class GuiError:
         if MsgBox == 'ok':
             GuiError.close_event()
 
+    def show2(self):
+        MsgBox = tk.messagebox.showerror('Error : ', self.create_error())
+        
+
     @staticmethod
     def close_event():
         exit()

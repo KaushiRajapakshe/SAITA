@@ -129,5 +129,7 @@ mini_button.bind('<Button-1>', mini_screen)
 # top.bind("<Map>", max_screen)
 # root.bind('<FocusOut>', mini_screen2)
 # root.bind('<Map>', unshow_task)
-
+# root.lift()
+# root.attributes('-topmost',True)
 root.mainloop()
+
