@@ -1,8 +1,14 @@
+import os
+import threading
+
 from Data.Log import *
 from Util.SoftwareTreeCreator import SoftwareTreeCreator
 from Util.Software import Software
 from Util.Osdata import Osdata
-
+from Data.Veriables import restore_point_name, file_location, download_location
+from Gui.GuiPopupWindow import GuiPopupWindow
+import requests
+from pathlib import Path
 
 class MainController:
     soft = None
@@ -92,3 +98,71 @@ class MainController:
                 except:
                     node.set_do_install(True)
         return tree
+
+    def run_install(self, root, soft_tree, acc_ra, work_area):
+        list = []
+        # self.osdata.create_restorepoint(restore_point_name, root, acc_ra, work_area)
+        for soft in soft_tree:
+            for node in soft:
+                if node.get_do_install():
+                    if not node.get_setup_type() == 1:
+                        node.set_file_path(os.path.abspath("../Temp/Eclipse_3_7/eclipse.zip"))
+                        self.osdata.run_installer(node, root, acc_ra, work_area)
+                        install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
+                        print(install_soft)
+                        continue
+                    if node.get_soft_name()=="Java":
+                        node.set_file_path(os.path.abspath("../Temp/Java_8/jdk.exe"))
+                        self.osdata.run_installer(node, root, acc_ra, work_area)
+                        install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
+                        print(install_soft)
+                        continue
+
+                    download_link = file_location + node.setup_link
+                    message = node.get_soft_name()+" Version:"+node.get_ver()+ " Downloading ...."
+                    massage = GuiPopupWindow(root,
+                                             acc_ra,
+                                             work_area,
+                                             "Downloading",
+                                             [message],
+                                             [0.4615, 0.25, 0.2702, 5],
+                                             type="download",
+                                             close=False,
+                                             )
+                    massage.top.deiconify()
+                    url_split = download_link.split("/")
+                    file_name = url_split[len(url_split) - 1]
+
+                    req = requests.get(download_link, stream=True)
+                    massage.progress["value"] = 0
+                    maxbytes = int(req.headers['content-length'])
+                    massage.progress["maximum"] = maxbytes
+                    chunk_size = 1024
+                    dl_size = 0
+                    c_path = download_location + node.get_soft_name()+"_"+node.get_ver().replace(".", "_")
+                    Path(c_path).mkdir(parents=True, exist_ok=True)
+                    file_path = c_path + "/" + file_name
+                    with open(file_path, "wb") as f:
+                        for data in req.iter_content(chunk_size=chunk_size):
+                            dl_size += len(data)
+                            done = round((100 * dl_size / maxbytes),1)
+                            massage.progress["value"] = round(dl_size)
+                            massage.progress_num.config(text=str(done)+" %")
+                            massage.top.update()
+                            f.write(data)
+                        f.close()
+                    # list.append(file_path)
+                    # print(file_path)
+                    massage.top.destroy()
+                    # node.print_node()
+                    # start install
+                    node.set_file_path(os.path.abspath(file_path))
+                    self.osdata.run_installer(node, root, acc_ra, work_area)
+                    install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
+                    print(install_soft)
+                    # root.deiconify()
+
+
+
+
+

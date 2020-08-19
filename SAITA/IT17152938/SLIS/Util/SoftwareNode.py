@@ -14,6 +14,7 @@ class SoftwareNode:
     do_install = None
     installed_path = None
     file_path = None
+    exe_param = None
 
     def __init__(self, ver_id, osbit):
         self.__dependency = []
@@ -37,6 +38,7 @@ class SoftwareNode:
             self.soft_id = softver['soft_id']
             self.ver = softver['v_no']
             self.soft_name = soft.get_soft_name_by_id(self.soft_id)[0]['name']
+            self.exe_param = softver['exe_param']
 
     def __set_dependency(self, soft):
         for depan in soft.get_dependency(self.ver_id):
@@ -90,3 +92,6 @@ class SoftwareNode:
 
     def set_file_path(self, path):
         self.file_path = path
+
+    def get_exe_param(self):
+        return self.exe_param

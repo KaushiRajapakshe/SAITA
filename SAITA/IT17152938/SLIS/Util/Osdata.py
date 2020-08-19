@@ -1,4 +1,7 @@
 import os
+from tkinter import filedialog
+import tkinter as tk
+
 import winapps_change
 import platform
 import subprocess
@@ -21,6 +24,27 @@ class Osdata:
     def search_installed_list(self, name):
         [app] = winapps_change.search_installed(name)
         return app
+
+    def search_installed_list_with_ver(self, name, ver):
+        install_location = []
+        v_no_split = str(ver).split('.')
+        v_no_ok = None
+        if len(v_no_split) > 1:
+            v_no_ok = v_no_split[0] + "." + v_no_split[1]
+        else:
+            v_no_ok = v_no_split[0] + ".0"
+        for app in winapps_change.search_installed(name):
+            if app.version is None or app.version == "" or app.install_location is None or app.install_location == "":
+                continue
+            inst_split = app.version.split('.')
+            inst_ok = None
+            if len(inst_split) > 1:
+                inst_ok = inst_split[0] + "." + inst_split[1]
+            else:
+                inst_ok = inst_split[0] + ".0"
+            if inst_ok == v_no_ok:
+                install_location.append(app.install_location)
+        return install_location
 
     def get_os_architecture_type(self):
         return platform.architecture()[0]
@@ -146,7 +170,7 @@ class Osdata:
         massage.top.deiconify()
         if node.get_setup_type() == 1:
             comand = "Start-Process \"" + node.get_file_path() + \
-                 "\" -argumentlist \"/silent /norestart\" -wait"
+                    "\" -argumentlist \""+node.get_exe_param()+"\" -wait"
             process = subprocess.Popen(["powershell", comand], shell=True, stdout=subprocess.PIPE)
             massage.top.deiconify()
             while process.poll() is None:
@@ -155,13 +179,19 @@ class Osdata:
                 # print('waiting')
             massage.top.destroy()
         else:
+            filename = None
+            massage.top.deiconify()
+            askdirectory_title = "Extract folder for " + node.get_soft_name() + " version:" + node.get_ver()
+            while filename is None or filename == "":
+                filename = filedialog.askdirectory(master=massage.top, title=askdirectory_title, mustexist=tk.TRUE)
+
             with zipfile.ZipFile(node.get_file_path(), 'r') as zip_ref:
                 for member in zip_ref.infolist():
-                    zip_ref.extract(member, "../Temp/test/")
+                    zip_ref.extract(member, filename)
                     massage.top.update()
-                # zip_ref.
-            massage.top.destroy()
+                    massage.top.deiconify()
 
+            massage.top.destroy()
 
         # result = process.stdout.readlines()
 
