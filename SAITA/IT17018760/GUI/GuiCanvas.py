@@ -1,20 +1,19 @@
-import urllib
-from tkinter import *
-from win32api import GetMonitorInfo, MonitorFromPoint, EnumDisplayMonitors
-from Data.Veriables import *
+from win32api import GetMonitorInfo, MonitorFromPoint
+
+from Data.Variables import *
 from Data.Log import *
-from tkinter import*
-import datetime
-from random import choice
+from tkinter import *
 import time
+
+
 time_string = time.strftime('%H:%M:%S')
-msg="hii"
+msg = "hii"
+
+userreply = []
+
 time1 = ''
 from PIL import ImageTk, Image
 import tkinter as tk
-
-import math
-from urllib.request import urlopen
 
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -31,23 +30,22 @@ body_window = None
 body_window_canves = None
 
 
-
-
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
     head_show_window = create_head_show_window(full_show_window)
     head_show_window.pack(expand=1, fill=BOTH)
 
-
     return full_show_window
 
-large_font = ('Verdana',17)
+
+large_font = ('Verdana', 17)
+
 
 def create_head_show_window(full_window):
     global search_box, search_but
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
 
-    clock = Label(head_window, font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white")
+    clock = Label(head_window, font=("Square721 BT", 13, 'bold'), fg="gray29", bg="white")
     clock.pack(padx=130, pady=0, side=TOP)
 
     def tick():
@@ -65,22 +63,22 @@ def create_head_show_window(full_window):
 
     clock.config(text="CLOCK:" + str(tick()))
 
-
-
-    file_in = 'E:/SLIIT/4year/CDAP/Presentation/SAITA.png'
+    file_in = img_location
     pil_image = Image.open(file_in)
     image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS)
     tk_image1 = ImageTk.PhotoImage(image200x100)
     global img_show
     img_show = tk_image1
-    label2 = tk.Label(head_window, image=img_show,bg="white").pack(padx=80, pady=0, side=tk.LEFT)
+    label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=40, pady=0, side=tk.LEFT)
 
-    label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29",bg="white").place(x=230, y=550)
+    label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
+        x=230, y=550)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
-                      font=("Square721 BT", 14, 'bold'), fg="gray29",bg="white").place(x=90, y=640)
-    label3 = tk.Label(head_window, width=1, height=58, bg="gray29").pack(padx=20, pady=0, side=tk.LEFT)
+                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=90, y=640)
+    label3 = tk.Label(head_window, width=1, height=58, bg="gray29").pack(padx=100, pady=0, side=tk.LEFT)
 
     def send():
+        global chatcon
         msg = EntryBox.get("1.0", 'end-1c').strip()
         EntryBox.delete("0.0", END)
 
@@ -88,15 +86,15 @@ def create_head_show_window(full_window):
             ChatLog.config(state=NORMAL)
             ChatLog.insert(END, "You: " + msg + '\n\n')
             ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
+
+
+
             print(msg)
 
-
-            # res = chatbot_response(msg)
-            ChatLog.insert(END, "SAITA : Please Wait ! SAITA trying to solving your issue. " '\n\n')
+            ChatLog.insert(END, "SAITA : "'\n\n')
 
             ChatLog.config(state=DISABLED)
             ChatLog.yview(END)
-
 
     # Create Chat window
     ChatLog = Text(head_window, bd=0, bg="white", height="8", width="50", font=("Square721 BT", 11, 'bold'), )
@@ -113,10 +111,8 @@ def create_head_show_window(full_window):
 
     # Create the box to enter message
     EntryBox = Text(head_window, bd=0, bg="gray74", width="29", height="5", font=("Square721 BT", 11, 'bold'))
-    label4 = tk.Label(head_window, text="SAITA :Please explain your service issue with service name: ", font=("Square721 BT", 11, 'bold'), fg="gray29",bg="white").place(x=726, y=46)
-
-
-
+    label4 = tk.Label(head_window, text="SAITA : Hi!!! This is SAITA corrupted service solving system.\nPlease note the issue.",
+                      font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=726, y=46)
 
     # Place all components on the screen
     scrollbar.place(x=1326, y=90, height=506)
@@ -125,26 +121,6 @@ def create_head_show_window(full_window):
     SendButton.place(x=1200, y=630, height=30)
 
 
-
-
-
-
-
     return head_window
 
-
-
-
     # bind search key to event
-
-
-
-
-
-
-
-
-
-
-
-

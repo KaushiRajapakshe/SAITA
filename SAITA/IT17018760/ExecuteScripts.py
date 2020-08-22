@@ -3,7 +3,6 @@ import operator
 import re
 import subprocess
 import logging
-
 import mysql
 
 
@@ -85,9 +84,8 @@ ch = 0
 class Exe:
 
     def issuesolve(self):
-        pr = "Is your issue solved? "
-        return str(input(pr))
-
+        issueget=input("Is your issue solved? ")
+        return issueget
 
 
     def run_script(self,CSVName,errorID):
@@ -193,7 +191,7 @@ class Exe:
 
             issueget=None
             issueget = self.issuesolve()
-            print(issueget)
+           # print(issueget)
             if issueget == "yes":
                 with open("CSVFILES/" + CSVName, 'rt') as f:
                     reader = csv.reader(f)

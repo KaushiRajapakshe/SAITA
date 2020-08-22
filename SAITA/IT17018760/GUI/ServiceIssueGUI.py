@@ -1,5 +1,5 @@
 from tkinter import*
-from Data.Veriables import *
+from Data.Variables import *
 from GUI.GuiCanvas import *
 
 root = Tk()
