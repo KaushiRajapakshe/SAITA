@@ -191,6 +191,7 @@ class Exe:
 
             issueget=None
             issueget = self.issuesolve()
+
            # print(issueget)
             if issueget == "yes":
                 with open("CSVFILES/" + CSVName, 'rt') as f:
