@@ -53,3 +53,19 @@ class Queries:
     @classmethod
     def get_technical_solution_warning_by_solution_id(cls, solution_id):
         return cls.mydb.select_param_query('SELECT t_warning FROM technical_solutions where t_id=%s', (solution_id,))
+
+    @classmethod
+    def get_all_directoryerrors(cls):
+        return cls.mydb.select_query('SELECT error_msg,error_code,component_type,issue_id FROM file_errors_msg')
+
+    @classmethod
+    def get_all_directory_solution_category(cls):
+        return cls.mydb.select_query('SELECT fq_one,fq_two,fq_three,fq_four,category FROM file_categorizer')
+
+    @classmethod
+    def get_all_userconferrors(cls):
+        return cls.mydb.select_query('SELECT error_msg,error_code,error_type,issue_id FROM user_errors_msg')
+
+    @classmethod
+    def get_all_userconf_solution_category(cls):
+        return cls.mydb.select_query('SELECT uq_one,uq_two,uq_three,uq_four,category FROM user_categorizer')

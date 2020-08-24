@@ -14,7 +14,16 @@ if __name__ == '__main__':
     net_cat_ques = Questions.network_categorizing_questions
     net_ident_ques.pop(len(net_ident_ques) - 1)
     net_cat_ques.pop(len(net_cat_ques) - 1)
+    direct_ident_ques = Questions.directory_identifying_questions
+    direct_cat_ques = Questions.directory_categorizing_questions
+    direct_ident_ques.pop(len(direct_ident_ques) - 1)
+    direct_cat_ques.pop(len(direct_cat_ques) - 1)
+    userconf_ident_ques = Questions.userconf_identifying_questions
+    userconf_cat_ques = Questions.userconf_categorizing_questions
+    userconf_ident_ques.pop(len(userconf_ident_ques) - 1)
+    userconf_cat_ques.pop(len(userconf_cat_ques) - 1)
 
+    # for x in range(6):
     category_input = input("What type of issue do you have(network/file and directory/User configuration)? ")
     for cat_in in network_synonyms:
         if cat_in in category_input.lower():
@@ -25,6 +34,11 @@ if __name__ == '__main__':
                 if cat_in2 in category_input.lower():
                     category = 'directory'
                     break
+                else:
+                    for cat_in3 in userconf_synonyms:
+                        if cat_in3 in category_input.lower():
+                            category = 'user'
+                            break
 
     inp.set_category(category)
 
@@ -40,6 +54,26 @@ if __name__ == '__main__':
             inp.set_error_code(code)
 
             type = input(net_ident_ques[2])
+            inp.set_type(type)
+
+        elif inp.get_category() == 'directory':
+            msg = input(direct_ident_ques[0])
+            inp.set_error_msg(msg)
+
+            code = input(direct_ident_ques[1])
+            inp.set_error_code(code)
+
+            type = input(direct_ident_ques[2])
+            inp.set_type(type)
+
+        elif inp.get_category() == 'user':
+            msg = input(userconf_ident_ques[0])
+            inp.set_error_msg(msg)
+
+            code = input(userconf_ident_ques[1])
+            inp.set_error_code(code)
+
+            type = input(userconf_ident_ques[2])
             inp.set_type(type)
 
     predicted_issue_ids = DecisiontreeController.decisontree_results(inp.get_component(), inp.get_category(),
@@ -59,6 +93,32 @@ if __name__ == '__main__':
             inp.set_question3(q3)
 
             q4 = input(net_cat_ques[3])
+            inp.set_question4(q4)
+
+        elif inp.get_category() == 'directory':
+            q1 = input(direct_cat_ques[0])
+            inp.set_question1(q1)
+
+            q2 = input(direct_cat_ques[1])
+            inp.set_question2(q2)
+
+            q3 = input(direct_cat_ques[2])
+            inp.set_question3(q3)
+
+            q4 = input(direct_cat_ques[3])
+            inp.set_question4(q4)
+
+        elif inp.get_category() == 'user':
+            q1 = input(userconf_cat_ques[0])
+            inp.set_question1(q1)
+
+            q2 = input(userconf_cat_ques[1])
+            inp.set_question2(q2)
+
+            q3 = input(userconf_cat_ques[2])
+            inp.set_question3(q3)
+
+            q4 = input(userconf_cat_ques[3])
             inp.set_question4(q4)
 
     predicted_solution_type = DecisiontreeController.decisontree_results(inp.get_component(), inp.get_category(),
@@ -88,8 +148,8 @@ if __name__ == '__main__':
                 else:
                     inp.set_name_para(None)
                 print(solution_id[0][0])
-                y = ScriptGenerator()
-                y.process_sequence(solution_id[0][0])
+                # y = ScriptGenerator()
+                # y.process_sequence(solution_id[0][0])
 
     # print(predicted_issue_ids)
     # split_by_issue = predicted_issue_ids.split(",")

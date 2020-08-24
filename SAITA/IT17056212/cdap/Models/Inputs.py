@@ -4,7 +4,7 @@ class Input(object):
     name_para = None
     error_msg = None
     error_code = None
-    connection_type = None
+    comp_type = None
     component = None
     category = None
     question1 = None
@@ -40,7 +40,7 @@ class Input(object):
     @classmethod
     def get_input_array(cls):
         if cls.component == 'identifying':
-            input_array = [[cls.error_msg, cls.error_code, cls.connection_type, 1]]
+            input_array = [[cls.error_msg, cls.error_code, cls.comp_type, 1]]
             return input_array
         if cls.component == 'categorizing':
             input_array = [[cls.question1, cls.question2, cls.question3, cls.question4, 'non-tech']]
@@ -52,7 +52,7 @@ class Input(object):
 
     @classmethod
     def set_error_msg(cls, msg):
-        cls.error_msg = msg
+        cls.error_msg = msg.lower()
 
     @classmethod
     def get_error_code(cls):
@@ -64,11 +64,11 @@ class Input(object):
 
     @classmethod
     def get_type(cls):
-        return cls.connection_type
+        return cls.comp_type
 
     @classmethod
     def set_type(cls, type):
-        cls.connection_type = type.lower()
+        cls.comp_type = type.lower()
 
     @classmethod
     def get_question1(cls):
