@@ -7,7 +7,7 @@ from SAITA.IT16178700.ontology.server import owl_upload
 # upload owl file
 if __name__ == "__main__":
     result = owl_upload.uploadOWL()
-    print("OWL File : ", result)
+    print("OWL File Upload : ", result)
 
 _application_name = "Intellij"
 _application = "application_name"
@@ -22,8 +22,8 @@ specific_query = query.get_application_type()
 specific_query = query.get_application_version()
 
 
-def execute_query():
-    r = requests.post(variables.url, params={'format': 'json', 'query': specific_query})
+def execute_query(query_type):
+    r = requests.post(variables.url, params={'format': 'json', 'query': query_type})
     data = r.json()
     _list = data["results"]["bindings"]
     value = []
@@ -34,4 +34,4 @@ def execute_query():
     return value
 
 
-print(execute_query())
+# print(execute_query())
