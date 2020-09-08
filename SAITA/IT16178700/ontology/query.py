@@ -26,3 +26,15 @@ def get_application_type():
         }
     """
     return query2
+
+
+def get_application_version():
+    query3 = """
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        SELECT DISTINCT ?versionInfo
+        WHERE {
+          ?owl owl:versionInfo ?versionInfo;
+        }
+    """
+    return query3
