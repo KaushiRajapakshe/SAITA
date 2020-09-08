@@ -18,3 +18,11 @@ SINGLE_TYPE = 'SingleType'
 USER_ENTERED = 'UserEntered'
 WEB = 'Web'
 WINDOWS_PLATFORM = 'WindowsPlatform'
+
+# Application
+INTELLIJ = 'Intellij'
+APACHE = 'Apache'
+ECLIPSE = 'Eclipse'
+VSCODE = 'VSCode'
+WORKBENCH = 'WorkBench'
+XAMPP = 'Xampp'
