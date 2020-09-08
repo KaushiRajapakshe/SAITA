@@ -24,3 +24,7 @@ soft_img_dev = 1.2
 soft_title_f_size_dev = 45
 soft_ver_f_size_dev = 30
 pad_val = 20
+
+
+# Apache Jena Fuseki Server URL
+url = 'http://localhost:3030/saita'
