@@ -74,10 +74,10 @@ def create_head_show_window(full_window):
     label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=80, pady=0, side=tk.LEFT)
 
     label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
-        x=230, y=750)
+        x=230, y=650)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
-                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=130, y=840)
-    label3 = tk.Label(head_window, width=1, height=63, bg="gray29").pack(padx=20, pady=0, side=tk.LEFT)
+                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=130, y=740)
+    label3 = tk.Label(head_window, width=1, height=50, bg="gray29").pack(padx=20, pady=0, side=tk.LEFT)
 
     def send():
         global chatcon
@@ -118,12 +118,14 @@ def create_head_show_window(full_window):
                       font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=726, y=46)
     label11 = tk.Label(head_window, text="Do you like to run error preventing scan for your operating system.?",
                        font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=780, y=72)
+    label12 = tk.Label(head_window, text="(Yes / No)",
+                       font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=780, y=100)
 
     # Place all components on the screen
-    scrollbar.place(x=1850, y=90, height=850)
-    ChatLog.place(x=750, y=110, height=600, width=801)
-    EntryBox.place(x=750, y=950, height=45, width=880)
-    SendButton.place(x=1680, y=950, height=45)
+    scrollbar.place(x=1650, y=30, height=750)
+    ChatLog.place(x=730, y=130, height=600, width=801)
+    EntryBox.place(x=730, y=750, height=45, width=750)
+    SendButton.place(x=1500, y=750, height=45)
 
     return head_window
 
