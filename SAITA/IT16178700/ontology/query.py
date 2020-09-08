@@ -38,3 +38,15 @@ def get_application_version():
         }
     """
     return query3
+
+
+def get_error_type():
+    query4 = """
+        PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/>
+
+        SELECT DISTINCT ?error_description
+        WHERE {
+          ?saita saita:error_description ?error_description;
+        }
+    """
+    return query4
