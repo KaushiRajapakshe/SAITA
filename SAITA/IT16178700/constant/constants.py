@@ -68,3 +68,8 @@ LOG_DESCRIPTION = 'log_description'
 LOG_DETAILS = 'log_details'
 LOG_NAME = 'log_name'
 LOG_PATH = 'log_path'
+
+# relationship
+HAS_CATEGORY = 'hasCategory'
+HAS_GENRE = 'hasGenre'
+HAS_PLATFORM = 'hasPlatform'
