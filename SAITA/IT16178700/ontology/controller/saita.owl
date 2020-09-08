@@ -323,20 +323,20 @@
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Oxygen___4_7 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen___4_7">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
-        <owl:versionInfo>Oxygen_4_7</owl:versionInfo>
+        <owl:versionInfo>Oxygen___4_7</owl:versionInfo>
     </owl:Class>
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Photon___4_8 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon___4_8">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
-        <owl:versionInfo>Photon_4_8</owl:versionInfo>
+        <owl:versionInfo>Photon___4_8</owl:versionInfo>
     </owl:Class>
     
 
@@ -431,29 +431,29 @@
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version___1_38_1 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_38_1">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
-        <owl:versionInfo>version_1_38_1</owl:versionInfo>
+        <owl:versionInfo>version___1_38_1</owl:versionInfo>
     </owl:Class>
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_44 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version___1_44 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_44">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_44">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
-        <owl:versionInfo>version_1_44</owl:versionInfo>
+        <owl:versionInfo>version___1_44</owl:versionInfo>
     </owl:Class>
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_45 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version___1_45 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_45">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_45">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
-        <owl:versionInfo>version_1_45</owl:versionInfo>
+        <owl:versionInfo>version___1_45</owl:versionInfo>
     </owl:Class>
     
 
@@ -485,20 +485,20 @@
     
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9 -->
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018__09___4_9 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9">
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018__09___4_9">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
-        <owl:versionInfo>2018_09_4_9</owl:versionInfo>
+        <owl:versionInfo>2018__09___4_9</owl:versionInfo>
     </owl:Class>
-    
 
 
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10 -->
 
-    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10">
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018__12___4_10 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018__12___4_10">
         <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
-        <owl:versionInfo>2018_12_4_10</owl:versionInfo>
+        <owl:versionInfo>2018__12___4_10</owl:versionInfo>
     </owl:Class>
     
 
@@ -639,18 +639,18 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7"/>
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8"/>
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9"/>
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen___4_7"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon___4_8"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018__09___4_9"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018__12___4_10"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1"/>
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_44"/>
-            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_45"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_38_1"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_44"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version___1_45"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
