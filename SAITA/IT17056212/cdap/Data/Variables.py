@@ -31,3 +31,4 @@ soft_img_dev = 1.2
 soft_title_f_size_dev = 45
 soft_ver_f_size_dev = 30
 pad_val = 20
+issue_history_csv = "../Data/user_issue_history.csv"

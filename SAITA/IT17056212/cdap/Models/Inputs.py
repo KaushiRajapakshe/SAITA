@@ -2,6 +2,7 @@ class Input(object):
     myInput = None
     keywords = []
     name_para = None
+    path_para = None
     error_msg = None
     error_code = None
     comp_type = None
@@ -117,3 +118,11 @@ class Input(object):
     @classmethod
     def set_name_para(cls, name_para):
         cls.name_para = name_para
+
+    @classmethod
+    def get_path_para(cls):
+        return cls.path_para
+
+    @classmethod
+    def set_path_para(cls, path_para):
+        cls.path_para = path_para

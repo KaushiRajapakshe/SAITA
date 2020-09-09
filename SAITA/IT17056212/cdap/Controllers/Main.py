@@ -1,3 +1,4 @@
+from Controllers.Ranking_controller import RankingController
 from Data import Questions
 from Models.Inputs import Input
 from Controllers.Decisiontree_controller import DecisiontreeController
@@ -66,6 +67,9 @@ if __name__ == '__main__':
             type = input(direct_ident_ques[2])
             inp.set_type(type)
 
+            path_par = input(direct_ident_ques[3])
+            inp.set_path_para(path_par)
+
         elif inp.get_category() == 'user':
             msg = input(userconf_ident_ques[0])
             inp.set_error_msg(msg)
@@ -76,8 +80,15 @@ if __name__ == '__main__':
             type = input(userconf_ident_ques[2])
             inp.set_type(type)
 
+            usr_name = input(userconf_ident_ques[3])
+            inp.set_name_para(usr_name)
+
     predicted_issue_ids = DecisiontreeController.decisontree_results(inp.get_component(), inp.get_category(),
                                                                      inp.get_input_array())
+    rank = RankingController()
+    issue_id = rank.process_decisiontree_result(predicted_issue_ids)
+    print(issue_id)
+
     component = 'categorizing'
     inp.set_component(component)
 
@@ -124,32 +135,31 @@ if __name__ == '__main__':
     predicted_solution_type = DecisiontreeController.decisontree_results(inp.get_component(), inp.get_category(),
                                                                          inp.get_input_array())
     solution_id = None
-    for key in predicted_issue_ids.keys():
-        print(key)
-        issue_id = key
-        for key2 in predicted_solution_type.keys():
-            print(key2)
-            solution_type = key2
-            if solution_type == "non-tech":
-                solution_id = Queries.get_nontech_solution_id_by_issue_id(issue_id)
+    #for key in predicted_issue_ids.keys():
+      #  print(key)
+       # issue_id = key
+    for key2 in predicted_solution_type.keys():
+        print(key2)
+        solution_type = key2
+        if solution_type == "non-tech":
+            solution_id = Queries.get_nontech_solution_id_by_issue_id(issue_id)
 
-                print(solution_id[0][0])
-                nontech_keyward = Queries.get_keywards_by_nontech_solution_id(solution_id[0][0])
-                print(nontech_keyward)
-                sentence = SentenceController.sentence_generator_results(nontech_keyward)
-                print("Main Output: " + sentence)
+            print(solution_id[0][0])
+            nontech_keyward = Queries.get_keywards_by_nontech_solution_id(solution_id[0][0])
+            print(nontech_keyward)
+            sentence = SentenceController.sentence_generator_results(nontech_keyward)
+            print("Main Output: " + sentence)
 
-            elif solution_type == "tech":
-                solution_id = Queries.get_tech_solution_id_by_issue_id(issue_id)
-                permant_para = Queries.get_permenant_parameter_by_issue_id(issue_id)
-                if permant_para[0][0] != 'None':
-                    print(permant_para[0][0])
-                    inp.set_name_para(permant_para[0][0])
-                else:
-                    inp.set_name_para(None)
+        elif solution_type == "tech":
+            solution_id = Queries.get_tech_solution_id_by_issue_id(issue_id)
+            permant_para = Queries.get_permenant_parameter_by_issue_id(issue_id)
+            if permant_para[0][0] != 'None':
+                print(permant_para[0][0])
+                inp.set_name_para(permant_para[0][0])
+            else:
                 print(solution_id[0][0])
-                # y = ScriptGenerator()
-                # y.process_sequence(solution_id[0][0])
+            # y = ScriptGenerator()
+            # y.process_sequence(solution_id[0][0])
 
     # print(predicted_issue_ids)
     # split_by_issue = predicted_issue_ids.split(",")
