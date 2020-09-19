@@ -1,7 +1,7 @@
 import os
 from SAITA.IT16178700.constant import constants
 import SAITA.IT16178700.access_file_detail as access_file_detail
-from SAITA.IT16178700.scheduler import drives_list
+from SAITA.IT16178700.error.analysis.scheduler import drives_list
 
 
 def dir_list_folder():
@@ -28,4 +28,4 @@ def dir_list_folder():
 def add_log_match_file():
     all_output_list = ['\n'.join(dir_list_folder())]
 
-    access_file_detail.add_log_details(all_output_list, "../textfile/logMatch.txt")
+    access_file_detail.add_log_details(all_output_list, "../../../textfile/logMatch.txt")
