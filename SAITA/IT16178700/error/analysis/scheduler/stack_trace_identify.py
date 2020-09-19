@@ -7,9 +7,9 @@ from SAITA.IT16178700.abstracterror import error_detail
 
 
 def get_log_file():
-    log_files = [access_file_detail.view_log_details("../textfile/logExtension.txt"),
-                 access_file_detail.view_log_details("../textfile/logMatch.txt"),
-                 access_file_detail.view_log_details("../textfile/logNoExtension.txt")]  # set logs txt file list
+    log_files = [access_file_detail.view_log_details("../../../textfile/logExtension.txt"),
+                 access_file_detail.view_log_details("../../../textfile/logMatch.txt"),
+                 access_file_detail.view_log_details("../../../textfile/logNoExtension.txt")]  # set logs txt file list
     return log_files
 
 
@@ -43,7 +43,7 @@ def identify_stack_trace():
                             f = f.readlines()
                             for line in f:
                                 length += 1
-                                if expression1.search(line) or length == len(f) or expression2.search(line) :
+                                if expression1.search(line) or length == len(f) or expression2.search(line):
                                     if count == 1:
                                         count = 0
                                         important.append(stack_trace)
