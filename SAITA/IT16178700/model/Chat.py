@@ -25,6 +25,9 @@ class TestChat:
 
         return self.usrerep[len(self.usrerep)-1]
 
+    def get_check_userreply(self):
+        return self.usrerep[len(self.usrerep)-2]
+
     def get_lastsaitareply(self):
         return self.sitarep[len(self.sitarep)-1]
 
