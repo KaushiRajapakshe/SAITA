@@ -43,13 +43,13 @@ class Error:
     def set_application_path(self, application_path):
         self._application_path = application_path
 
-    # getter method time
-    def get_time(self):
-        return self._time
+    # getter method application_version
+    def get_application_version(self):
+        return self._application_version
 
-    # setter method time
-    def set_time(self, time):
-        self._time = time
+    # setter method application_version
+    def set_application_version(self, application_version):
+        self._application_version = application_version
 
     # getter method log_stack_trace
     def get_log_stack_trace(self):
