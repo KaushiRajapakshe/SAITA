@@ -13,6 +13,7 @@ def query_by_application_name(value, application_name):
           VALUES ?""" + value + """ {'""" + application_name + """'}
         }      
     """
+    print(query1)
     return query1
 
 
@@ -25,6 +26,7 @@ def get_application_type():
           ?rdfs rdfs:isDefinedBy ?isDefinedBy;
         }
     """
+    print(query2)
     return query2
 
 
@@ -37,6 +39,7 @@ def get_application_version():
           ?owl owl:versionInfo ?versionInfo;
         }
     """
+    print(query3)
     return query3
 
 
@@ -49,4 +52,19 @@ def get_error_type():
           ?saita saita:error_description ?error_description;
         }
     """
+    print(query4)
     return query4
+
+
+def check_app_version(entity, value, select):
+    query5 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT DISTINCT ?""" + select + """ 
+    WHERE { 
+        ?saita saita:""" + select + """ ?""" + select + """ ;
+        VALUES ?""" + entity + """ {'""" + value + """'}
+        }
+    """
+    print(query5)
+    return query5
