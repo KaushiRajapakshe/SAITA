@@ -68,3 +68,17 @@ def check_app_version(entity, value, select):
     """
     print(query5)
     return query5
+
+
+def check_error_description(entity, value, select):
+    query6 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT DISTINCT ?""" + select + """ 
+    WHERE { 
+        ?saita saita:""" + select + """ ?""" + select + """ ;
+        VALUES ?""" + entity + """ {'""" + value + """'}
+        }
+    """
+    print(query6)
+    return query6
