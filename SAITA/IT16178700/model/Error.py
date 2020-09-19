@@ -3,14 +3,13 @@ class Error:
     type: 'log error'
 
     # Initializer / Instance Attributes
-    def __init__(self, error_id, error_description, application_name, application_path, time,
-                 log_stack_trace):
-        self._error_id = error_id
-        self._error_description = error_description
-        self._application_name = application_name
-        self._application_path = application_path
-        self._time = time
-        self._log_stack_trace = log_stack_trace
+    def __init__(self):
+        self._error_id = ''
+        self._error_description = ''
+        self._application_name = ''
+        self._application_path = ''
+        self._application_version = ''
+        self._log_stack_trace = ''
 
     # getter method error_id
     def get_error_id(self):
