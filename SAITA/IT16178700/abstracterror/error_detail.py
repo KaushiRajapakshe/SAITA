@@ -1,4 +1,4 @@
-from SAITA.IT16178700.scheduler.logidentity import log_path
+from SAITA.IT16178700.error.analysis.scheduler.logidentity import log_path
 from SAITA.IT16178700.model import Error
 from SAITA.IT16178700.model import ESubDetail
 
