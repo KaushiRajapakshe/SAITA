@@ -174,7 +174,7 @@ def setup_create(event):
                     for node in soft:
                         if massage.value[k].get() == 0 and node.get_do_install() == True:
                             node.set_do_install(False)
-                            node.print_node()
+                            # node.print_node()
                         k += 1
 
             create_prosesing_cart_body()
