@@ -2,7 +2,7 @@ import csv
 import operator
 import re
 import subprocess
-import logging
+from Data.Variables import *
 import mysql
 
 
@@ -16,13 +16,12 @@ class Execute:
         path = {}
         rew = {}
         lent = {}
-        self.ch=0
+        self.ch = 0
 
     @classmethod
-    def getDictionary(self,CSVName):
-        print("CSVName")
+    def getDictionary(self, CSVName):
         k = 0
-        with open("CSVFILES/" + CSVName) as f:
+        with open(csvfilepath + CSVName) as f:
             read = csv.DictReader(f)
             for line in read:
                 self.path[str(k)] = line['path']
@@ -68,208 +67,171 @@ class Execute:
             del self.path[del_num]
             del self.rew[del_num]
             del self.lent[del_num]
+        # print(return_path)
         return return_path
-
-p1=Execute()
-
 
 
 k = []
 ch = 0
 
 
-
-
-
 class Exe:
+    csvName = None
+    errid = None
+    doid = None
+    p1 = None
+
+    def __init__(self, CSVName=None, errorID=None):
+        if CSVName != None:
+            self.p1 = Execute()
+            self.p1.getDictionary(CSVName)
+        self.csvName = CSVName
+        self.errid = errorID
+        self.runpath = None
+
+    def setData(self, CSVName, errorID):
+        self.p1 = Execute()
+        self.p1.getDictionary(CSVName)
+        self.csvName = CSVName
+        self.errid = errorID
 
     def issuesolve(self):
-        issueget=input("Is your issue solved? ")
+        issueget = input("Is your issue solved? ")
         return issueget
 
+    def run_script(self):
+        k = self.p1.get_path()
+        self.runpath = k
+        if k is None:
+            return "All Path executed"
 
-    def run_script(self,CSVName,errorID):
-        p1.getDictionary(CSVName)
-        while True:
-            k = p1.get_path()
-            if k is None:
-                break
+        ab = k.replace("  ", ",")
+        f = open(executedLog, 'w')
+        f.write(ab)
+        f.close()
+        f1 = open(executedLog, 'a')
+        f1.write("\n")
+        f1.write(self.csvName)
+        f1.write("\n")
+        f1.write(str(self.errid))
+        f1.write("\n")
+        f1.write(str(k))
+        f1.close()
 
-            ab=k.replace("  ", ",")
-            f = open('log_file.txt', 'w')
-            f.write(ab )
-            f.close()
-            f1 = open('log_file.txt', 'a')
-            f1.write("\n")
-            f1.write(CSVName)
-            f1.write("\n")
-            f1.write(str(errorID))
-            f1.write("\n")
-            f1.write(str(k))
-            f1.close()
+        ard = ab.split(',')
 
-            ard=ab.split(',')
+        for letter in ard:
+            res1 = "".join(re.findall("[A-Z0-9a-z]+", letter))
 
-            for letter in ard:
-               #print (letter)
-                #print("pula")
-                res1 = "".join(re.findall("[A-Z0-9a-z]+", letter))
-                #print(res1)
+            mydb = mysql.connector.connect(
+                host=sql_server,
+                user=sql_uname,
+                password=sql_password,
+                database=sql_db
+            )
 
-                mydb = mysql.connector.connect(
-                    host="localhost",
-                    user="root",
-                    password="",
-                    database="saita"
-                )
+            mycursor = mydb.cursor()
+            mycursor.execute("SELECT code FROM node WHERE nodeID = %s", (res1,))
+            myresult = mycursor.fetchall()
+            for code in myresult:
+                fullCode = code[0]
 
+                mycursor.execute("SELECT ParamID FROM node WHERE nodeID = %s", (res1,))
+                myresult1 = mycursor.fetchall()
+                for paramid in myresult1:
+                    paramID = paramid[0]
 
-                mycursor = mydb.cursor()
-                mycursor.execute("SELECT code FROM node WHERE nodeID = %s", (res1,))
-                myresult = mycursor.fetchall()
-                for code in myresult:
-                    #print(code[0])
-                    fullCode=code[0]
+                mycursor.execute("SELECT ParamName FROM parameter WHERE ParamID = %s ", (paramID,))
+                myresult2 = mycursor.fetchall()
+                for paramname in myresult2:
+                    paramName = paramname[0]
 
-                    mycursor.execute("SELECT ParamID FROM node WHERE nodeID = %s", (res1,))
-                    myresult1 = mycursor.fetchall()
-                    for paramid in myresult1:
-                        paramID=paramid[0]
-                        #print(paramid[0])
+                if paramid[0] != 0:  # Has parameter
+                    mycursor.execute("SELECT DefaultParameter FROM error_parameter WHERE ParamID = %s AND ErrorID=%s",
+                                     (paramID, self.errid,))
+                    myresult3 = mycursor.fetchall()
+                    for paracode in myresult3:
+                        paramCode = paracode[0]
 
-                    mycursor.execute("SELECT ParamName FROM parameter WHERE ParamID = %s ", (paramID,))
-                    myresult2 = mycursor.fetchall()
-                    for paramname in myresult2:
-                        paramName=paramname[0]
-                        #print(paramname[0])
+                    newc = fullCode.replace(paramName, paramCode)
+                    process = subprocess.Popen(["powershell", newc], shell=True, stdout=subprocess.PIPE)
+                else:
+                    process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
 
+        return self
 
+    def say_yes(self):
+        k = self.runpath
+        with open(csvfilepath + self.csvName, 'rt') as f:
+            reader = csv.reader(f)
+            results = filter(lambda x: k in x, reader)
+            for line in results:
+                print("<Solution Path Executed>")
 
-                    if paramid[0] != 0:   #Has parameter
-                        mycursor.execute("SELECT DefaultParameter FROM error_parameter WHERE ParamID = %s AND ErrorID=%s", (paramID,errorID,))
-                        myresult3 = mycursor.fetchall()
-                        for paracode in myresult3:
-                            paramCode=paracode[0]
-                            #print(paracode[0])
+            addReward = int(line[2]) + 1;
+            # print(addReward)
 
-                        newc=fullCode.replace(paramName,paramCode)
-                        #print(newc)
-                        process = subprocess.Popen(["powershell", newc],shell=True, stdout=subprocess.PIPE)
+        lines = list()
+        with open(csvfilepath + self.csvName, 'r') as readFile:
+            reader = csv.reader(readFile)
+            for row in reader:
+                lines.append(row)
+                for field in row:
+                    if field == k:
+                        lines.remove(row)
 
-                    else:
-                        process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
+        with open(indexCSV, 'w') as writeFile:
+            writer = csv.writer(writeFile)
+            writer.writerows(lines)
 
+        nms = [1, line[1], str(addReward), line[3]]
+        f = open(indexCSV, 'a')
+        with f:
+            writer = csv.writer(f)
+            writer.writerow(nms)
 
+        with open(indexCSV) as inputt, open(csvfilepath + self.csvName, 'w') as output:
+            non_blank = (line for line in inputt if line.strip())
+            output.writelines(non_blank)
 
+        f = open(executedLog, 'w')
+        f.write("")
+        return "Thank you for join with SAITA"
 
+    def say_no(self):
+        k = self.runpath
+        with open(csvfilepath + self.csvName, 'rt') as f:
+            reader = csv.reader(f)
+            results = filter(lambda x: k in x, reader)
+            for line in results:
+                print("<Solution Path Executed.>")
+            addReward = int(line[2]) - 1;
+            # print(addReward)
 
+        lines = list()
+        with open(csvfilepath + self.csvName, 'r') as readFile:
+            reader = csv.reader(readFile)
+            for row in reader:
+                lines.append(row)
+                for field in row:
+                    if field == k:
+                        lines.remove(row)
 
+        with open(indexCSV, 'w') as writeFile:
+            writer = csv.writer(writeFile)
+            writer.writerows(lines)
 
+        nms = [1, line[1], str(addReward), line[3]]
+        # print(nms)
+        f = open(indexCSV, 'a')
+        with f:
+            writer = csv.writer(f)
+            writer.writerow(nms)
 
+        with open(indexCSV) as inputt, open(csvfilepath + self.csvName, 'w') as output:
+            non_blank = (line for line in inputt if line.strip())
+            output.writelines(non_blank)
+        output.close()
+        inputt.close()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            issueget=None
-            issueget = self.issuesolve()
-
-           # print(issueget)
-            if issueget == "yes":
-                with open("CSVFILES/" + CSVName, 'rt') as f:
-                    reader = csv.reader(f)
-                    results = filter(lambda x: k in x, reader)
-                    for line in results:
-                        print(line)
-
-                    addReward = int(line[2]) + 1;
-                    print(addReward)
-
-                lines = list()
-                with open("CSVFILES/" + CSVName, 'r') as readFile:
-                    reader = csv.reader(readFile)
-                    for row in reader:
-                        lines.append(row)
-                        for field in row:
-                            if field == k:
-                                lines.remove(row)
-
-                with open('index.csv', 'w') as writeFile:
-                    writer = csv.writer(writeFile)
-                    writer.writerows(lines)
-
-                nms = [1,line[1], str(addReward), line[3]]
-                print(nms)
-                f = open('index.csv', 'a')
-                with f:
-                    writer = csv.writer(f)
-                    writer.writerow(nms)
-
-                with open('index.csv') as inputt, open("CSVFILES/" + CSVName, 'w') as output:
-                    non_blank = (line for line in inputt if line.strip())
-                    output.writelines(non_blank)
-
-                f = open('log_file.txt', 'w')
-                f.write("")
-                return "Thank you for join with SAITA"
-
-            elif issueget == "no":
-
-                with open("CSVFILES/" + CSVName, 'rt') as f:
-                    reader = csv.reader(f)
-                    results = filter(lambda x: k in x, reader)
-                    for line in results:
-                        print(line)
-                    addReward = int(line[2]) - 1;
-                    print(addReward)
-
-                lines = list()
-                with open("CSVFILES/" + CSVName, 'r') as readFile:
-                    reader = csv.reader(readFile)
-                    for row in reader:
-                        lines.append(row)
-                        for field in row:
-                            if field == k:
-                                lines.remove(row)
-
-                with open('index.csv', 'w') as writeFile:
-                    writer = csv.writer(writeFile)
-                    writer.writerows(lines)
-
-                nms = [1, line[1], str(addReward), line[3]]
-                print(nms)
-                f = open('index.csv', 'a')
-                with f:
-                    writer = csv.writer(f)
-                    writer.writerow(nms)
-
-                with open('index.csv') as inputt, open("CSVFILES/" + CSVName, 'w') as output:
-                    non_blank = (line for line in inputt if line.strip())
-                    output.writelines(non_blank)
-                output.close()
-                inputt.close()
-
-
-
-
-            else:
-                return "Wrong input.Systen Exit"
-
+        return self.run_script()

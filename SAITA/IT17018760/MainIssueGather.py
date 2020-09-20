@@ -2,25 +2,22 @@ import csv
 
 import mysql.connector
 import os.path
-
-from ExecuteScripts import Exe
+from Data.Variables import *
 from QLearningAlgorithm import pula
 
 class GatherIssue(object):
     IssuedService = None
     @classmethod
-    def TakeIssue(cls,issue):
+    def TakeIssue(cls,issue,ex):
 
-        print("The file is  empty: ")
 
-        #issue = input("Enter the issue")   #Gather issue for 1st time
 
         mydb = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password="",
-                database="saita"
-            )
+            host=sql_server,
+            user=sql_uname,
+            password=sql_password,
+            database=sql_db
+        )
         cls.valuex = 0
 
         mycursor = mydb.cursor()
@@ -33,41 +30,41 @@ class GatherIssue(object):
 
 
             #print(cls.valuex)
-        print(CSVGenClass.CSVGenrator(cls.valuex,cls.errorID))
+        print(CSVGenClass.CSVGenrator(cls.valuex,cls.errorID,ex))
         #return cls.valuex
 
 
 class CSVGenClass:
     @classmethod
-    def CSVGenrator(ccc,valuex,errorID):
+    def CSVGenrator(ccc,valuex,errorID,ex):
 
         mydb = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="saita"
+            host=sql_server,
+            user=sql_uname,
+            password=sql_password,
+            database=sql_db
         )
+
         mycursor = mydb.cursor()
         mycursor.execute("""SELECT csvName FROM error_type WHERE typeID = %s""", (valuex,))
         myresult1 = mycursor.fetchall()
-
         for y in myresult1:
             CSVName = y[0]
-        print(CSVName)
 
 
 
 
-        if os.path.isfile("CSVFILES/" + CSVName):
-            return Exe().run_script(CSVName,errorID)
-            print("File exist")
+
+        if os.path.isfile(csvfilepath + CSVName):
+            ex.setData(CSVName,errorID)
+            return ex.run_script()
+            print("CSV File Is Exist In The Local Folder.")
         else:
-            print("File not exist")
-            f = open("CSVFILES/""" + CSVName + "", 'w')
+            print("CSV File Is Not Exist In The Local Folder And Created.")
+            f = open(csvfilepath + CSVName + "", 'w')
             with f:
                 writer = csv.writer(f)
-
-            return pula().PathGenerator(CSVName,valuex,errorID)
+            return pula().PathGenerator(CSVName,valuex,errorID,ex)
 
 
 
