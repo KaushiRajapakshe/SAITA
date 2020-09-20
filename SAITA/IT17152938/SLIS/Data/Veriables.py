@@ -1,4 +1,4 @@
-log_enable_all = False
+log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
 error_str_size = 100
@@ -8,14 +8,6 @@ sql_uname = "root"
 sql_password = "passw0rd"
 img_location = "http://192.168.1.151/SLIS/"
 file_location = "http://192.168.1.151/SLIS/"
-log_file = "../Log/slis.log"
-logo = "../Icon/logo.ico"
-not_found_img = "../Icon/imgnot.png"
-img_cart = "../Icon/cart.png"
-img_hand_down_cart = "../Icon/hand_down_cart.png"
-img_hand_up_cart = "../Icon/hand_up_cart.png"
-img_zoom_in = "../Icon/zoom_in.png"
-img_zoom_out = "../Icon/zoom_out.png"
 logo_div = 0.3
 zoom_dev = 0.08
 title_bar_bg = "#3a3a3a"
@@ -68,7 +60,32 @@ separator_color = "#ffffff"
 clock_txt_color = "#3a3a3a"
 message_body_color = "#ffffff"
 restore_point_name = "SAITA_SIAES"
-powershellcode_floder_location = "../PowerShellCode/"
-loader_icon = "../Icon/loader.gif"
-download_location = "../Temp/"
+
+# for run on IDE
+
+# powershellcode_floder_location = "../PowerShellCode/"
+# loader_icon = "../Icon/loader.gif"
+# download_location = "../Temp/"
+# log_file = "../Log/slis.log"
+# logo = "../Icon/logo.ico"
+# not_found_img = "../Icon/imgnot.png"
+# img_cart = "../Icon/cart.png"
+# img_hand_down_cart = "../Icon/hand_down_cart.png"
+# img_hand_up_cart = "../Icon/hand_up_cart.png"
+# img_zoom_in = "../Icon/zoom_in.png"
+# img_zoom_out = "../Icon/zoom_out.png"
+
+#for run on BAT
+
+powershellcode_floder_location = "PowerShellCode/"
+loader_icon = "Icon/loader.gif"
+download_location = "Temp/"
+log_file = "Log/slis.log"
+logo = "Icon/logo.ico"
+not_found_img = "Icon/imgnot.png"
+img_cart = "Icon/cart.png"
+img_hand_down_cart = "Icon/hand_down_cart.png"
+img_hand_up_cart = "Icon/hand_up_cart.png"
+img_zoom_in = "Icon/zoom_in.png"
+img_zoom_out = "Icon/zoom_out.png"
 
