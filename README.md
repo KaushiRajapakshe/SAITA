@@ -35,7 +35,8 @@ How to solve abundant service-specific issues using machine learning.?
 How to solving fundamental Operating System issues using AI and NLG.?
 -	IT17056212
 How to perform environment setup using the neural networks?
--	IT17152938
+-	IT17152938 
+How to install software list and its' dependencies with minimal risk.?
 
 **Individual Objectives**
 
