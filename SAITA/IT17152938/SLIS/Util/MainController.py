@@ -102,7 +102,7 @@ class MainController:
 
     def run_install(self, root, soft_tree, acc_ra, work_area):
         list = []
-        # self.osdata.create_restorepoint(restore_point_name, root, acc_ra, work_area)
+        self.osdata.create_restorepoint(restore_point_name, root, acc_ra, work_area)
         for soft in soft_tree:
             for node in soft:
                 if node.get_do_install() == 1:
