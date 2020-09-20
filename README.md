@@ -37,6 +37,7 @@ How to solving fundamental Operating System issues using AI and NLG.?
 How to perform environment setup using the neural networks?
 -	IT17152938 
 How to install software list and its' dependencies with minimal risk.?
+
 **Individual Objectives**
 
 This study will be divided in to 4 specific sub objectives which will be carry out the separate by the research team members. Each of those sub objectives is an essential aspect of the project which are specifically designed to achieve a specific part of the troubleshooting field of Windows OS. Those sub objectives are the main components in the software architecture. Those troubleshooting components are,
