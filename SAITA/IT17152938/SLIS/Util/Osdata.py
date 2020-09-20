@@ -136,7 +136,9 @@ class Osdata:
         for var in var_array:
             new_var += var + ';'
         new_var = new_var.replace(";;", ";")
+        new_var = new_var.replace(";';", ";")
         code = "[Environment]::SetEnvironmentVariable('" + variable_name + "', '" + new_var + "', 'Machine')"
+
         process = subprocess.Popen(["powershell",
                                     code],
                                    shell=True, stdout=subprocess.PIPE)
@@ -144,6 +146,8 @@ class Osdata:
         if not str(result) == "b''":
             add_log(log_types[3], "Osdata", "can't add environment variable" + str(result))
             return False
+        else:
+            add_log(log_types[2], "Osdata", "add varaiabal "+variable_name+":"+variable)
         return True
 
     def search_environment_variable(self, variable_name, variable):
@@ -168,7 +172,7 @@ class Osdata:
                                  )
         massage.top.update()
         massage.top.deiconify()
-        filename="";
+        filename=None;
         if node.get_setup_type() == 1:
             if node.get_exe_param()== None:
                 comand = "Start-Process \"" + node.get_file_path() + "\" -wait"
