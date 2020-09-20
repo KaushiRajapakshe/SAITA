@@ -1,5 +1,5 @@
 sql_server = "localhost"
-sql_db = "saita"
+sql_db = "saita_ser"
 sql_uname = "root"
 sql_password = ""
 log_enable_all = True
