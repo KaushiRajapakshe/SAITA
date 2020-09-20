@@ -168,14 +168,17 @@ class Osdata:
                                  )
         massage.top.update()
         massage.top.deiconify()
+        filename="";
         if node.get_setup_type() == 1:
-            comand = "Start-Process \"" + node.get_file_path() + \
+            if node.get_exe_param()== None:
+                comand = "Start-Process \"" + node.get_file_path() + "\" -wait"
+            else:
+                comand = "Start-Process \"" + node.get_file_path() + \
                     "\" -argumentlist \""+node.get_exe_param()+"\" -wait"
             process = subprocess.Popen(["powershell", comand], shell=True, stdout=subprocess.PIPE)
             massage.top.deiconify()
             while process.poll() is None:
                 massage.top.update()
-                massage.top.deiconify()
                 # print('waiting')
             massage.top.destroy()
         else:
@@ -189,9 +192,8 @@ class Osdata:
                 for member in zip_ref.infolist():
                     zip_ref.extract(member, filename)
                     massage.top.update()
-                    massage.top.deiconify()
-
             massage.top.destroy()
+        return filename
 
         # result = process.stdout.readlines()
 
