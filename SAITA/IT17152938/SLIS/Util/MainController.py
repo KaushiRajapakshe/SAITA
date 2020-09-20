@@ -163,10 +163,11 @@ class MainController:
 
                     #start path set process
                     path_list = self.soft.get_path(node.get_ver_id())
-
+                    filename = None
                     if len(path_list) > 0:
                         if node.get_exe_param() == None:
-                            filename = filedialog.askdirectory(master=root, title="select "+node.get_soft_name()+" installed directory",
+                            while filename is None or filename == "":
+                                filename = filedialog.askdirectory(master=root, title="select "+node.get_soft_name()+" installed directory",
                                                            mustexist=tk.TRUE)
 
                         for path in path_list:
@@ -190,9 +191,9 @@ class MainController:
                                 if not MsgBox == 'yes':
                                     continue
 
-                            self.osdata.add_environment_variable(path['var_name'], full_env_path)
+                            self.osdata.add_environment_variable(path['var_name'], full_env_path,root, acc_ra, work_area, node.get_soft_name())
 
-                            print(full_env_path,path['var_name'],node.get_soft_name())
+
                     # root.deiconify()
         messagebox.showinfo("Completed", 'software installation completed with dependencies ', master=root)
         root.destroy()

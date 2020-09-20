@@ -130,7 +130,19 @@ class Osdata:
         result = process.stdout.readline()
         return str(result).replace("b'", "").replace("\\r\\n'", "").replace("\\\\", "\\").split(';')
 
-    def add_environment_variable(self, variable_name, variable):
+    def add_environment_variable(self, variable_name, variable , root, acc_ra, work_area, softname):
+        me = "Waiting for "+softname+"environment variables setup\n\t" + variable_name + " : " + variable
+        massage = GuiPopupWindow(root,
+                                 acc_ra,
+                                 work_area,
+                                 "Wait",
+                                 [me],
+                                 [0.4615, 0.5, 0.2702, 5],
+                                 type="wait",
+                                 close=False,
+                                 )
+        massage.top.update()
+        massage.top.deiconify()
         var_array = self.get_environment_variable(variable_name)
         new_var = variable + ';'
         for var in var_array:
@@ -142,7 +154,10 @@ class Osdata:
         process = subprocess.Popen(["powershell",
                                     code],
                                    shell=True, stdout=subprocess.PIPE)
+        while process.poll() is None:
+            massage.top.update()
         result = process.stdout.readline()
+        massage.top.destroy()
         if not str(result) == "b''":
             add_log(log_types[3], "Osdata", "can't add environment variable" + str(result))
             return False
