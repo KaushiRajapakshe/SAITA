@@ -32,12 +32,8 @@ class Software:
 # get all path list for version from db
     @classmethod
     def get_path(cls, ver_id):
-        return cls.db.execute_query('Select * from path where del=%s and verId=%s', ('0', ver_id))
+        return cls.db.execute_query('Select * from e_veriables where del=%s and v_id=%s', ('0', ver_id))
 
-# get all path list for version from db
-    @classmethod
-    def get_install_step(cls, ver_id):
-        return cls.db.execute_query('Select * from path where del=%s and verId=%s', ('0', ver_id))
 
 # get software name using software id
     @classmethod
