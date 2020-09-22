@@ -414,3 +414,15 @@
 	Info : set acc_ra: 0.5402635431918009
 2020-09-22 15:56:33 : GuiMain.py
 	Info : max_screen : <Map event>
+2020-09-22 16:04:20 : GuiCanvas.py
+	Info : Monitor info : {'Monitor': (0, 0, 1366, 768), 'Work': (0, 0, 1366, 738), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
+2020-09-22 16:04:20 : GuiCanvas.py
+	Info : set acc_ra: 0.5402635431918009
+2020-09-22 16:04:21 : GuiMain.py
+	Info : max_screen : <Map event>
+2020-09-22 16:05:31 : GuiCanvas.py
+	Info : Monitor info : {'Monitor': (0, 0, 1366, 768), 'Work': (0, 0, 1366, 738), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
+2020-09-22 16:05:31 : GuiCanvas.py
+	Info : set acc_ra: 0.5402635431918009
+2020-09-22 16:05:32 : GuiMain.py
+	Info : max_screen : <Map event>
