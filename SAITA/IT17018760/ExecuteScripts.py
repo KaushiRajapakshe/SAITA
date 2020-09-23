@@ -154,10 +154,15 @@ class Exe:
                         paramCode = paracode[0]
 
                     newc = fullCode.replace(paramName, paramCode)
-                    process = subprocess.Popen(["powershell", newc], shell=True, stdout=subprocess.PIPE)
+                    try:
+                        process = subprocess.Popen(["powershell", newc], shell=True, stdout=subprocess.PIPE)
+                    except:
+                        pass
                 else:
-                    process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
-
+                    try:
+                        process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
+                    except:
+                        pass
         return self
 
     def say_yes(self):
