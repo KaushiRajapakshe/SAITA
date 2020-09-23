@@ -76,6 +76,7 @@ class pula:
 
         s = valuey
         d = 100
+
         k = g.printAllPaths(s, d)
 
         def remove(string):
