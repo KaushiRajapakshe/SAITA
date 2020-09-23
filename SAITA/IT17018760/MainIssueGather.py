@@ -20,6 +20,8 @@ class GatherIssue(object):
         )
         cls.valuex = 0
 
+
+
         mycursor = mydb.cursor()
         mycursor.execute("""SELECT typeID,errorID FROM service_error WHERE error = %s""", (issue,))
         myresult = mycursor.fetchall()

@@ -91,16 +91,24 @@ class GUICna:
                 cl.ChatLog.insert(END, "You: " + msg + '\n\n')
                 cl.ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
 
-                chatcon.get_chat().set_usrerep(msg)
-                chatcon.chat_do(cl)
+                listOfStrings = ['The code execution cannot proceed because MSVCR100.dll was not found', 'yes', 'no']
+
+                if msg in listOfStrings:
+                    chatcon.get_chat().set_usrerep(msg)
+                    chatcon.chat_do(cl)
+                else:
+                    cl.ChatLog.insert(END, "SAITA: Your entered message cannot proceed.Enter the correct message " '\n\n')
+
+
+
                 # chatcon.chat_question_sequence()
 
                 #print(msg)
 
                 # ChatLog.insert(END, "SAITA : " + chatcon.get_chat().get_lastsaitareply() + '\n\n')
 
-                cl.ChatLog.config(state=DISABLED)
-                cl.ChatLog.yview(END)
+                    cl.ChatLog.config(state=DISABLED)
+                    cl.ChatLog.yview(END)
 
 
 
