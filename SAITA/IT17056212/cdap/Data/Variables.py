@@ -37,4 +37,15 @@ rank_model_path = "Data/rank_model.sav"
 data_pkl_path = "Data/data_pkl.pkl"
 rank_log_csv = "Data/rank_log.csv"
 
-
+main_search_color_bg = "#ffffff"
+main_search_width = 50
+main_search_color_txt = "black"
+main_search_color_txt_hint = "#C1C0C0"
+main_search_but_bg = "#3a3a3a"
+main_search_but_hover = "#4C4C4C"
+main_search_but_acc = "#504646"
+main_search_but_txt_color = "#ffffff"
+main_search_but_txt = "Search"
+main_search_but_ipadx = 40
+main_search_but_ipady = 11
+loader_icon = "Icon/loader.gif"
