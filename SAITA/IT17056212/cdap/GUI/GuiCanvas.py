@@ -34,7 +34,7 @@ body_window_canves = None
 
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
-    head_show_window = create_head_show_window(full_show_window)
+    head_show_window = create_head_show_window(full_show_window,win_root)
     head_show_window.pack(expand=1, fill=BOTH)
 
     return full_show_window
@@ -43,7 +43,7 @@ def create_full_show_window(win_root):
 large_font = ('Verdana', 17)
 
 
-def create_head_show_window(full_window):
+def create_head_show_window(full_window,win_root):
     global search_box, search_but
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
 
@@ -80,7 +80,7 @@ def create_head_show_window(full_window):
     label3 = tk.Label(head_window, width=1, height=58, bg="gray29").pack(padx=100, pady=0, side=tk.LEFT)
 
     def send():
-        global chatcon
+        global chatcon, acc_ra, work_area
         msg = EntryBox.get("1.0", 'end-1c').strip()
         EntryBox.delete("0.0", END)
 
@@ -90,7 +90,7 @@ def create_head_show_window(full_window):
             ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
 
             chatcon.get_chat().set_usrerep(msg)
-            chatcon.chat_question_sequence()
+            chatcon.chat_question_sequence(acc_ra, work_area, win_root)
 
             print(msg)
 
