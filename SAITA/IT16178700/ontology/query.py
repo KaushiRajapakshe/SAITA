@@ -82,3 +82,22 @@ def check_error_description(entity, value, select):
     """
     print(query6)
     return query6
+
+
+def get_error_action(value1, value2, value3, application_name, error_description, application_version):
+    query7 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT  ?error_action 
+    WHERE { 
+        ?saita saita:application_name ?application_name ;
+            saita:error_description ?error_description ;
+            saita:application_version ?application_version ;
+            saita:error_action ?error_action ;
+            VALUES ?""" + value1 + """ {'""" + application_name + """'}.
+            VALUES ?""" + value2 + """ {'""" + error_description + """'}.
+            VALUES ?""" + value3 + """ {'""" + application_version + """'}.
+    } 
+    """
+    print(query7)
+    return query7
