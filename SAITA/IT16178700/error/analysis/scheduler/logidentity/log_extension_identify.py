@@ -16,4 +16,4 @@ def get_log_extension():
 
 def add_log_extension():
     all_output_list = ['\n'.join(get_log_extension())]
-    access_file_detail.add_log_details(all_output_list, "../../../textfile/logExtension.txt")
+    access_file_detail.add_log_details(all_output_list, "../textfile/logExtension.txt")
