@@ -6,7 +6,7 @@ from SAITA.IT16178700.model.Error import Error
 from SAITA.IT16178700.model.Chat import TestChat
 from SAITA.IT16178700.ontology import query
 from SAITA.IT16178700.controllers.ontology import query_controller
-from SAITA.IT16178700.controllers.shell_script import schell_script_controller as schell
+from SAITA.IT16178700.controllers.shell_script import shell_script_controller as schell
 import re
 
 
