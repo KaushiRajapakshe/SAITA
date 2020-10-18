@@ -1,6 +1,6 @@
 from win32api import GetMonitorInfo, MonitorFromPoint
 
-from SAITA.IT16178700.controllers.chat_controller import ChatController
+from SAITA.IT16178700.controllers.chat.chat_controller import ChatController
 from SAITA.IT16178700.data.variables import *
 from SAITA.IT16178700.data.log import *
 from tkinter import *
