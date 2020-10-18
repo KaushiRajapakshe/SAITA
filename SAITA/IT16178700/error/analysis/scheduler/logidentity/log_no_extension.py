@@ -20,4 +20,4 @@ def get_log_no_extension():
 def add_log_no_extension_file():
     all_output_list = ['\n'.join(get_log_no_extension())]
 
-    access_file_detail.add_log_details(all_output_list, "../../../textfile/logNoExtension.txt")
+    access_file_detail.add_log_details(all_output_list, "../textfile/logNoExtension.txt")
