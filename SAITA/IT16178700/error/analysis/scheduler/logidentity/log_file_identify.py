@@ -28,4 +28,4 @@ def dir_list_folder():
 def add_log_match_file():
     all_output_list = ['\n'.join(dir_list_folder())]
 
-    access_file_detail.add_log_details(all_output_list, "../../../textfile/logMatch.txt")
+    access_file_detail.add_log_details(all_output_list, "../textfile/logMatch.txt")
