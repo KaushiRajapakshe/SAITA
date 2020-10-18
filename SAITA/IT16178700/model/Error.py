@@ -10,6 +10,7 @@ class Error:
         self._application_path = ''
         self._application_version = ''
         self._log_stack_trace = ''
+        self._log_path = ''
 
     # getter method error_id
     def get_error_id(self):
@@ -58,3 +59,12 @@ class Error:
     # setter method log_stack_trace
     def set_log_stack_trace(self, log_stack_trace):
         self._log_stack_trace = log_stack_trace
+
+    # getter method log_path
+    def get_log_path(self):
+        return self._log_path
+
+    # setter method log_path
+    def set_log_path(self, log_path):
+        self._log_path = log_path
+
