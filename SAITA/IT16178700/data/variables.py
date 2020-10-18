@@ -28,3 +28,9 @@ pad_val = 20
 
 # Apache Jena Fuseki Server URL
 url = 'http://localhost:3030/saita'
+
+# Script file name
+script_file = "C:\\Projects\\test.ps1"
+script1 = "set-executionpolicy remotesigned\n$port = 80\nStop-Process -id (Get-NetTCPConnection -LocalPort $port).OwningProcess"
+script2 = "set-executionpolicy remotesigned\ntaskkill /IM xampp-control.exe /F"
+script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath \"C:\\Users\\kaush\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\""
