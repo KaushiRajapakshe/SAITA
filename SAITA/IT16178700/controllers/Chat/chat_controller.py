@@ -23,9 +23,8 @@ class ChatController:
     application_q = ['Sorry.. We are out of service for entered query you. Try out for other.',
                      'Please enter your application name.?',
                      'Please enter version of your application.?',
-                     'Please enter your error discretion.?',
+                     'Please enter your error description.?',
                      'Please wait until error analyzing.',
-                     'Insight-dashboard.jar service run on 8080 port.',
                      'Do you need to continue.?',
                      'Your problem is solved.',
                      'System has no issue to find.']
@@ -69,7 +68,7 @@ class ChatController:
         elif self.loop == 12:
             if type(int(self.chat.get_lastuserreply())) == int:
                 schell.shell_script_write(variables.script1)
-                self.chat.set_sitarep(self.application_q[7])
+                self.chat.set_sitarep(self.application_q[6])
         elif re.search(r'\byes\b', self.chat.get_lastuserreply()) or \
                 re.search(r'\bYes\b', self.chat.get_lastuserreply()) and self.loop == 0:
             self.chat.set_sitarep("Scheduler running...")
@@ -124,7 +123,7 @@ class ChatController:
                     if application_path_identify.check_port(self.error) == 'False':
                         self.loop = 5
                         # if self.loop == 5:
-                        #     self.chat.set_sitarep(self.application_q[8])
+                        #     self.chat.set_sitarep(self.application_q[7])
 
             query.get_error_action(constants.APPLICATION_NAME, constants.ERROR_DESCRIPTION,
                                    constants.APPLICATION_VERSION, self.error.get_application_name(),
