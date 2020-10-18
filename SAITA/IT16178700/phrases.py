@@ -1,6 +1,6 @@
 def get_phrases():
     keep_phrases = ["Address already in use", "Unable to open logs", "ReservedCodeCacheSize=240m",
-                    "Application run failed", "objectMapperConfigurer"]
+                    "Application run failed", "objectMapperConfigurer", "The OSGi framework has been initialised"]
     return keep_phrases
 
 
