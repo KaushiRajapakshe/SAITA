@@ -164,7 +164,7 @@ class Exe:
                     except:
                         pass
         return self
-
+#if it is yes
     def say_yes(self):
         k = self.runpath
         with open(csvfilepath + self.csvName, 'rt') as f:
