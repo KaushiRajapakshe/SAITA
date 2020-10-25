@@ -11,8 +11,8 @@ def add_log_details(line, file_name):
 
 
 def view_log_details(file_name):
-    log_files = []
-    file1 = open(file_name, "r")
-    log_files.append(file1.readlines())
-    file1.close()
-    return log_files
+    log_files = []  # Define log file list variable
+    file1 = open(file_name, "r")  # read mode
+    log_files.append(file1.readlines())  # append next line of read line
+    file1.close()  # close the file
+    return log_files  # return read file list

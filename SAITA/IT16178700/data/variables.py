@@ -1,3 +1,6 @@
+# Variable for
+# PRE SELECTED APPLICATION PROBLEM
+# SOLVING SYSTEM
 log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
@@ -17,6 +20,7 @@ title_bar_txt_color = "#ffffff"
 full_window_color = "#ffffff"
 head_window_color = "#ffffff"
 body_window_color = "#ffffff"
+message_body_color = "#ffffff"
 cell_bg = "#3a3a3a"
 cell_topic_txt_color = "#ffffff"
 coll_count = 4
@@ -24,13 +28,24 @@ soft_img_dev = 1.2
 soft_title_f_size_dev = 45
 soft_ver_f_size_dev = 30
 pad_val = 20
-
+main_search_color_bg = "#ffffff"
+main_search_width = 50
+main_search_color_txt = "black"
+main_search_color_txt_hint = "#C1C0C0"
+main_search_but_bg = "#3a3a3a"
+main_search_but_hover = "#4C4C4C"
+main_search_but_acc = "#504646"
+main_search_but_txt_color = "#ffffff"
+main_search_but_txt = "Search"
+main_search_but_ipadx = 40
+main_search_but_ipady = 11
+loader_icon = "icon/loader.gif"
 
 # Apache Jena Fuseki Server URL
 url = 'http://localhost:3030/saita'
 
-# Script file name
-script_file = "C:\\Projects\\test.ps1"
+# Sample script file name
+script_file = "C:\\Projects\\runScript.ps1"
 script1 = "set-executionpolicy remotesigned\n$port = 80\nStop-Process -id (Get-NetTCPConnection -LocalPort $port).OwningProcess"
 script2 = "set-executionpolicy remotesigned\ntaskkill /IM xampp-control.exe /F"
-script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath \"C:\\Users\\kaush\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\""
+script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath \"C:\\Users\\TechNoobToPro\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\""

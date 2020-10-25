@@ -1,20 +1,23 @@
 from win32api import GetMonitorInfo, MonitorFromPoint
-
 from SAITA.IT16178700.controllers.chat.chat_controller import ChatController
-from SAITA.IT16178700.data.variables import *
-from SAITA.IT16178700.data.log import *
-from tkinter import *
+from tkinter import Frame, Label, BOTH, TOP, END, NORMAL, DISABLED, Text, Scrollbar, Button
 from PIL import ImageTk, Image
 import tkinter as tk
 
 import time
 
+# Define Time format
+from SAITA.IT16178700.data.log import add_log, log_types
+from SAITA.IT16178700.data.variables import head_window_color, full_window_color
+
 time_string = time.strftime('%H:%M:%S')
 msg = "hii"
 
+# Define Chat Controller Variable as chatcon
 chatcon = ChatController()
+# Define user reply list variable
 userreply = []
-
+# Define time1 string variable as null
 time1 = ''
 
 # get monitor working aria size
@@ -32,9 +35,10 @@ body_window = None
 body_window_canves = None
 
 
+# CREATE full show window for Installed Application GUI
 def create_full_show_window(win_root):
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
-    head_show_window = create_head_show_window(full_show_window)
+    head_show_window = create_head_show_window(full_show_window, win_root)
     head_show_window.pack(expand=1, fill=BOTH)
 
     return full_show_window
@@ -43,7 +47,8 @@ def create_full_show_window(win_root):
 large_font = ('Verdana', 17)
 
 
-def create_head_show_window(full_window):
+# CREATE head show window for Installed Application GUI
+def create_head_show_window(full_window, win_root):
     global search_box, search_but
     head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
 
@@ -74,59 +79,54 @@ def create_head_show_window(full_window):
     label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=80, pady=0, side=tk.LEFT)
 
     label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
-        x=230, y=650)
+        x=250, y=700)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
-                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=130, y=740)
-    label3 = tk.Label(head_window, width=1, height=50, bg="gray29").pack(padx=20, pady=0, side=tk.LEFT)
+                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=120, y=810)
+    label3 = tk.Label(head_window, width=1, height=80, bg="gray29").pack(padx=170, pady=0, side=tk.LEFT)
 
-    def send():
-        global chatcon
-        msg = EntryBox.get("1.0", 'end-1c').strip()
-        EntryBox.delete("0.0", END)
+    def send(event, full_root):
+        global chatcon, acc_ra, work_area
+        msg = entry_box.get("1.0", 'end-1c').strip()
+        entry_box.delete("0.0", END)
 
         if msg != '':
-            ChatLog.config(state=NORMAL)
-            ChatLog.insert(END, "You: " + msg + '\n\n')
-            ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
+            chat_log.config(state=NORMAL)
+            chat_log.insert(END, "You: " + msg + '\n\n')
+            chat_log.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
 
             chatcon.get_chat().set_usrerep(msg)
-            chatcon.chat_question_sequence()
+            chatcon.chat_question_sequence(work_area, acc_ra, full_root)
 
-            print(msg)
+            chat_log.insert(END, "SAITA : " + chatcon.get_chat().get_lastsaitareply() + '\n\n')
 
-            ChatLog.insert(END, "SAITA : " + chatcon.get_chat().get_lastsaitareply() + '\n\n')
-
-            ChatLog.config(state=DISABLED)
-            ChatLog.yview(END)
+            chat_log.config(state=DISABLED)
+            chat_log.yview(END)
 
     # Create Chat window
-    ChatLog = Text(head_window, bd=0, bg="white", height="8", width="50", font=("Square721 BT", 11, 'bold'), )
-    ChatLog.config(state=DISABLED)
+    chat_log = Text(head_window, bd=0, bg="white", height="8", width="50", font=("Square721 BT", 11, 'bold'), )
+    chat_log.config(state=DISABLED)
 
     # Bind scrollbar to Chat window
-    scrollbar = Scrollbar(head_window, command=ChatLog.yview, cursor="heart")
-    ChatLog['yscrollcommand'] = scrollbar.set
+    scrollbar = Scrollbar(head_window, command=chat_log.yview, cursor="heart")
+    chat_log['yscrollcommand'] = scrollbar.set
 
     # Create Button to send message
-    SendButton = Button(head_window, font=("Verdana", 12, 'bold'), text="Send", width="12", height=5,
-                        bd=0, bg="gray29", activebackground="#3c9d9b", fg='#ffffff',
-                        command=send)
+    send_button = Button(head_window, font=("Verdana", 12, 'bold'), text="Send", width="12", height=5,
+                        bd=0, bg="gray29", activebackground="#3c9d9b", fg='#ffffff')
+    send_button.bind("<Button-1>", lambda eff, full_root=win_root:
+    send(eff, full_root=full_root))
 
     # Create the box to enter message
-    EntryBox = Text(head_window, bd=0, bg="gray74", width="29", height="5", font=("Square721 BT", 11, 'bold'))
-    label4 = tk.Label(head_window, text="SAITA : Hi!!! This is SAITA pre selected application problem solving system.",
-                      font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=726, y=46)
-    label11 = tk.Label(head_window, text="Do you like to run error preventing scan for your operating system.?",
-                       font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=780, y=72)
-    label12 = tk.Label(head_window, text="(Yes / No)",
-                       font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=780, y=100)
+    entry_box = Text(head_window, bd=0, bg="gray74", width="29", height="5", font=("Square721 BT", 11, 'bold'))
+    label4 = tk.Label(head_window,
+                      text="SAITA : Hi!!! This is SAITA pre selected application problem solving system.\nDo you like "
+                           "to run error preventing scan for your operating system.? (Yes / No)",
+                      font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=890, y=46)
 
     # Place all components on the screen
-    scrollbar.place(x=1650, y=30, height=750)
-    ChatLog.place(x=730, y=130, height=600, width=801)
-    EntryBox.place(x=730, y=750, height=45, width=750)
-    SendButton.place(x=1500, y=750, height=45)
+    scrollbar.place(x=1650, y=110, height=630)
+    chat_log.place(x=890, y=110, height=630, width=700)
+    entry_box.place(x=890, y=800, height=45, width=570)
+    send_button.place(x=1480, y=800, height=45)
 
     return head_window
-
-    # bind search key to event
