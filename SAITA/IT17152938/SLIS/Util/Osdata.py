@@ -11,6 +11,8 @@ import ctypes as ct
 from Gui.GuiPopupWindow import GuiPopupWindow
 import zipfile
 
+from Util.SayText import SayText
+
 
 class Osdata:
 
@@ -130,20 +132,40 @@ class Osdata:
         result = process.stdout.readline()
         return str(result).replace("b'", "").replace("\\r\\n'", "").replace("\\\\", "\\").split(';')
 
-    def add_environment_variable(self, variable_name, variable):
+    def add_environment_variable(self, variable_name, variable , root, acc_ra, work_area, softname):
+        me = "Waiting for "+softname+"environment variables setup\n\t" + variable_name + " : " + variable
+        massage = GuiPopupWindow(root,
+                                 acc_ra,
+                                 work_area,
+                                 "Wait",
+                                 [me],
+                                 [0.4615, 0.5, 0.2702, 5],
+                                 type="wait",
+                                 close=False,
+                                 path=True
+                                 )
+        massage.top.update()
+        massage.top.deiconify()
         var_array = self.get_environment_variable(variable_name)
         new_var = variable + ';'
         for var in var_array:
             new_var += var + ';'
         new_var = new_var.replace(";;", ";")
+        new_var = new_var.replace(";';", ";")
         code = "[Environment]::SetEnvironmentVariable('" + variable_name + "', '" + new_var + "', 'Machine')"
+
         process = subprocess.Popen(["powershell",
                                     code],
                                    shell=True, stdout=subprocess.PIPE)
+        while process.poll() is None:
+            massage.top.update()
         result = process.stdout.readline()
+        massage.top.destroy()
         if not str(result) == "b''":
             add_log(log_types[3], "Osdata", "can't add environment variable" + str(result))
             return False
+        else:
+            add_log(log_types[2], "Osdata", "add varaiabal "+variable_name+":"+variable)
         return True
 
     def search_environment_variable(self, variable_name, variable):
@@ -157,29 +179,48 @@ class Osdata:
     def run_installer(self, node, root, acc_ra, work_area):
         self.minimize_all()
         me = "Waiting for install " + node.get_soft_name() + " version : " + node.get_ver()
-        massage = GuiPopupWindow(root,
-                                 acc_ra,
-                                 work_area,
-                                 "Wait",
-                                 [me],
-                                 [0.4615, 0.5, 0.2702, 5],
-                                 type="wait",
-                                 close=False,
-                                 )
-        massage.top.update()
-        massage.top.deiconify()
+
+        filename=None;
         if node.get_setup_type() == 1:
-            comand = "Start-Process \"" + node.get_file_path() + \
+            if node.get_exe_param()== None:
+                SayText.get_say_text().say("please do a"+node.get_soft_name()+" version "+node.get_ver()+" installation process manually ")
+                comand = "Start-Process \"" + node.get_file_path() + "\" -wait"
+            else:
+                SayText.get_say_text().say(
+                    "please wait until installation process finish")
+                comand = "Start-Process \"" + node.get_file_path() + \
                     "\" -argumentlist \""+node.get_exe_param()+"\" -wait"
+            massage = GuiPopupWindow(root,
+                                     acc_ra,
+                                     work_area,
+                                     "Wait",
+                                     [me],
+                                     [0.4615, 0.5, 0.2702, 5],
+                                     type="wait",
+                                     close=False,
+                                     )
+            massage.top.update()
+            massage.top.deiconify()
             process = subprocess.Popen(["powershell", comand], shell=True, stdout=subprocess.PIPE)
             massage.top.deiconify()
             while process.poll() is None:
                 massage.top.update()
-                massage.top.deiconify()
                 # print('waiting')
             massage.top.destroy()
         else:
             filename = None
+            SayText.get_say_text().say(
+                "Select Unzip location for "+node.get_soft_name()+" version "+node.get_ver())
+            massage = GuiPopupWindow(root,
+                                     acc_ra,
+                                     work_area,
+                                     "Wait",
+                                     [me],
+                                     [0.4615, 0.5, 0.2702, 5],
+                                     type="wait",
+                                     close=False,
+                                     )
+            massage.top.update()
             massage.top.deiconify()
             askdirectory_title = "Extract folder for " + node.get_soft_name() + " version:" + node.get_ver()
             while filename is None or filename == "":
@@ -189,9 +230,8 @@ class Osdata:
                 for member in zip_ref.infolist():
                     zip_ref.extract(member, filename)
                     massage.top.update()
-                    massage.top.deiconify()
-
             massage.top.destroy()
+        return filename
 
         # result = process.stdout.readlines()
 

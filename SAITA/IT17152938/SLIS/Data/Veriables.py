@@ -1,21 +1,19 @@
-log_enable_all = False
+# variables for logs
+log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
 error_str_size = 100
-sql_server = "192.168.1.150"
+
+# variables for server
+sql_server = "192.168.1.151"
 sql_db = "saita_slis_db"
 sql_uname = "root"
 sql_password = "passw0rd"
-img_location = "http://192.168.1.150/SLIS/"
-file_location = "http://192.168.1.150/SLIS/"
-log_file = "Log/slis.log"
-logo = "Icon/logo.ico"
-not_found_img = "Icon/imgnot.png"
-img_cart = "Icon/cart.png"
-img_hand_down_cart = "Icon/hand_down_cart.png"
-img_hand_up_cart = "Icon/hand_up_cart.png"
-img_zoom_in = "Icon/zoom_in.png"
-img_zoom_out = "Icon/zoom_out.png"
+img_location = "http://192.168.1.151/SLIS/"
+file_location = "http://192.168.1.151/SLIS/"
+
+
+# variables for UI
 logo_div = 0.3
 zoom_dev = 0.08
 title_bar_bg = "#3a3a3a"
@@ -68,7 +66,46 @@ separator_color = "#ffffff"
 clock_txt_color = "#3a3a3a"
 message_body_color = "#ffffff"
 restore_point_name = "SAITA_SIAES"
-powershellcode_floder_location = "PowerShellCode/"
-loader_icon = "Icon/loader.gif"
-download_location = "Temp/"
+say_voice = 1
+say_speed = 0.9
+
+# # variables for speech
+start_text = "WellCome"
+end_text = "Have a nice day"
+cart_open = "opening cart"
+cart_close = "closing cart"
+software_add = "added"
+software_remove = "removed"
+spech_search = "searching"
+search_result = " result founded"
+processing = "processing"
+installing = "Start installation"
+
+# for run on IDE
+
+powershellcode_floder_location = "../PowerShellCode/"
+loader_icon = "../Icon/loader.gif"
+download_location = "../Temp/"
+log_file = "../Log/slis.log"
+logo = "../Icon/logo.ico"
+not_found_img = "../Icon/imgnot.png"
+img_cart = "../Icon/cart.png"
+img_hand_down_cart = "../Icon/hand_down_cart.png"
+img_hand_up_cart = "../Icon/hand_up_cart.png"
+img_zoom_in = "../Icon/zoom_in.png"
+img_zoom_out = "../Icon/zoom_out.png"
+
+#for run on BAT
+
+# powershellcode_floder_location = "PowerShellCode/"
+# loader_icon = "Icon/loader.gif"
+# download_location = "Temp/"
+# log_file = "Log/slis.log"
+# logo = "Icon/logo.ico"
+# not_found_img = "Icon/imgnot.png"
+# img_cart = "Icon/cart.png"
+# img_hand_down_cart = "Icon/hand_down_cart.png"
+# img_hand_up_cart = "Icon/hand_up_cart.png"
+# img_zoom_in = "Icon/zoom_in.png"
+# img_zoom_out = "Icon/zoom_out.png"
 

@@ -1,14 +1,16 @@
 import os
-import threading
-
+from tkinter import filedialog,messagebox
+import tkinter as tk
 from Data.Log import *
+from Util.SayText import SayText
 from Util.SoftwareTreeCreator import SoftwareTreeCreator
 from Util.Software import Software
 from Util.Osdata import Osdata
-from Data.Veriables import restore_point_name, file_location, download_location
+from Data.Veriables import restore_point_name, file_location, download_location, end_text
 from Gui.GuiPopupWindow import GuiPopupWindow
 import requests
 from pathlib import Path
+
 
 class MainController:
     soft = None
@@ -101,25 +103,26 @@ class MainController:
 
     def run_install(self, root, soft_tree, acc_ra, work_area):
         list = []
-        # self.osdata.create_restorepoint(restore_point_name, root, acc_ra, work_area)
+        self.osdata.create_restorepoint(restore_point_name, root, acc_ra, work_area)
         for soft in soft_tree:
             for node in soft:
-                if node.get_do_install():
-                    if not node.get_setup_type() == 1:
-                        node.set_file_path(os.path.abspath("../Temp/Eclipse_3_7/eclipse.zip"))
-                        self.osdata.run_installer(node, root, acc_ra, work_area)
-                        install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
-                        print(install_soft)
-                        continue
-                    if node.get_soft_name()=="Java":
-                        node.set_file_path(os.path.abspath("../Temp/Java_8/jdk.exe"))
-                        self.osdata.run_installer(node, root, acc_ra, work_area)
-                        install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
-                        print(install_soft)
-                        continue
+                if node.get_do_install() == 1:
+                    # if node.get_do_install():
+                    #     if not node.get_setup_type() == 1:
+                    #         node.set_file_path(os.path.abspath("../Temp/Eclipse_3_7/eclipse.zip"))
+                    #         self.osdata.run_installer(node, root, acc_ra, work_area)
+                    #         install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
+                    #         print(install_soft)
+                    #         continue
+                    #     if node.get_soft_name()=="Java":
+                    #         node.set_file_path(os.path.abspath("../Temp/Java_8/jdk.exe"))
+                    #         self.osdata.run_installer(node, root, acc_ra, work_area)
+                    #         install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
+                    #         print(install_soft)
+                    #         continue
 
                     download_link = file_location + node.setup_link
-                    message = node.get_soft_name()+" Version:"+node.get_ver()+ " Downloading ...."
+                    message = node.get_soft_name() + " Version:" + node.get_ver() + " Downloading ...."
                     massage = GuiPopupWindow(root,
                                              acc_ra,
                                              work_area,
@@ -139,15 +142,15 @@ class MainController:
                     massage.progress["maximum"] = maxbytes
                     chunk_size = 1024
                     dl_size = 0
-                    c_path = download_location + node.get_soft_name()+"_"+node.get_ver().replace(".", "_")
+                    c_path = download_location + node.get_soft_name() + "_" + node.get_ver().replace(".", "_")
                     Path(c_path).mkdir(parents=True, exist_ok=True)
                     file_path = c_path + "/" + file_name
                     with open(file_path, "wb") as f:
                         for data in req.iter_content(chunk_size=chunk_size):
                             dl_size += len(data)
-                            done = round((100 * dl_size / maxbytes),1)
+                            done = round((100 * dl_size / maxbytes), 1)
                             massage.progress["value"] = round(dl_size)
-                            massage.progress_num.config(text=str(done)+" %")
+                            massage.progress_num.config(text=str(done) + " %")
                             massage.top.update()
                             f.write(data)
                         f.close()
@@ -157,12 +160,43 @@ class MainController:
                     # node.print_node()
                     # start install
                     node.set_file_path(os.path.abspath(file_path))
-                    self.osdata.run_installer(node, root, acc_ra, work_area)
-                    install_soft = self.osdata.search_installed_list_with_ver(node.get_soft_name(), node.get_ver())
-                    print(install_soft)
+                    filename = self.osdata.run_installer(node, root, acc_ra, work_area)
+
+                    #start path set process
+                    path_list = self.soft.get_path(node.get_ver_id())
+                    filename = None
+                    if len(path_list) > 0:
+                        if node.get_exe_param() == None:
+                            SayText.get_say_text().say(
+                                "Select " + node.get_soft_name() + " version " + node.get_ver()+" installed location")
+                            while filename is None or filename == "":
+                                filename = filedialog.askdirectory(master=root, title="select "+node.get_soft_name()+" installed directory",
+                                                           mustexist=tk.TRUE)
+
+                        for path in path_list:
+                            full_env_path=None
+                            if file_name == None:
+                                full_env_path = path['var_path']
+                            else:
+                                full_env_path = os.path.join(filename,path['var_path'])
+                                full_env_path = full_env_path.replace('/','\\')
+                            exsisting_v=self.osdata.search_environment_variable(path['var_name'],node.get_soft_name())
+                            if len(exsisting_v) > 0:
+                                txt='Existing environment variable found for '+node.get_soft_name()+' : '+path['var_name']
+                                txt+='\n its\'  located to:\n'
+                                for exet in exsisting_v:
+                                    txt += '\t'+exet+'\n'
+                                txt += 'Is it ok to overwrite?'
+                                MsgBox = messagebox.askquestion('Existing environment variable found',
+                                                                   txt,
+                                                                   icon='warning', master=root)
+
+                                if not MsgBox == 'yes':
+                                    continue
+
+                            self.osdata.add_environment_variable(path['var_name'], full_env_path,root, acc_ra, work_area, node.get_soft_name())
+
+
                     # root.deiconify()
-
-
-
-
-
+        messagebox.showinfo("Completed", 'software installation completed with dependencies ', master=root)
+        root.destroy()

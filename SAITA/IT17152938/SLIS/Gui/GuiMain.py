@@ -1,5 +1,6 @@
 from Gui.GuiCanvas import *
 
+SayText.get_say_text().set_enable(val=True)
 root = Tk()
 # root = Toplevel(top)
 # top.attributes("-alpha", 0.0)
@@ -131,5 +132,7 @@ mini_button.bind('<Button-1>', mini_screen)
 # root.bind('<Map>', unshow_task)
 # root.lift()
 # root.attributes('-topmost',True)
+SayText.get_say_text().say(start_text)
 root.mainloop()
+SayText.get_say_text().say(end_text)
 

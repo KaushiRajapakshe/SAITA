@@ -30,6 +30,7 @@ def open_cart_window(root_win):
     if len(install_list) < 1:
         showinfo("Info", "No Software for Installation")
     else:
+        SayText.get_say_text().say(cart_open)
         root = root_win
         cart_root = Toplevel(root_win)
         cart_root.overrideredirect(True)
@@ -87,3 +88,4 @@ def cart_root_close():
     global cart_root, root
     cart_root.destroy()
     root.deiconify()
+    SayText.get_say_text().say(cart_close)
