@@ -22,6 +22,7 @@ class DBConnection(object):
     # data = cursor.fetchone()
     # print("Database version : %s " % data)
 
+    # Execute non parameterized queries
     @classmethod
     def select_query(cls, query):
         connection = cls.get_connection()
@@ -31,6 +32,7 @@ class DBConnection(object):
         cursor.close()
         return results
 
+    # Execute parameterized queries
     @classmethod
     def select_param_query(cls, query, value):
         connection = cls.get_connection()

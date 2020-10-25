@@ -5,19 +5,17 @@ import random
 from Models.Inputs import Input
 
 
-# keywords = ['Drive-letter', 'because']
-
-
+# Get keywords
 def get_key_words():
     inp = Input.get_input()
     keywords = []
-    # keywords = ['Drive-letter', 'because']
     key = inp.keywords
     keywords.append(key)
     keywords.append("because")
     return keywords
 
 
+# Select the text from prickle file according to keywords
 def get_selected_text():
     data = pd.read_pickle('../Data/data_pkl.pkl')
 
@@ -27,6 +25,7 @@ def get_selected_text():
     return selected_text[:300]
 
 
+# Create markov_chain
 def markov_chain(text):
     # Tokenize the text by word, though including punctuation
     words = text.split(' ')
@@ -50,6 +49,7 @@ def create_dict():
     return new_dict
 
 
+# Generate Sentences
 def generate_sentence(chain, k_word, count):
     # Capitalize the first word
     word1 = k_word
@@ -80,9 +80,7 @@ def generate_sentence(chain, k_word, count):
     return sentence
 
 
-# print('Prediction: ' + generate_sentence(new_dict))
-
-
+# Send the sentence to validation
 def sentence_verifier(k_word):
     x = 1
     while x == 1:
@@ -107,11 +105,11 @@ def sentence_verifier(k_word):
             x = 1
 
 
+# Receive the final sentence
 def get_final_sentence():
     final_sen = ""
     for key_no in get_key_words():
         final_sen += sentence_verifier(key_no)
-    # print("Output Sentence: " + final_sen)
     return final_sen
 
-# get_final_sentence()
+
