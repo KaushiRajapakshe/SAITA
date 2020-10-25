@@ -7,7 +7,7 @@ from Data.Variables import *
 
 
 class ChatController:
-    next_q = []
+    next_q = []  # next question
     chat = None
     net_ident_ques = Questions.network_identifying_questions
     net_cat_ques = Questions.network_categorizing_questions
@@ -29,6 +29,7 @@ class ChatController:
         self.chat = TestChat()
         self.maincon = mainController()
 
+    # Create the question sequence for the chat according to the issue category
     def chat_question_sequence(self, acc_ra, work_area, win_root):
         ch = True
 

@@ -3,6 +3,7 @@ from Models.Inputs import Input
 from difflib import SequenceMatcher
 
 
+# Get database data for identifying the issue to an array
 def get_arr():
     inp = Input.get_input()
     if inp.get_component() == 'identifying':
@@ -11,7 +12,7 @@ def get_arr():
             # print("ident cat" + inp.get_category())
             net_arr = []
 
-            result = Queries.get_all_networkerrors()
+            result = Queries.get_all_networkerrors()  # identifying result data from the database network table
             # print(result)
             for x in result:
 
@@ -22,7 +23,7 @@ def get_arr():
                     x = list(x)
                     x[0] = inp.get_error_msg()
                     x = tuple(x)
-                    print('Changed after similarity check: '+x[0])
+                    print('Changed after similarity check: ' + x[0])
                 else:
                     x = list(x)
                     x[0] = errormsg
@@ -41,7 +42,7 @@ def get_arr():
         elif inp.get_category() == 'directory':
             direct_arr = []
 
-            result = Queries.get_all_directoryerrors()
+            result = Queries.get_all_directoryerrors()  # identifying result data from the database directory table
             # print(result)
             for x in result:
 
@@ -72,7 +73,7 @@ def get_arr():
         elif inp.get_category() == 'user':
             userconf_arr = []
 
-            result = Queries.get_all_userconferrors()
+            result = Queries.get_all_userconferrors()  # identifying result data from the database user table
             # print(result)
             for x in result:
 

@@ -17,9 +17,11 @@ class mainController:
         self.input = []
         self.inp = Input.get_input()
 
+    # set users reply to the input
     def set_input(self, userreply):
         self.input = userreply
 
+    # handle the chat process and issue solving process
     def process(self, acc_ra, work_area, win_root):
         print(self.input)
 

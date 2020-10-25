@@ -5,6 +5,7 @@ from Data import Questions
 
 class DecisiontreeController:
 
+    # Handle the decision tree according to the inputs and get the predictions
     @classmethod
     def decisontree_results(cls, component, category, input_array):
         if component == 'categorizing':

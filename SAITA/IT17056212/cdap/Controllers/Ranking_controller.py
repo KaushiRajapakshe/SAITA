@@ -13,6 +13,7 @@ class RankingController:
     def __init__(self):
         self.inp = Input.get_input()
 
+    # Process the predicted issue list
     def process_decisiontree_result(self, result):
         all_values = result.values()
         max_value = max(all_values)  # get max value
@@ -20,6 +21,7 @@ class RankingController:
         maxissues = [k for k, v in result.items() if v == max_value]  # Issues with max percentage
         return self.choose_issue(maxissues)
 
+    # Select the most probable issue
     def choose_issue(self, issuelist):
         input_file = open(issue_history_csv, "r+")
         reader_file = csv.reader(input_file)
@@ -90,7 +92,8 @@ class RankingController:
             # print(self.max_rating)
             return self.max_issueid
 
-    def check_list_for_unusable(self, alist, issueid):  # check last records for poor ratings for a issueid
+    # Check last records for poor ratings for a issueid
+    def check_list_for_unusable(self, alist, issueid):
 
         for item in alist:
             #print(item)
