@@ -116,7 +116,7 @@ def return_to_normal_state(event):
     mini_button['bg'] = title_bar_bg
 
 
-# action bind
+
 # title_bar.bind('<B1-Motion>', move_window)
 close_button.bind('<Enter>', close_btn_on_hovering)
 close_button.bind('<Leave>', return_to_normal_state)
