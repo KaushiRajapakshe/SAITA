@@ -101,7 +101,6 @@ class GUICna:
 
 
 
-                # chatcon.chat_question_sequence()
 
                 #print(msg)
 
