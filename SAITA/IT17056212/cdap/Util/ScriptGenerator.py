@@ -13,14 +13,17 @@ class ScriptGenerator:
     def __init__(self):
         self.inp = Input.get_input()
 
+    # Get solution sequence
     def getsolution_sequence(self, solutionid):
         solution_seq = Queries.get_technical_solution_sequence_by_solution_id(solutionid)
         return solution_seq[0][0]
 
+    # Check parameter status of te solution
     def check_param_status(self, stepid):
         para_status = Queries.get_technical_solution_parameter_status_by_cid(stepid)
         return para_status
 
+    # Execute solution sequence
     def process_sequence(self, solutionid):
         command_list = []
         shell_command = ""
@@ -41,6 +44,7 @@ class ScriptGenerator:
         self.execute_command(command_list)
         self.execution_status()
 
+    # Set parameters for the PowerShell commands
     def set_parameters(self, step, solutionid):
         variable_names = Queries.get_technical_solution_variables_by_cid(step)
         v_names = variable_names[0][0].split(",")
@@ -57,6 +61,7 @@ class ScriptGenerator:
 
         return variable_name
 
+    # Write the command sequence
     def write_command(self, step, variable_name):
         final_command = ""
         if variable_name != 'none':
@@ -70,6 +75,7 @@ class ScriptGenerator:
 
         return final_command
 
+    # Write and execute the command list using a PS1 file
     def execute_command(self, command_list):
         ex_stats = []
         shell_file = open("D:\\testShellScript.ps1", "w+")
@@ -84,6 +90,7 @@ class ScriptGenerator:
                               "D:\\testShellScript.ps1"],
                              stdout=sys.stdout)
 
+    # Get the execution status
     def execution_status(self):
         status_file = open("d:\ExecutionStatus.txt", "r")
 

@@ -1,6 +1,6 @@
 import language_check
 
-
+# Validate Sentences
 def sentence_validate(text):
     tool = language_check.LanguageTool('en-US')
 

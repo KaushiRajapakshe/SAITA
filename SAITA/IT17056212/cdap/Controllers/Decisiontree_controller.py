@@ -5,6 +5,7 @@ from Data import Questions
 
 class DecisiontreeController:
 
+    # Handle the decision tree according to the inputs and get the predictions
     @classmethod
     def decisontree_results(cls, component, category, input_array):
         if component == 'categorizing':
@@ -12,8 +13,11 @@ class DecisiontreeController:
                 training_data = Datasets.check_com()
                 Decision_tree.header = Questions.network_categorizing_questions
             elif category == 'directory':
-                training_data = Datasets.directory_category_data
+                training_data = Datasets.check_com()
                 Decision_tree.header = Questions.directory_categorizing_questions
+            elif category == 'user':
+                training_data = Datasets.check_com()
+                Decision_tree.header = Questions.userconf_categorizing_questions
             else:
                 Decision_tree.header = []
         elif component == 'identifying':
@@ -21,8 +25,11 @@ class DecisiontreeController:
                 training_data = Datasets.check_com()
                 Decision_tree.header = Questions.network_identifying_questions
             elif category == 'directory':
-                training_data = Datasets.directory_identify_data
+                training_data = Datasets.check_com()
                 Decision_tree.header = Questions.directory_identifying_questions
+            elif category == 'user':
+                training_data = Datasets.check_com()
+                Decision_tree.header = Questions.userconf_identifying_questions
             else:
                 Decision_tree.header = []
         else:

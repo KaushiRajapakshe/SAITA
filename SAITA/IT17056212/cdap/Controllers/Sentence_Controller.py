@@ -4,6 +4,7 @@ from Util.Sentence_Generator import get_final_sentence
 
 class SentenceController:
 
+    # Send keywords to generate sentences and receive the generated result
     @classmethod
     def sentence_generator_results(cls, keywords):
         inp = Input.get_input()
