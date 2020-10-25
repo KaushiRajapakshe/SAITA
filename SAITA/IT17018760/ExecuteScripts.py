@@ -203,6 +203,7 @@ class Exe:
         f.write("")
         return "Thank you for join with SAITA"
 
+#if user said no to the chat screen
     def say_no(self):
         k = self.runpath
         with open(csvfilepath + self.csvName, 'rt') as f:
