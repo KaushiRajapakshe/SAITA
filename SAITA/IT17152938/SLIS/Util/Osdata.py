@@ -11,6 +11,8 @@ import ctypes as ct
 from Gui.GuiPopupWindow import GuiPopupWindow
 import zipfile
 
+from Util.SayText import SayText
+
 
 class Osdata:
 
@@ -140,6 +142,7 @@ class Osdata:
                                  [0.4615, 0.5, 0.2702, 5],
                                  type="wait",
                                  close=False,
+                                 path=True
                                  )
         massage.top.update()
         massage.top.deiconify()
@@ -176,24 +179,28 @@ class Osdata:
     def run_installer(self, node, root, acc_ra, work_area):
         self.minimize_all()
         me = "Waiting for install " + node.get_soft_name() + " version : " + node.get_ver()
-        massage = GuiPopupWindow(root,
-                                 acc_ra,
-                                 work_area,
-                                 "Wait",
-                                 [me],
-                                 [0.4615, 0.5, 0.2702, 5],
-                                 type="wait",
-                                 close=False,
-                                 )
-        massage.top.update()
-        massage.top.deiconify()
+
         filename=None;
         if node.get_setup_type() == 1:
             if node.get_exe_param()== None:
+                SayText.get_say_text().say("please do a"+node.get_soft_name()+" version "+node.get_ver()+" installation process manually ")
                 comand = "Start-Process \"" + node.get_file_path() + "\" -wait"
             else:
+                SayText.get_say_text().say(
+                    "please wait until installation process finish")
                 comand = "Start-Process \"" + node.get_file_path() + \
                     "\" -argumentlist \""+node.get_exe_param()+"\" -wait"
+            massage = GuiPopupWindow(root,
+                                     acc_ra,
+                                     work_area,
+                                     "Wait",
+                                     [me],
+                                     [0.4615, 0.5, 0.2702, 5],
+                                     type="wait",
+                                     close=False,
+                                     )
+            massage.top.update()
+            massage.top.deiconify()
             process = subprocess.Popen(["powershell", comand], shell=True, stdout=subprocess.PIPE)
             massage.top.deiconify()
             while process.poll() is None:
@@ -202,6 +209,18 @@ class Osdata:
             massage.top.destroy()
         else:
             filename = None
+            SayText.get_say_text().say(
+                "Select Unzip location for "+node.get_soft_name()+" version "+node.get_ver())
+            massage = GuiPopupWindow(root,
+                                     acc_ra,
+                                     work_area,
+                                     "Wait",
+                                     [me],
+                                     [0.4615, 0.5, 0.2702, 5],
+                                     type="wait",
+                                     close=False,
+                                     )
+            massage.top.update()
             massage.top.deiconify()
             askdirectory_title = "Extract folder for " + node.get_soft_name() + " version:" + node.get_ver()
             while filename is None or filename == "":

@@ -296,6 +296,7 @@ def search_key_enter(event):
 
 
 def search_soft(event):
+    SayText.get_say_text().say(spech_search)
     global body_window_canves
     add_log(log_types[2], "GuiCanvas.py", "search_soft : " + str(event) + "  Data : " + search_box.get())
     search_normel()
@@ -310,6 +311,7 @@ def search_normel():
     main_con = MainController()
     soft_list = main_con.get_soft_list_search(tx)
     create_body_data(soft_list, main_con.get_insalled_list())
+    SayText.get_say_text().say(str(len(soft_list))+search_result)
 
 
 def search_button_hover_in(event):
@@ -516,10 +518,12 @@ def add_click(event, soft_id, array_id):
                 add_button_array[array_id]['text'] = '-'
                 install_list.append(cr_array)
                 select_box_array[array_id]['state'] = "disabled"
+                SayText.get_say_text().say(software_add)
             else:
                 add_button_array[array_id]['text'] = '+'
                 install_list.remove(cr_array)
                 select_box_array[array_id]['state'] = "readonly"
+                SayText.get_say_text().say(software_remove)
             # print(install_list)
         create_cart_labal()
     else:

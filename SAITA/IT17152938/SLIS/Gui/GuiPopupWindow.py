@@ -8,6 +8,8 @@ from Data.Log import *
 from Gui.GuiGifShow import AnimatedGIF
 from tkinter import ttk
 
+from Util.SayText import SayText
+
 
 class GuiPopupWindow:
     massage = None
@@ -20,7 +22,7 @@ class GuiPopupWindow:
     progress = None
 
     def __init__(self, master, acc_ra, work_area, massage_tital, data_in, poin_val, close=True, type="soft",
-                 btn_txt=""):
+                 btn_txt="",path=False):
         self.checkbox_array = []
         self.checkbox_array_val = []
         self.data = data_in
@@ -73,7 +75,7 @@ class GuiPopupWindow:
         if type == "soft":
             self.dependencies_select_body()
         elif type == "wait":
-            self.creat_wait_body()
+            self.creat_wait_body(path)
         elif type == "download":
             self.creat_download_body()
         elif type == "show":
@@ -171,9 +173,14 @@ class GuiPopupWindow:
     def but_hover_out(self, event):
         self.but['bg'] = main_search_but_bg
 
-    def creat_wait_body(self):
+    def creat_wait_body(self,path=False):
         self.top_in_window_body = Frame(self.top_in_window, bg=message_body_color, highlightthickness=0)
         fontsize = round(self.acc / 1.5)
+        if(path==True):
+            xx=self.data[0].split(':')
+            SayText.get_say_text().say(xx[0])
+        else:
+            SayText.get_say_text().say(self.data[0])
         self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
         self.massage.config(font=("arial", fontsize))
         self.massage.pack(fill=X)
@@ -183,6 +190,7 @@ class GuiPopupWindow:
     def creat_download_body(self):
         self.top_in_window_body = Frame(self.top_in_window, bg=message_body_color, highlightthickness=0)
         fontsize = round(self.acc / 1.5)
+        SayText.get_say_text().say(self.data[0])
         self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
         self.massage.config(font=("arial", fontsize))
         self.massage.pack(fill=X, pady=10)

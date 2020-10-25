@@ -2,10 +2,11 @@ import os
 from tkinter import filedialog,messagebox
 import tkinter as tk
 from Data.Log import *
+from Util.SayText import SayText
 from Util.SoftwareTreeCreator import SoftwareTreeCreator
 from Util.Software import Software
 from Util.Osdata import Osdata
-from Data.Veriables import restore_point_name, file_location, download_location
+from Data.Veriables import restore_point_name, file_location, download_location, end_text
 from Gui.GuiPopupWindow import GuiPopupWindow
 import requests
 from pathlib import Path
@@ -166,6 +167,8 @@ class MainController:
                     filename = None
                     if len(path_list) > 0:
                         if node.get_exe_param() == None:
+                            SayText.get_say_text().say(
+                                "Select " + node.get_soft_name() + " version " + node.get_ver()+" installed location")
                             while filename is None or filename == "":
                                 filename = filedialog.askdirectory(master=root, title="select "+node.get_soft_name()+" installed directory",
                                                            mustexist=tk.TRUE)

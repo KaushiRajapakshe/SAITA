@@ -12,6 +12,7 @@ from Util.MainController import MainController
 import math
 from urllib.request import urlopen
 from Util.Software import Software
+from Util.SayText import SayText
 
 # get monitor working aria size
 monitor_fo = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -154,6 +155,7 @@ def create_cart_footer_window(cart_frame):
 def setup_create(event):
     global install_list, install_but, cart_root, ch, acc_ra, soft_tree, root_main
     if install_but['text'] == install_button_text:
+        SayText.get_say_text().say(processing)
         if ch:
             m_con = MainController()
             soft_tree = m_con.create_setup(install_list)
@@ -179,6 +181,7 @@ def setup_create(event):
 
             create_prosesing_cart_body()
     else:
+        SayText.get_say_text().say(installing)
         cart_root.destroy()
         root_main.deiconify()
         MainController().run_install(root_main, soft_tree, acc_ra, work_area)
