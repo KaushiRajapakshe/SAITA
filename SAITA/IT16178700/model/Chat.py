@@ -1,12 +1,13 @@
 class TestChat:
     usrerep = []
     sitarep = [["hi"]]
-    type = None
+    loop = 0
 
     def __init__(self):
         self.usrerep = []
         self.sitarep = ["hi"]
         self.mass = 0
+        self.loop = 0
 
     def get_usrerep(self):
         return self.usrerep
@@ -24,11 +25,14 @@ class TestChat:
 
         return self.usrerep[len(self.usrerep)-1]
 
+    def get_check_userreply(self):
+        return self.usrerep[len(self.usrerep)-2]
+
     def get_lastsaitareply(self):
         return self.sitarep[len(self.sitarep)-1]
 
-    def get_type(self):
-        return self.type
+    def get_loop(self):
+        return self.loop
 
-    def set_type(self, type):
-        self.type = type
+    def set_loop(self, loop):
+        self.loop = loop
