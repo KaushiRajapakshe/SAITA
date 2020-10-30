@@ -49,3 +49,6 @@ script_file = "C:\\Projects\\runScript.ps1"
 script1 = "set-executionpolicy remotesigned\n$port = 80\nStop-Process -id (Get-NetTCPConnection -LocalPort $port).OwningProcess"
 script2 = "set-executionpolicy remotesigned\ntaskkill /IM xampp-control.exe /F"
 script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath \"C:\\Users\\TechNoobToPro\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\""
+
+# Ignore SAITA log path
+ignore_log_path = 'IT16178700\\data\\foi.log'
