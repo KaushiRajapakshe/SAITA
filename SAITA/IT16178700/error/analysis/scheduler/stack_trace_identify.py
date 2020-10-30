@@ -4,6 +4,8 @@ import re
 import SAITA.IT16178700.access_file_detail as access_file_detail
 import SAITA.IT16178700.phrases as phrases
 from SAITA.IT16178700.abstracterror import error_detail
+from SAITA.IT16178700.config import config_controller
+from SAITA.IT16178700.data import variables
 from SAITA.IT16178700.data.log import add_log, log_types
 from SAITA.IT16178700.model.Error import Error
 from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
@@ -43,6 +45,13 @@ def identify_stack_trace(work_area, acc_ra, roott):
     set_log = ''
     # identify stack trace on error
     c = get_log_file()
+
+    # initialise config object using the config_controller
+    app_config = config_controller.init_config("../app.ini")
+
+    # get string value scheduler_current_date
+    scheduler_current_date = app_config.get('default', 'scheduler_current_date')
+
     # Apply loading for identify logs with .log extension scanner
     maxp = 0
     for logs in c:
@@ -70,48 +79,66 @@ def identify_stack_trace(work_area, acc_ra, roott):
 
         for infile in logs:
             for log in infile:
-                last_char = infile[-1]
-                if last_char == "\n":
-                    infile = infile[:-1]
-                last_ch = log[-1:]
-                if last_ch == "\n":
-                    log = log[:-1]
-                # See if the path exists.
-                if os.path.exists(log):
-                    # open file
-                    try:
-                        with open(log, 'r') as f:
-                            f = f.readlines()
-                            error = Error()
-                            for line in f:
-                                length += 1
-                                if expression1.search(line) or length == len(f) or expression2.search(line):
-                                    if count == 1:
-                                        # If count = 1 set Error details for Error and ESubDetail Model and
-                                        # count changed to 0 and stack trace equal to empty
-                                        count = 0
-                                        important.append(stack_trace)
-                                        error.set_log_stack_trace(stack_trace)
-                                        error.set_error_description(set_phrase)
-                                        error.set_log_path(set_log)
-                                        error_list = check_error_list(error, error_list)
-                                        error_detail.error_details(stack_trace, log)
-                                        stack_trace = []
-                                    stack_trace = [line]
-                                else:
-                                    stack_trace.append(line)
-                                # Check phrases having on error log file line
-                                for phrase in keep_phrases:
-                                    if phrase in line:
-                                        # If true set phrase, log and count = 1
-                                        set_phrase = phrase
-                                        set_log = log
-                                        count = 1
-                        length = 0
-                        # error_list.append(error)
-                    except (IOError, PermissionError, UnicodeDecodeError) as e:
-                        add_log(log_types[0], "Stack Trace Identify : ", e)
-                        pass
+                if not re.search(r'' + variables.ignore_log_path, log):
+                    last_char = infile[-1]
+                    if last_char == "\n":
+                        infile = infile[:-1]
+                    last_ch = log[-1:]
+                    if last_ch == "\n":
+                        log = log[:-1]
+                    # See if the path exists.
+                    if os.path.exists(log):
+                        # open file
+                        try:
+                            with open(log, 'r') as f:
+                                f = f.readlines()
+                                error = Error()
+                                for line in f:
+                                    length += 1
+                                    if expression1.search(line) or length == len(f) or expression2.search(line):
+                                        # check scheduler_current_date application property
+                                        if scheduler_current_date == 'enable':
+                                            for date_time in phrases.get_current_date_versions():
+                                                if re.search(r'\b' + date_time + '\\b', line):
+                                                    if count == 1:
+                                                        # If count = 1 set Error details for Error and ESubDetail Model and
+                                                        # count changed to 0 and stack trace equal to empty
+                                                        count = 0
+                                                        important.append(stack_trace)
+                                                        error.set_log_stack_trace(stack_trace)
+                                                        error.set_error_description(set_phrase)
+                                                        error.set_log_path(set_log)
+                                                        error_list = check_error_list(error, error_list)
+                                                        error_detail.error_details(stack_trace, log)
+                                                        stack_trace = []
+                                                    stack_trace = [line]
+                                        else:
+                                            if count == 1:
+                                                # If count = 1 set Error details for Error and ESubDetail Model and
+                                                # count changed to 0 and stack trace equal to empty
+                                                count = 0
+                                                important.append(stack_trace)
+                                                error.set_log_stack_trace(stack_trace)
+                                                error.set_error_description(set_phrase)
+                                                error.set_log_path(set_log)
+                                                error_list = check_error_list(error, error_list)
+                                                error_detail.error_details(stack_trace, log)
+                                                stack_trace = []
+                                            stack_trace = [line]
+                                    else:
+                                        stack_trace.append(line)
+                                    # Check phrases having on error log file line
+                                    for phrase in keep_phrases:
+                                        if phrase in line:
+                                            # If true set phrase, log and count = 1
+                                            set_phrase = phrase
+                                            set_log = log
+                                            count = 1
+                            length = 0
+                            # error_list.append(error)
+                        except (IOError, PermissionError, UnicodeDecodeError) as e:
+                            add_log(log_types[0], "Stack Trace Identify : ", str(e))
+                            pass
                 done = round((100 * k / showt), 1)
                 k += 1
                 showt = maxsi
