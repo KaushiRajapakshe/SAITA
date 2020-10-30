@@ -5,10 +5,6 @@ log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
 error_str_size = 100
-img_location = "../Icon/SAITA.png"
-log_file = "../data/foi.log"
-logo = "../icon/logo.ico"
-not_found_img="../Icon/imgnot.png"
 logo_div = 0.3
 title_bar_bg = "#3a3a3a"
 window_bg = "#ffffff"
@@ -52,3 +48,77 @@ script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath
 
 # Ignore SAITA log path
 ignore_log_path = 'IT16178700\\\\data\\\\foi.log'
+
+# Dev variable
+log_file = "../data/foi.log"
+logo = "../icon/logo.ico"
+log_match = "../textfile/logMatch.txt"
+file_in = "../icon/SAITA.png"
+log_extension = "../textfile/logExtension.txt"
+log_no_extension = "../textfile/logNoExtension.txt"
+app_config_path = "../app.ini"
+ontology_path = "../../ontology/saita.owl"
+
+# Prod variable
+# log_file = "data/foi.log"
+# logo = "icon/logo.ico"
+# log_match = "textfile/logMatch.txt"
+# file_in = "icon/SAITA.png"
+# log_extension = "textfile/logExtension.txt"
+# log_no_extension = "textfile/logNoExtension.txt"
+# app_config_path = "app.ini"
+# ontology_path = "ontology/saita.owl"
+
+# MAC VM
+label2_x = 80
+label4_x = 250
+label4_y = 700
+label5_x = 120
+label5_y = 810
+label3_h = 80
+label3_w = 1
+label3_padx = 170
+label3_pady = 0
+label4_xx = 890
+label4_yy = 46
+scrollbar_x = 1650
+scrollbar_y = 110
+scrollbar_h = 630
+chat_log_x = 890
+chat_log_y = 110
+chat_log_h = 630
+chat_log_w = 700
+entry_box_x = 890
+entry_box_y = 800
+entry_box_h = 45
+entry_box_w = 570
+send_button_x = 1480
+send_button_y = 800
+send_button_h = 45
+
+# Windows VM
+# label2_x = 80
+# label4_x = 230
+# label4_y = 550
+# label5_x = 90
+# label5_y = 640
+# label3_h = 50
+# label3_w = 1
+# label3_padx = 100
+# label3_pady = 0
+# label4_xx = 787
+# label4_yy = 46
+# scrollbar_x = 1500
+# scrollbar_y = 90
+# scrollbar_h = 600
+# chat_log_x = 790
+# chat_log_y = 90
+# chat_log_h = 600
+# chat_log_w = 700
+# entry_box_x = 790
+# entry_box_y = 700
+# entry_box_h = 45
+# entry_box_w = 570
+# send_button_x = 1380
+# send_button_y = 700
+# send_button_h = 45
