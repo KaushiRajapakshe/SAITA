@@ -6,10 +6,11 @@ import tkinter as tk
 
 import time
 
-# Define Time format
+from SAITA.IT16178700.data import variables
 from SAITA.IT16178700.data.log import add_log, log_types
 from SAITA.IT16178700.data.variables import head_window_color, full_window_color
 
+# Define Time format
 time_string = time.strftime('%H:%M:%S')
 msg = "hii"
 
@@ -70,19 +71,20 @@ def create_head_show_window(full_window, win_root):
 
     clock.config(text="CLOCK:" + str(tick()))
 
-    file_in = '../Icon/SAITA.png'
-    pil_image = Image.open(file_in)
+    pil_image = Image.open(variables.file_in)
     image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS)
     tk_image1 = ImageTk.PhotoImage(image200x100)
     global img_show
     img_show = tk_image1
-    label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=80, pady=0, side=tk.LEFT)
+    label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=variables.label2_x, pady=0, side=tk.LEFT)
 
     label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
-        x=250, y=700)
+        x=variables.label4_x, y=variables.label4_y)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
-                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=120, y=810)
-    label3 = tk.Label(head_window, width=1, height=80, bg="gray29").pack(padx=170, pady=0, side=tk.LEFT)
+                      font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=variables.label5_x,
+                                                                                        y=variables.label5_y)
+    label3 = tk.Label(head_window, width=variables.label3_w, height=variables.label3_h,
+                      bg="gray29").pack(padx=variables.label3_padx, pady=variables.label3_pady, side=tk.LEFT)
 
     def send(event, full_root):
         global chatcon, acc_ra, work_area
@@ -121,12 +123,14 @@ def create_head_show_window(full_window, win_root):
     label4 = tk.Label(head_window,
                       text="SAITA : Hi!!! This is SAITA pre selected application problem solving system.\nDo you like "
                            "to run error preventing scan for your operating system.? (Yes / No)",
-                      font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=890, y=46)
+                      font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=variables.label4_xx,
+                                                                                        y=variables.label4_yy)
 
     # Place all components on the screen
-    scrollbar.place(x=1650, y=110, height=630)
-    chat_log.place(x=890, y=110, height=630, width=700)
-    entry_box.place(x=890, y=800, height=45, width=570)
-    send_button.place(x=1480, y=800, height=45)
+    scrollbar.place(x=variables.scrollbar_x, y=variables.scrollbar_y, height= variables.scrollbar_h)
+    chat_log.place(x=variables.chat_log_x, y=variables.chat_log_y, height=variables.chat_log_h,
+                   width=variables.chat_log_w)
+    entry_box.place(x=variables.entry_box_x, y=variables.entry_box_y, height= variables.entry_box_h, width=variables.entry_box_w)
+    send_button.place(x=variables.send_button_x, y=variables.send_button_y, height=variables.send_button_h)
 
     return head_window

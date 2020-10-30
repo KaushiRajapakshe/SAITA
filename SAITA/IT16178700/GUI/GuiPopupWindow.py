@@ -22,6 +22,7 @@ class GuiPopupWindow:
     progress_num = None
     progress = None
     filecount = None
+    index = 0
 
     def __init__(self, master, acc_ra, work_area, massage_tital, data_in, poin_val, close=True, type="soft",
                  btn_txt=""):
@@ -62,6 +63,9 @@ class GuiPopupWindow:
                                        activeforeground=title_bar_but_txt_color,
                                        highlightthickness=0
                                        )
+
+        # put a toggle button on the title bar
+        self.top_toggle_button = Button(self.top_title_bar, text='Night-Mode',  command=self.onNightMode).pack(side=RIGHT)
 
         # window title
         self.massage_title_name = Label(self.top_title_bar, text=massage_tital, bg=title_bar_bg, fg=title_bar_txt_color,
@@ -112,6 +116,7 @@ class GuiPopupWindow:
         self.top_title_bar.pack(fill=X)
         self.top_title_img_set.pack(side=LEFT)
         self.massage_title_name.pack(side=LEFT)
+        self.top_toggle_button.pack(side= RIGHT)
         if close:
             self.top_close_button.pack(side=RIGHT)
         self.top_window.pack(expand=1, fill=BOTH)
@@ -205,3 +210,12 @@ class GuiPopupWindow:
         self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
         self.massage.config(font=("arial", fontsize))
         self.massage.pack(fill=X, pady=10)
+
+    def onNightMode(self):
+        if self.index:
+            self.text.config(font=('courier', 12, 'normal'), background='black', fg='green')
+
+        else:
+            self.text.config(font=('courier', 12, 'normal'))
+
+        self.index = not self.index
