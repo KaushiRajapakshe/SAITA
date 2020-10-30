@@ -77,3 +77,43 @@ def check_port(error_description, self):
                 return 'True'
         except IndexError:
             return 'False'
+
+
+# Check user who entered valid port
+def check_application_port(error_description, e):
+    port = 65538
+    # regular expression patterns
+    regular_expression1 = phrases.get_port_regular_expression1()
+    expression1 = re.compile(regular_expression1)
+    regular_expression2 = phrases.get_port_regular_expression2()
+    expression2 = re.compile(regular_expression2)
+    regular_expression3 = phrases.get_port_regular_expression3()
+    expression3 = re.compile(regular_expression3)
+    regular_expression4 = phrases.get_port_regular_expression4()
+    expression4 = re.compile(regular_expression4)
+    regular_expression5 = phrases.get_port_regular_expression5()
+    expression5 = re.compile(regular_expression5)
+    e5 = expression5.search(error_description)
+    e4 = expression4.search(error_description)
+    e3 = expression3.search(error_description)
+    e2 = expression2.search(error_description)
+    e1 = expression1.search(error_description)
+
+    if e5:
+        port = e5.group()
+    elif e4:
+        port = e4.group()
+    elif e3:
+        port = e3.group()
+    elif e2:
+        port = e2.group()
+    elif e1:
+        port = e1.group()
+
+    for x in range(0, 65535):
+        try:
+            if str(x) == str(port):
+                e.set_application_path(port)
+                return 'True'
+        except IndexError:
+            return 'False'
