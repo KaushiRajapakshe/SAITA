@@ -4,6 +4,7 @@ import re
 import subprocess
 from Data.Variables import *
 import mysql
+from SayText import SayText
 
 
 class Execute:
@@ -146,6 +147,7 @@ class Exe:
                 for paramname in myresult2:
                     paramName = paramname[0]
 
+
                 if paramid[0] != 0:  # Has parameter
                     mycursor.execute("SELECT DefaultParameter FROM error_parameter WHERE ParamID = %s AND ErrorID=%s",
                                      (paramID, self.errid,))
@@ -163,6 +165,7 @@ class Exe:
                         process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
                     except:
                         pass
+        SayText.get_say_text().say(solution_executing)
         return self
 #if it is yes script running
     def say_yes(self):
