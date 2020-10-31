@@ -37,7 +37,7 @@ restartCode="Add-Type -AssemblyName PresentationCore,PresentationFramework;$Butt
 
 
 
-# # variables for speech
+#variables for the saytext class
 start_text = "WelCome  You are navigating to solve the abandant service issue category."
 end_text = "Have a nice day"
 processing = "System is processing your entered value Please wait for a moment."
