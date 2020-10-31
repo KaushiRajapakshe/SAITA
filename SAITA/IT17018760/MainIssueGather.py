@@ -37,7 +37,7 @@ class GatherIssue(object):
 
 
 
-                #print(cls.valuex)
+
             print(CSVGenClass.CSVGenrator(cls.valuex,cls.errorID,ex))
             #return cls.valuex
 
