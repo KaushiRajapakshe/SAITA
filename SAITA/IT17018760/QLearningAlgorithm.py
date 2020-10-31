@@ -3,6 +3,8 @@ import mysql.connector
 from collections import defaultdict
 from Data.Variables import *
 import csv
+from SayText import SayText
+
 
 
 
@@ -104,6 +106,7 @@ class pula:
             df = pd.read_csv(inputCSV)
             df.to_csv(csvfilepath + CSVName)
 
+        SayText.get_say_text().say(generating_csv)
         copy_csv(inputCSV)
         ex.setData(CSVName, errorID)
         return ex.run_script()
