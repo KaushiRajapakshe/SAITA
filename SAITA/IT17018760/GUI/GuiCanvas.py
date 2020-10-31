@@ -170,4 +170,4 @@ class GUICna:
 
         return head_window
 
-        # bind search key to event
+
