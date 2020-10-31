@@ -162,7 +162,7 @@ class GUICna:
         label4 = tk.Label(head_window, text="SAITA : Hi!!! Please note your issue.",
                           font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=726, y=46)
 
-        # Place all components on the screen
+
         scrollbar.place(x=1326, y=90, height=506)
         self.ChatLog.place(x=726, y=90, height=506, width=570)
         EntryBox.place(x=720, y=630, height=30, width=470)
