@@ -31,7 +31,7 @@ class Execute:
                 k += 1
             f.close()
             self.rew = dict(sorted(self.rew.items(), key=operator.itemgetter(1), reverse=True))
-
+#select the execution paths with rewards
     def get_path(self):
 
         return_path = None
