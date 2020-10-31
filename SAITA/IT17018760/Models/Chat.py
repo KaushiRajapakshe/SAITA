@@ -1,6 +1,6 @@
 class TestChat:
     usrerep = []
-    sitarep = [["h"]]
+    sitarep = [["hi"]]
     type = None
 
     def __init__(self):
