@@ -1,5 +1,6 @@
 import subprocess
 import time
+from SayText import SayText
 
 from Models.Chat import TestChat
 from tkinter.constants import END
@@ -27,6 +28,7 @@ class ChatController:
             self.maincon.IssueTakerEmpty(self.chat.get_lastuserreply())
             # print(self.chat.get_lastuserreply())
             time.sleep(5)
+            SayText.get_say_text().say(issue_solved)
             self.chat.set_sitarep("Is your issue solved in this moment? (yes/no)");
         else:
             # print(self.chat.get_lastuserreply())
@@ -34,13 +36,18 @@ class ChatController:
                 self.chatch = True
                 self.chat.set_sitarep(self.maincon.RunDone());
                 self.chat.set_sitarep("Your issue solved.Thank you for join with SAITA. ");
+                SayText.get_say_text().say(if_yes_solved)
+
                 process = subprocess.Popen(["powershell", restartCode], shell=True, stdout=subprocess.PIPE)
             elif self.chat.get_lastuserreply() == 'no':
                 self.maincon.RunNext();
                 time.sleep(5)
                 self.chat.set_sitarep("Is your issue solved in this moment? (yes/no)");
+                SayText.get_say_text().say(issue_solved)
+
             else:
                 self.chat.set_sitarep("Please Send Correct Feedback. Is your issue solved in this moment? (yes/no)");
+                SayText.get_say_text().say(wrong_input)
 
         chat_log.ChatLog.insert(END, "SAITA : " + self.chat.get_lastsaitareply() + '\n\n')
 
