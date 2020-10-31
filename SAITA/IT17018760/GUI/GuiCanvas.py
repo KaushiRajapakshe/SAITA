@@ -136,7 +136,7 @@ class GUICna:
                     SayText.get_say_text().say('SAITA have found '+str(listlen)+'similar errors which you entered Please select your error and retype or copy paste it')
                 else:
                     cl.ChatLog.insert(END,
-                                      "SAITA:Sorry cannot proceed your entered value Please check it and try again "'\n\n')
+                                      "SAITA:Sorry cannot proceed that your entered value Please check it and try again "'\n\n')
                     SayText.get_say_text().say(not_found_error)
 
 
