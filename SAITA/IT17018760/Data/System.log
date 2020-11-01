@@ -1768,3 +1768,55 @@
 	Info : max_screen : <Map event>
 2020-11-01 02:08:09 : GuiMain.py
 	Info : close_btn_on_hovering : <Enter event state=Mod1|Mod3 focus=False x=17 y=27>
+2020-11-01 11:15:21 : GuiCanvas.py
+	Info : Monitor info : {'Monitor': (0, 0, 1366, 768), 'Work': (0, 0, 1366, 738), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
+2020-11-01 11:15:21 : GuiCanvas.py
+	Info : set acc_ra: 0.5402635431918009
+2020-11-01 11:15:35 : GuiMain.py
+	Info : max_screen : <Map event>
+2020-11-01 11:16:26 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=2 y=22>
+2020-11-01 11:16:26 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=25 y=22>
+2020-11-01 11:16:26 : GuiMain.py
+	Info : close_btn_on_hovering : <Enter event state=Mod1 focus=False x=4 y=22>
+2020-11-01 11:19:05 : GuiCanvas.py
+	Info : Monitor info : {'Monitor': (0, 0, 1366, 768), 'Work': (0, 0, 1366, 738), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
+2020-11-01 11:19:05 : GuiCanvas.py
+	Info : set acc_ra: 0.5402635431918009
+2020-11-01 11:19:11 : GuiMain.py
+	Info : max_screen : <Map event>
+2020-11-01 11:21:36 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=0 y=3>
+2020-11-01 11:21:36 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=22 y=2>
+2020-11-01 11:21:36 : GuiMain.py
+	Info : close_btn_on_hovering : <Enter event state=Mod1 focus=False x=1 y=2>
+2020-11-01 11:21:37 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=-5 y=23>
+2020-11-01 11:21:37 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=16 y=23>
+2020-11-01 11:21:38 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=8 y=28>
+2020-11-01 11:21:38 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=9 y=27>
+2020-11-01 11:21:38 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=11 y=28>
+2020-11-01 11:21:38 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=8 y=26>
+2020-11-01 11:21:38 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=11 y=32>
+2020-11-01 11:23:28 : GuiMain.py
+	Info : mini_btn_on_hovering : <Enter event state=Mod1 focus=False x=9 y=23>
+2020-11-01 11:23:28 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=21 y=1>
+2020-11-01 11:23:28 : GuiMain.py
+	Info : close_btn_on_hovering : <Enter event state=Mod1 focus=False x=0 y=1>
+2020-11-01 11:23:28 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=2 y=-1>
+2020-11-01 11:23:28 : GuiMain.py
+	Info : close_btn_on_hovering : <Enter event state=Mod1 focus=False x=11 y=0>
+2020-11-01 11:23:37 : GuiMain.py
+	Info : return_to_normal_state : <Leave event state=Mod1 focus=False x=1 y=28>
+2020-11-01 11:51:05 : GuiMain.py
+	Info : close_btn_on_hovering : <Enter event state=Mod1 focus=False x=0 y=0>
