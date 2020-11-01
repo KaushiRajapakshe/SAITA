@@ -5,7 +5,7 @@ class IssueControl(object):
 
     ex=None
 
-
+    #get the issue from the chat controller
     def IssueTakerEmpty(self,issue):
         self.ex=Exe()
         GatherIssue().TakeIssue(issue,self.ex)
