@@ -7,7 +7,7 @@ from SayText import SayText
 
 
 
-
+#Generating the qlearning algorithm graph
 class Graph:
     all_path = []
     k = 0
