@@ -60,7 +60,7 @@ class pula:
             password=sql_password,
             database=sql_db
         )
-
+        #selecting the node joins from database
         mycursor = mydb.cursor()
         mycursor.execute("SELECT * FROM node_join")
         myresult = mycursor.fetchall()
