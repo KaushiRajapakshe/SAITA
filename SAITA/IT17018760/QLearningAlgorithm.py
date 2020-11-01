@@ -70,7 +70,7 @@ class pula:
             g.addEdge(x[1], x[2])
 
 
-
+        #take the node id from the databse
         mycursor.execute("""SELECT nodeID FROM service_start_node WHERE typeID = %s""", (typeid,))
         myresult = mycursor.fetchall()
         for x in myresult:
