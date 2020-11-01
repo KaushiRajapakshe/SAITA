@@ -174,7 +174,7 @@ class Exe:
             reader = csv.reader(f)
             results = filter(lambda x: k in x, reader)
             for line in results:
-                print("<Solution Path Executed>")
+                print("<Best Solution Path Executed>")
 
             addReward = int(line[2]) + 1;
             # print(addReward)
@@ -213,7 +213,7 @@ class Exe:
             reader = csv.reader(f)
             results = filter(lambda x: k in x, reader)
             for line in results:
-                print("<Solution Path Executed.>")
+                print("<Best Solution Path Executed.>")
             addReward = int(line[2]) - 1;
             # print(addReward)
 
