@@ -105,7 +105,7 @@ class pula:
             import pandas as pd
             df = pd.read_csv(inputCSV)
             df.to_csv(csvfilepath + CSVName)
-
+        #calling saytext class to voice
         SayText.get_say_text().say(generating_csv)
         copy_csv(inputCSV)
         ex.setData(CSVName, errorID)
