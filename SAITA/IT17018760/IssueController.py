@@ -12,12 +12,12 @@ class IssueControl(object):
 
         print(self.ex)
         print(issue)
-
+    #execute the next runnable class
     def RunNext(self):
 
         print(self.ex)
         return self.ex.say_no()
-
+    #if user says yes it terminating from this class call
     def RunDone(self):
         k= self.ex.say_yes()
         self.ex=None
