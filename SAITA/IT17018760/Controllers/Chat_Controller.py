@@ -21,8 +21,6 @@ class ChatController:
     def chat_do(self, chat_log):
         if self.chatch:
             self.chatch = False
-
-
             self.maincon.IssueTakerEmpty(self.chat.get_lastuserreply())
             #waiting to take next SAITA reply to GUI
             time.sleep(5)
@@ -46,11 +44,12 @@ class ChatController:
                 self.chat.set_sitarep("Is your issue solved in this moment? (yes/no)");
                 # Calling saytext class to ask issue is solved or not
                 SayText.get_say_text().say(issue_solved)
-
             else:
+                #if user input the value which is not same as yes or no display this message to the GUI
                 self.chat.set_sitarep("Please Send Correct Feedback. Is your issue solved in this moment? (yes/no)");
+                #calling say text class to say user entered wrong input
                 SayText.get_say_text().say(wrong_input)
-
+        #pass the reply to the Service_GUI and display
         chat_log.ChatLog.insert(END, "SAITA : " + self.chat.get_lastsaitareply() + '\n\n')
 
     def get_chat(self):
