@@ -1,14 +1,25 @@
+#mysql Database connection
+
 sql_server = "localhost"
 sql_db = "saita_ser"
 sql_uname = "root"
 sql_password = ""
+
+
+#log file variables
 log_enable_all = True
 log_enable_error = True
 log_enable_warning = True
+
+
+#images and assets location variables
 img_location = "../Icon/SAITA.png"
 log_file = "../Data/System.log"
 logo = "../Icon/logo.ico"
 not_found_img="../Icon/imgnot.png"
+
+
+#another GUI color variables and text variables
 logo_div = 0.3
 title_bar_bg = "#3a3a3a"
 window_bg = "#ffffff"
@@ -28,13 +39,13 @@ soft_title_f_size_dev = 45
 soft_ver_f_size_dev = 30
 pad_val = 20
 
+#nessesory file path variables
 csvfilepath="../CSVFILES/"
 executedLog="log_file.txt"
 indexCSV="../SystemCSV/index.csv"
 inputCSV="../SystemCSV/input.csv"
 shutdownMSG=" Add-Type -AssemblyName PresentationCore,PresentationFramework; $msgBody = ""Your Windows will restart after 30 seconds.Save your works.""; [System.Windows.MessageBox]::Show($msgBody)"
 restartCode="Add-Type -AssemblyName PresentationCore,PresentationFramework;$ButtonType = [System.Windows.MessageBoxButton]::YesNo;$MessageIcon = [System.Windows.MessageBoxImage]::Error;$MessageBody = 'Do you want to continue with the restart ?';$MessageTitle = 'SAITA Alert';$Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon);if($Result -eq 'Yes'){Restart-Computer}"
-
 
 
 #variables for the saytext class
@@ -52,7 +63,7 @@ if_yes_solved="Your issue solved thank you for join with saita system ask you to
 system_terminate="Sorry  You cannot send these kind of values as an errors  System is terminating  Navigate SAITA system again  Thank you"
 
 
-
+#say speed variable and the voice type variable
 say_voice = 1
 say_speed = 0.5
 
