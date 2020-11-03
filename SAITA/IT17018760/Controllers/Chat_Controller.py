@@ -1,13 +1,12 @@
 import subprocess
 import time
 from SayText import SayText
-
 from Models.Chat import TestChat
 from tkinter.constants import END
 from IssueController import IssueControl
 from Data.Variables import *
 
-
+#all the chats which is done by the system is controll by this chatcontroller class
 class ChatController:
     next_q = []
     chat = None
