@@ -113,17 +113,19 @@ class GUICna:
                 )
                 mycursor = mydb.cursor()
 
-                #to get all service errors which are entered in the
+                #to get all service errors which are entered in the database by this query execution
                 query = "SELECT * FROM service_error"
-
                 mycursor.execute(query)
 
                 myresult1 = mycursor.fetchall()
+
+                #append the service errors to the array list
                 result_t = []
                 for y in myresult1:
                     CSVName = y[1]
                     result_t.append(CSVName)
 
+                #take the similar words in the array and the entered value
                 sim=difflib.get_close_matches(msg,result_t)
                 listlen=len(sim)
                 yesnolist=['yes','no']
