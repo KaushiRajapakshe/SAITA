@@ -1,7 +1,7 @@
+#main chat GUI
+#importing libraries and classes
 import difflib
-
 from win32api import GetMonitorInfo, MonitorFromPoint
-
 from SayText import SayText
 from Controllers.Chat_Controller import ChatController
 from Data.Variables import *
@@ -12,8 +12,9 @@ import mysql.connector
 
 from Models.Chat import TestChat
 
+#initialize the current time from the system
 time_string = time.strftime('%H:%M:%S')
-msg = "hii"
+msg = "hii"    #set default message value because neet to pass the msg variable
 
 chatcon = ChatController()
 userreply = []
@@ -29,10 +30,10 @@ work_area = monitor_fo.get("Work")
 acc_ra = work_area[3] / work_area[2]
 add_log(log_types[2], "GuiCanvas.py", "set acc_ra: " + str(acc_ra))
 
-# img
+# img display
 img_show = None
 
-# body
+# GUI display body
 body_window = None
 body_window_canves = None
 
@@ -44,21 +45,23 @@ def create_full_show_window(win_root):
 
     return full_show_window
 
-
+#Font style of the GUI
 large_font = ('Verdana', 17)
 
-
+#GUI connection class
 class GUICna:
     ChatLog = None
 
     def create_head_show_window(self, full_window):
         global search_box, search_but
         head_window = Frame(full_window, bg=head_window_color, highlightthickness=0)
-
+        #Place the time in the middle of the GUI
         clock = Label(head_window, font=("Square721 BT", 13, 'bold'), fg="gray29", bg="white")
         clock.pack(padx=130, pady=0, side=TOP)
+        #calling say text class which saying the start speech
         SayText.get_say_text().say(start_text)
 
+        #set the current time
         def tick():
             global time1
             # get the current local time from the PC
@@ -68,35 +71,40 @@ class GUICna:
                 time1 = time2
                 clock.config(text=time2)
             # calls itself every 200 milliseconds
-            # to update the time display as needed
-            # could use >200 ms, but display gets jerky
             clock.after(200, tick)
 
+        #pass the time text to the GUI
         clock.config(text="CLOCK:" + str(tick()))
 
+        #Get the main image path from the variable file
         file_in = img_location
         pil_image = Image.open(file_in)
-        image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS)
+        image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS) #resize the image
         tk_image1 = ImageTk.PhotoImage(image200x100)
         global img_show
         img_show = tk_image1
         label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=40, pady=0, side=tk.LEFT)
 
+        #display SAITA word under the logo
         label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
             x=230, y=550)
         label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
                           font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=90, y=640)
         label3 = tk.Label(head_window, width=1, height=58, bg="gray29").pack(padx=100, pady=0, side=tk.LEFT)
 
+        #chat send function
         def send(event, cl):
             global chatcon
             msg = EntryBox.get("1.0", 'end-1c').strip()
             EntryBox.delete("0.0", END)
+
+            #system checks chat is empty or not
             if msg != '':
                 cl.ChatLog.config(state=NORMAL)
-                cl.ChatLog.insert(END, "You: " + msg + '\n\n')
+                cl.ChatLog.insert(END, "You: " + msg + '\n\n')  #display the last sent chat
                 cl.ChatLog.config(foreground="gray29", font=("Square721 BT", 11, 'bold'))
 
+                #conntection to the database
                 mydb = mysql.connector.connect(
                     host=sql_server,
                     user=sql_uname,
@@ -105,6 +113,7 @@ class GUICna:
                 )
                 mycursor = mydb.cursor()
 
+                #to get all service errors which are entered in the
                 query = "SELECT * FROM service_error"
 
                 mycursor.execute(query)
