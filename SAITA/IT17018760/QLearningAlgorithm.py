@@ -54,6 +54,7 @@ class pula:
         self.params=csvname
         self.params=typeid
 
+        #get the database connection
         mydb = mysql.connector.connect(
             host=sql_server,
             user=sql_uname,
@@ -100,7 +101,7 @@ class pula:
         with open(csvfilepath + CSVName) as input, open(inputCSV, 'w') as output:
             non_blank = (line for line in input if line.strip())
             output.writelines(non_blank)
-
+        #temp copy csv file data because want to re adjest it with replacements
         def copy_csv(filename):
             import pandas as pd
             df = pd.read_csv(inputCSV)
