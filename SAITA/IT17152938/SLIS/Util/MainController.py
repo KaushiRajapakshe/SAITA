@@ -1,5 +1,5 @@
 import os
-from tkinter import filedialog,messagebox
+from tkinter import filedialog, messagebox
 import tkinter as tk
 from Data.Log import *
 from Util.SayText import SayText
@@ -162,40 +162,43 @@ class MainController:
                     node.set_file_path(os.path.abspath(file_path))
                     filename = self.osdata.run_installer(node, root, acc_ra, work_area)
 
-                    #start path set process
+                    # start path set process
                     path_list = self.soft.get_path(node.get_ver_id())
                     filename = None
                     if len(path_list) > 0:
                         if node.get_exe_param() == None:
                             SayText.get_say_text().say(
-                                "Select " + node.get_soft_name() + " version " + node.get_ver()+" installed location")
+                                "Select " + node.get_soft_name() + " version " + node.get_ver() + " installed location")
                             while filename is None or filename == "":
-                                filename = filedialog.askdirectory(master=root, title="select "+node.get_soft_name()+" installed directory",
-                                                           mustexist=tk.TRUE)
+                                filename = filedialog.askdirectory(master=root,
+                                                                   title="select " + node.get_soft_name() + " installed directory",
+                                                                   mustexist=tk.TRUE)
 
                         for path in path_list:
-                            full_env_path=None
+                            full_env_path = None
                             if file_name == None:
                                 full_env_path = path['var_path']
                             else:
-                                full_env_path = os.path.join(filename,path['var_path'])
-                                full_env_path = full_env_path.replace('/','\\')
-                            exsisting_v=self.osdata.search_environment_variable(path['var_name'],node.get_soft_name())
+                                full_env_path = os.path.join(filename, path['var_path'])
+                                full_env_path = full_env_path.replace('/', '\\')
+                            exsisting_v = self.osdata.search_environment_variable(path['var_name'],
+                                                                                  node.get_soft_name())
                             if len(exsisting_v) > 0:
-                                txt='Existing environment variable found for '+node.get_soft_name()+' : '+path['var_name']
-                                txt+='\n its\'  located to:\n'
+                                txt = 'Existing environment variable found for ' + node.get_soft_name() + ' : ' + path[
+                                    'var_name']
+                                txt += '\n its\'  located to:\n'
                                 for exet in exsisting_v:
-                                    txt += '\t'+exet+'\n'
+                                    txt += '\t' + exet + '\n'
                                 txt += 'Is it ok to overwrite?'
                                 MsgBox = messagebox.askquestion('Existing environment variable found',
-                                                                   txt,
-                                                                   icon='warning', master=root)
+                                                                txt,
+                                                                icon='warning', master=root)
 
                                 if not MsgBox == 'yes':
                                     continue
 
-                            self.osdata.add_environment_variable(path['var_name'], full_env_path,root, acc_ra, work_area, node.get_soft_name())
-
+                            self.osdata.add_environment_variable(path['var_name'], full_env_path, root, acc_ra,
+                                                                 work_area, node.get_soft_name())
 
                     # root.deiconify()
         messagebox.showinfo("Completed", 'software installation completed with dependencies ', master=root)
