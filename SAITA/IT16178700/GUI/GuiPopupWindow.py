@@ -64,9 +64,6 @@ class GuiPopupWindow:
                                        highlightthickness=0
                                        )
 
-        # put a toggle button on the title bar
-        self.top_toggle_button = Button(self.top_title_bar, text='Night-Mode',  command=self.onNightMode).pack(side=RIGHT)
-
         # window title
         self.massage_title_name = Label(self.top_title_bar, text=massage_tital, bg=title_bar_bg, fg=title_bar_txt_color,
                                         font="bold")
@@ -116,7 +113,6 @@ class GuiPopupWindow:
         self.top_title_bar.pack(fill=X)
         self.top_title_img_set.pack(side=LEFT)
         self.massage_title_name.pack(side=LEFT)
-        self.top_toggle_button.pack(side= RIGHT)
         if close:
             self.top_close_button.pack(side=RIGHT)
         self.top_window.pack(expand=1, fill=BOTH)

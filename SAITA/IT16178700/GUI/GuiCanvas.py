@@ -11,6 +11,8 @@ from SAITA.IT16178700.data.log import add_log, log_types
 from SAITA.IT16178700.data.variables import head_window_color, full_window_color
 
 # Define Time format
+from SAITA.IT16178700.model.SayText import SayText
+
 time_string = time.strftime('%H:%M:%S')
 msg = "hii"
 
@@ -125,6 +127,7 @@ def create_head_show_window(full_window, win_root):
                            "to run error preventing scan for your operating system.? (Yes / No)",
                       font=("Square721 BT", 11, 'bold'), fg="gray29", bg="white").place(x=variables.label4_xx,
                                                                                         y=variables.label4_yy)
+    SayText.get_say_text().say(variables.q11)
 
     # Place all components on the screen
     scrollbar.place(x=variables.scrollbar_x, y=variables.scrollbar_y, height= variables.scrollbar_h)
