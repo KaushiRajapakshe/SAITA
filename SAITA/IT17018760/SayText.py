@@ -2,13 +2,14 @@ import win32com.client
 from Data.Variables import say_speed, say_voice
 import threading
 
-
+#saytext class
 class SayText(object):
     enable = True
     speaker = None
     __seyText = None
 #
     @staticmethod
+    #get the say text params
     def get_say_text():
         if SayText.__seyText == None:
             SayText()
