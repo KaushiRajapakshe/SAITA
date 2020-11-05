@@ -182,7 +182,7 @@ class Osdata:
 
         filename=None;
         if node.get_setup_type() == 1:
-            if node.get_exe_param()== None:
+            if node.get_exe_param() == None:
                 SayText.get_say_text().say("please do a"+node.get_soft_name()+" version "+node.get_ver()+" installation process manually ")
                 comand = "Start-Process \"" + node.get_file_path() + "\" -wait"
             else:
