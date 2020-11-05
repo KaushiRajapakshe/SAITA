@@ -4,6 +4,8 @@ from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
 import os
 
 # Define log extension file path variable
+from SAITA.IT16178700.data import variables
+
 log_extension = []
 
 
@@ -54,4 +56,4 @@ def get_log_extension(work_area, acc_ra, roott):
 # Write log extension file list on SAITA system file
 def add_log_extension(work_area, acc_ra, root):
     all_output_list = ['\n'.join(get_log_extension(work_area, acc_ra, root))]
-    access_file_detail.add_log_details(all_output_list, "../textfile/logExtension.txt")
+    access_file_detail.add_log_details(all_output_list, variables.log_extension)

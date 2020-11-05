@@ -1,42 +1,62 @@
 import os
 import re
+import winapps
 
 from SAITA.IT16178700 import phrases
+from SAITA.IT16178700.controllers.ontology import query_controller
+from SAITA.IT16178700.data import validate
 from SAITA.IT16178700.data.log import add_log, log_types
 from SAITA.IT16178700.error.analysis.scheduler import drives_list
-from SAITA.IT16178700.model import ESubDetail
-
 
 # Identify application path from Application name
 # Get Error model details for identify
+from SAITA.IT16178700.ontology import query
 
 
-def application_path_identify(self):
-    # application_name = self.get_application_name()
-    application_version = self.get_application_version()
-    error_description = self.get_error_description()
-    application_name = 'PyCharm'
-    self.set_application_path(search_application_path(application_name))
+def check_application_path(self):
+    # Get Error Application name
+    application_name = self.get_application_name()
 
-    add_log(log_types[2], "Application Path Identify : ",
-            application_version + ' ' + application_name + ' ' + error_description + ' ' + self.get_application_path())
+    # Define application path string variable as null
+    application_path = ''
+
+    # Find installed application path from OS
+    for app in winapps.search_installed(application_name):
+        application_path = app.install_location
+
+    return application_path
 
 
-# Search Application Path on OS
-def search_application_path(get_application_name):
-    path_list = []
-    for head_dir in drives_list.get_os_drives_list():
-        for root, dirs, files in os.walk(head_dir):
-            for d in dirs:
-                if d == get_application_name:
-                    path_list.append(os.path.join(root, d))
+def application_path_identify():
 
-    # If Application not installed in OS return as empty
-    if len(path_list) == 0:
-        return ''
-    # If Application installed in OS return the application path
-    else:
-        return path_list[0]
+    # Define application list array
+    application_list = []
+
+    # GET application name list
+    query_type = query.get_application_type()
+    application_name_list = query_controller.execute_query(query_type)
+
+    for application_name in application_name_list:
+
+        # Find installed application path from OS
+        for app in winapps.search_installed(application_name):
+
+            # Search Application Path on OS
+            if app.install_location != '':
+                for root, dirs, files in os.walk(app.install_location):
+                    for d in dirs:
+                        for ap in validate.application_validate:
+                            if re.search(application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
+                                    str(ap[1]+"$"), str(d), re.IGNORECASE):
+                                application_list.append([application_name, str(os.path.join(root, d)), ap[1]])
+
+                    for f in files:
+                        for ap in validate.application_validate:
+                            if re.search(r'\b' + application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
+                                    str(ap[1])+"$", str(f)):
+                                application_list.append([application_name, str(os.path.join(root, f)), ap[1]])
+    # [Application name, application installed path, process name]
+    return application_list
 
 
 # Check user who entered valid port

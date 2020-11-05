@@ -1,6 +1,7 @@
 import os
 from SAITA.IT16178700.constant import constants
 import SAITA.IT16178700.access_file_detail as access_file_detail
+from SAITA.IT16178700.data import variables
 from SAITA.IT16178700.error.analysis.scheduler import drives_list
 from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
 
@@ -66,4 +67,4 @@ def dir_list_folder(work_area, acc_ra, roott):
 def add_log_match_file(work_area, acc_ra, root):
     all_output_list = ['\n'.join(dir_list_folder(work_area, acc_ra, root))]
 
-    access_file_detail.add_log_details(all_output_list, "../textfile/logMatch.txt")
+    access_file_detail.add_log_details(all_output_list, variables.log_match)

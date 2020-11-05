@@ -13,9 +13,9 @@ from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
 
 # GET log file list for stack trace and error identify
 def get_log_file():
-    log_files = [access_file_detail.view_log_details("../textfile/logExtension.txt"),
-                 access_file_detail.view_log_details("../textfile/logMatch.txt"),
-                 access_file_detail.view_log_details("../textfile/logNoExtension.txt")]  # set logs txt file list
+    log_files = [access_file_detail.view_log_details(variables.log_extension),
+                 access_file_detail.view_log_details(variables.log_match),
+                 access_file_detail.view_log_details(variables.log_no_extension)]  # set logs txt file list
     return log_files
 
 
@@ -47,7 +47,7 @@ def identify_stack_trace(work_area, acc_ra, roott):
     c = get_log_file()
 
     # initialise config object using the config_controller
-    app_config = config_controller.init_config("../app.ini")
+    app_config = config_controller.init_config(variables.app_config_path)
 
     # get string value scheduler_current_date
     scheduler_current_date = app_config.get('default', 'scheduler_current_date')
