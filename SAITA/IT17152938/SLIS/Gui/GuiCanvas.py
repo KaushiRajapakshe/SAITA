@@ -42,14 +42,15 @@ time1 = None
 root = None
 
 
+# create main form full window
 def create_full_show_window(win_root):
     global root
     root = win_root
     full_show_window = Frame(win_root, bg=full_window_color, highlightthickness=0)
-    head_show_window = create_head_show_window(full_show_window)
-    separator_window = create_separator_window_window(full_show_window)
-    body_show_window = create_body_show_window(full_show_window)
-    footer_show_window = create_footer_show_window(full_show_window)
+    head_show_window = create_head_show_window(full_show_window)  # add head section
+    separator_window = create_separator_window_window(full_show_window)  # add separator between head and body
+    body_show_window = create_body_show_window(full_show_window)  # add body section
+    footer_show_window = create_footer_show_window(full_show_window)  # add footer section
     head_show_window.pack(fill=X)
     separator_window.pack(fill=X)
     body_show_window.pack(expand=1, fill=BOTH)
@@ -57,18 +58,22 @@ def create_full_show_window(win_root):
     return full_show_window
 
 
+# create window separator
 def create_separator_window_window(full_window):
     return Frame(full_window, bg=separator_color, highlightthickness=0)
 
 
+# create footer
 def create_footer_show_window(full_window):
     global scale_get, scale, zoom_in_img, zoom_out_img
 
     footer_window = Frame(full_window, bg=footer_window_color, highlightthickness=0)
 
+    # add clock to footer
     clock = Label(footer_window, bg=footer_window_color, font="bold", fg=clock_txt_color)
     clock.pack(padx=pad_val * acc_ra * 2, side=LEFT)
 
+    # clock working def
     def tick():
         global time1
         # get the current local time from the PC
@@ -84,15 +89,14 @@ def create_footer_show_window(full_window):
 
     clock.config(text="CLOCK:" + str(tick()))
 
+    # footer zoom and zoom out pack
     zoom_in_img = ImageTk.PhotoImage(create_img(img_zoom_in))
     zoomin = Label(footer_window,
                    image=zoom_in_img,
                    bg=footer_window_color,
-
                    )
     zoomin.pack(
         side=RIGHT,
-
     )
 
     scale_get = IntVar()
@@ -114,6 +118,7 @@ def create_footer_show_window(full_window):
     return footer_window
 
 
+# create image size to show
 def create_img(path):
     z_img = Image.open(path)
     n_img_w, n_img_h = z_img.size
@@ -123,6 +128,7 @@ def create_img(path):
     return z_img
 
 
+# create head
 def create_head_show_window(full_window):
     global search_box, search_but, cart_lable_txt, cart_lable_img, cart_form
     # print(root)
@@ -311,7 +317,7 @@ def search_normel():
     main_con = MainController()
     soft_list = main_con.get_soft_list_search(tx)
     create_body_data(soft_list, main_con.get_insalled_list())
-    SayText.get_say_text().say(str(len(soft_list))+search_result)
+    SayText.get_say_text().say(str(len(soft_list)) + search_result)
 
 
 def search_button_hover_in(event):
