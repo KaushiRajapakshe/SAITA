@@ -1,0 +1,8 @@
+*Read before execution or editng*
+
+1.User must enter correct error message with the correct spellings.
+2.If the spellings or error content is wrong,system displays similar error messages.
+3.System execute the best solution
+4.Ask whether the error is fixed or not
+5.Whether the error is fixed system ask restart
+6.Otherwise system execute another best solution
