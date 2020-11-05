@@ -49,3 +49,5 @@ main_search_but_txt = "Search"
 main_search_but_ipadx = 40
 main_search_but_ipady = 11
 loader_icon = "Icon/loader.gif"
+say_voice = 1
+say_speed = 0.9
