@@ -1,6 +1,0 @@
-2020-11-05 14:14:51 : GuiCanvas.py
-	Info : Monitor info : {'Monitor': (0, 0, 1366, 768), 'Work': (0, 0, 1366, 738), 'Flags': 1, 'Device': '\\\\.\\DISPLAY1'}
-2020-11-05 14:14:51 : GuiCanvas.py
-	Info : set acc_ra: 0.5402635431918009
-2020-11-05 14:15:02 : GuiMain.py
-	Info : max_screen : <Map event>
