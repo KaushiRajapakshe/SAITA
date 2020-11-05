@@ -1,3 +1,4 @@
+#import libs and files
 import csv
 import operator
 import re
@@ -18,7 +19,7 @@ class Execute:
         rew = {}
         lent = {}
         self.ch = 0
-
+    #get the solution path from the csv file
     @classmethod
     def getDictionary(self, CSVName):
         k = 0
@@ -31,7 +32,8 @@ class Execute:
                 k += 1
             f.close()
             self.rew = dict(sorted(self.rew.items(), key=operator.itemgetter(1), reverse=True))
-#select the execution paths with rewards
+
+    #select the execution paths with rewards
     def get_path(self):
 
         return_path = None
@@ -81,7 +83,7 @@ class Exe:
     errid = None
     doid = None
     p1 = None
-
+    #take and execute the running path
     def __init__(self, CSVName=None, errorID=None):
         if CSVName != None:
             self.p1 = Execute()
@@ -96,10 +98,11 @@ class Exe:
         self.csvName = CSVName
         self.errid = errorID
 
+    #is issue solved or not method
     def issuesolve(self):
         issueget = input("Is your issue solved? ")
         return issueget
-
+    #if the error isnot fixed run this class for the next path
     def run_script(self):
         k = self.p1.get_path()
         self.runpath = k
@@ -130,25 +133,25 @@ class Exe:
                 password=sql_password,
                 database=sql_db
             )
-
+            #get the node by the node id which is get by the csv file
             mycursor = mydb.cursor()
             mycursor.execute("SELECT code FROM node WHERE nodeID = %s", (res1,))
             myresult = mycursor.fetchall()
             for code in myresult:
                 fullCode = code[0]
-
+                #get the node has parameter or not.
                 mycursor.execute("SELECT ParamID FROM node WHERE nodeID = %s", (res1,))
                 myresult1 = mycursor.fetchall()
                 for paramid in myresult1:
                     paramID = paramid[0]
-
+                #if the node has a param it takes the param name by the param ID
                 mycursor.execute("SELECT ParamName FROM parameter WHERE ParamID = %s ", (paramID,))
                 myresult2 = mycursor.fetchall()
                 for paramname in myresult2:
                     paramName = paramname[0]
 
 
-                if paramid[0] != 0:  # Has parameter
+                if paramid[0] != 0:  # check Has parameter
                     mycursor.execute("SELECT DefaultParameter FROM error_parameter WHERE ParamID = %s AND ErrorID=%s",
                                      (paramID, self.errid,))
                     myresult3 = mycursor.fetchall()
@@ -157,14 +160,17 @@ class Exe:
 
                     newc = fullCode.replace(paramName, paramCode)
                     try:
+                        #execute the node solution code from the subprocesses
                         process = subprocess.Popen(["powershell", newc], shell=True, stdout=subprocess.PIPE)
                     except:
                         pass
                 else:
                     try:
+                        #execute the node solution code from the subprocesses
                         process = subprocess.Popen(["powershell", fullCode], shell=True, stdout=subprocess.PIPE)
                     except:
                         pass
+        #calling say text class
         SayText.get_say_text().say(solution_executing)
         return self
 #if it is yes script running
