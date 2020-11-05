@@ -1,5 +1,7 @@
 from SAITA.IT16178700.constant import constants
 from SAITA.IT16178700.data.log import add_log, log_types
+
+
 # Ontology KB data extract query for SAITA Application related issue solver
 
 
@@ -132,6 +134,7 @@ def get_error_status(value1, value2, value3, application_name, error_description
     return query8
 
 
+# GET Error target query
 def get_error_target(value1, value2, value3, application_name, error_description, application_version):
     query9 = """
     PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
@@ -149,3 +152,17 @@ def get_error_target(value1, value2, value3, application_name, error_description
     """
     add_log(log_types[2], constants.QUERY, query9)
     return query9
+
+
+# GET Error types query
+def get_error_type():
+    query10 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT  ?error_type
+    {
+	    ?saita saita:error_type ?error_type ;
+    }
+    """
+    add_log(log_types[2], constants.QUERY, query10)
+    return query10

@@ -3,9 +3,17 @@ import calendar
 
 
 # Define scheduler log error identify phrases
+from SAITA.IT16178700.controllers.ontology import query_controller
+from SAITA.IT16178700.ontology import query
+
+
 def get_phrases():
-    keep_phrases = ["Address already in use", "Unable to open logs", "ReservedCodeCacheSize=240m",
-                    "Application run failed", "objectMapperConfigurer", "The OSGi framework has been initialised"]
+    # keep_phrases = ["Address already in use", "Unable to open logs", "ReservedCodeCacheSize=240m",
+    #                 "Application run failed", "objectMapperConfigurer", "The OSGi framework has been initialised"]
+
+    # Get scheduler error type from knowledge base
+    query_type = query.get_error_type()
+    keep_phrases = query_controller.execute_query(query_type)
     return keep_phrases
 
 
