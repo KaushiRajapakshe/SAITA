@@ -1,17 +1,17 @@
 from win32api import GetMonitorInfo, MonitorFromPoint
-from SAITA.IT16178700.controllers.chat.chat_controller import ChatController
+from ARTA.controllers.chat.chat_controller import ChatController
 from tkinter import Frame, Label, BOTH, TOP, END, NORMAL, DISABLED, Text, Scrollbar, Button
 from PIL import ImageTk, Image
 import tkinter as tk
 
 import time
 
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.data.log import add_log, log_types
-from SAITA.IT16178700.data.variables import head_window_color, full_window_color
+from ARTA.data import variables
+from ARTA.data.log import add_log, log_types
+from ARTA.data.variables import head_window_color, full_window_color
 
 # Define Time format
-from SAITA.IT16178700.model.SayText import SayText
+from ARTA.model.SayText import SayText
 
 time_string = time.strftime('%H:%M:%S')
 msg = "hii"

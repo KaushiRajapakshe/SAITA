@@ -1,5 +1,5 @@
 import win32com.client
-from SAITA.IT16178700.data.variables import say_speed, say_voice
+from ARTA.data.variables import say_speed, say_voice
 
 
 class SayText(object):

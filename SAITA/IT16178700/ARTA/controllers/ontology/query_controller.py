@@ -1,7 +1,7 @@
 import requests
 
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.ontology import query
+from ARTA.data import variables
+from ARTA.ontology import query
 
 # Application names
 specific_query = query.get_application_type()

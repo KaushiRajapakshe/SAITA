@@ -1,12 +1,12 @@
-from SAITA.IT16178700.config import config_controller
-from SAITA.IT16178700.data import validate, variables
-from SAITA.IT16178700.data.log import add_log, log_types
-from SAITA.IT16178700.error.analysis.scheduler import stack_trace_identify
-from SAITA.IT16178700.error.analysis.scheduler.logidentity import log_no_extension, log_extension_identify, \
+from ARTA.config import config_controller
+from ARTA.data import validate, variables
+from ARTA.data.log import add_log, log_types
+from ARTA.error.analysis.scheduler import stack_trace_identify
+from ARTA.error.analysis.scheduler.logidentity import log_no_extension, log_extension_identify, \
     log_file_identify
-from SAITA.IT16178700.error.analysis.userentered.application_path_identify import check_application_port
-from SAITA.IT16178700.ontology import query
-from SAITA.IT16178700.controllers.ontology import query_controller
+from ARTA.error.analysis.userentered.application_path_identify import check_application_port
+from ARTA.ontology import query
+from ARTA.controllers.ontology import query_controller
 import re
 import copy
 
@@ -22,7 +22,7 @@ import copy
 
 def scanner_details(work_area, acc_ra, roott):
     # initialise config object using the config_controller
-    app_config = config_controller.init_config(variables.app_config_path)
+    app_config = config_controller.init_config(variables.scanner_config_path)
 
     # get string value scheduler_log_scan
     scheduler_log_scan = app_config.get('log', 'scheduler_log_scan')

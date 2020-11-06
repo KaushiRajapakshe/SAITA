@@ -55,14 +55,15 @@ script3 = "taskkill /IM Code.exe /F\nStart-Sleep -s -15\nStart-Process -FilePath
 ignore_log_path = 'IT16178700\\\\data\\\\foi.log'
 
 # Dev variable
+app_config_path = "../../app.ini"
+file_in = "../icon/SAITA.png"
 log_file = "../data/foi.log"
 logo = "../icon/logo.ico"
 log_match = "../textfile/logMatch.txt"
-file_in = "../icon/SAITA.png"
 log_extension = "../textfile/logExtension.txt"
 log_no_extension = "../textfile/logNoExtension.txt"
-app_config_path = "../app.ini"
 ontology_path = "../../ontology/saita.owl"
+scanner_config_path = "../app.ini"
 
 # Prod variable
 # log_file = "data/foi.log"

@@ -1,6 +1,6 @@
-from SAITA.IT16178700.error.analysis.scheduler.logidentity import log_path
-from SAITA.IT16178700.model import Error
-from SAITA.IT16178700.model import ESubDetail
+from ARTA.error.analysis.scheduler.logidentity import log_path
+from ARTA.model import Error
+from ARTA.model import ESubDetail
 
 
 # Set Error Module data
