@@ -5,7 +5,7 @@ from Data.Variables import *
 from Data.Log import *
 from tkinter import *
 import time
-
+from Util.SayText import SayText
 from Models.Chat import TestChat
 time_string = time.strftime('%H:%M:%S')
 msg = "hii"
@@ -95,7 +95,7 @@ def create_head_show_window(full_window,win_root):
             print(msg)
 
             ChatLog.insert(END, "SAITA : " + chatcon.get_chat().get_lastsaitareply() + '\n\n')
-
+            SayText.get_say_text().say(chatcon.get_chat().get_lastsaitareply())
             ChatLog.config(state=DISABLED)
             ChatLog.yview(END)
 
