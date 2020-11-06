@@ -1,0 +1,2 @@
+**You can delete the csv files in this folder.If you delete the csv files from this folder your previous records which means
+your prevoius solution execution records will be deleted.But it will automatically re-creating.***

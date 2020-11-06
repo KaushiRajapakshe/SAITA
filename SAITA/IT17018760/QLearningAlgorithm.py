@@ -3,9 +3,11 @@ import mysql.connector
 from collections import defaultdict
 from Data.Variables import *
 import csv
+from SayText import SayText
 
 
 
+#Generating the qlearning algorithm graph
 class Graph:
     all_path = []
     k = 0
@@ -52,13 +54,14 @@ class pula:
         self.params=csvname
         self.params=typeid
 
+        #get the database connection
         mydb = mysql.connector.connect(
             host=sql_server,
             user=sql_uname,
             password=sql_password,
             database=sql_db
         )
-
+        #selecting the node joins from database
         mycursor = mydb.cursor()
         mycursor.execute("SELECT * FROM node_join")
         myresult = mycursor.fetchall()
@@ -68,7 +71,7 @@ class pula:
             g.addEdge(x[1], x[2])
 
 
-
+        #take the node id from the databse
         mycursor.execute("""SELECT nodeID FROM service_start_node WHERE typeID = %s""", (typeid,))
         myresult = mycursor.fetchall()
         for x in myresult:
@@ -98,12 +101,13 @@ class pula:
         with open(csvfilepath + CSVName) as input, open(inputCSV, 'w') as output:
             non_blank = (line for line in input if line.strip())
             output.writelines(non_blank)
-
+        #temp copy csv file data because want to re adjest it with replacements
         def copy_csv(filename):
             import pandas as pd
             df = pd.read_csv(inputCSV)
             df.to_csv(csvfilepath + CSVName)
-
+        #calling saytext class to voice
+        SayText.get_say_text().say(generating_csv)
         copy_csv(inputCSV)
         ex.setData(CSVName, errorID)
         return ex.run_script()

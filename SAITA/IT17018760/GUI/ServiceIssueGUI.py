@@ -61,7 +61,7 @@ mini_button = Button(title_bar,
                      highlightthickness=0
                      )
 
-# window title
+# window title on the title bar
 title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_txt_color, font="bold")
 
 # title bar img
