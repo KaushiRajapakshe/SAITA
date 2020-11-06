@@ -1,6 +1,6 @@
 import requests
 
-from SAITA.IT16178700.data import variables
+from ARTA.data import variables
 
 
 # OWL File Upload for Apache Jena Fuseki Server

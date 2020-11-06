@@ -1,12 +1,12 @@
 import os
 from fnmatch import fnmatch
 
-import SAITA.IT16178700.access_file_detail as access_file_detail
-import SAITA.IT16178700.error.analysis.scheduler.drives_list as drives_list
-from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
+import ARTA.abstracterror.access_file_detail as access_file_detail
+import ARTA.error.analysis.scheduler.drives_list as drives_list
+from ARTA.GUI.GuiPopupWindow import GuiPopupWindow
 
 # Set any name with log pattern for identify log files
-from SAITA.IT16178700.data import variables
+from ARTA.data import variables
 
 pattern = "*log"
 # Define log no extension file path variable

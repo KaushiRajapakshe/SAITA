@@ -1,5 +1,5 @@
 import datetime
-from SAITA.IT16178700.data.variables import log_file, log_enable_all, log_enable_error, log_enable_warning
+from ARTA.data.variables import log_file, log_enable_all, log_enable_error, log_enable_warning
 
 # Log status types
 log_types = ["Error", "Warning", "Info"]

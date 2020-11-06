@@ -2,12 +2,12 @@ from PIL import ImageTk, Image
 from tkinter import Toplevel, Frame, Label, Button, X, BOTH, LEFT, RIGHT, IntVar, Checkbutton
 
 
-from SAITA.IT16178700.GUI.GuiGifShow import AnimatedGIF
+from ARTA.GUI.GuiGifShow import AnimatedGIF
 from tkinter import ttk
 
 
 # CREATE GUI Popup window for Canvas
-from SAITA.IT16178700.data.variables import logo, logo_div, title_bar_bg, message_body_color, title_bar_txt_color, \
+from ARTA.data.variables import logo, logo_div, title_bar_bg, message_body_color, title_bar_txt_color, \
     close_but_acc_bg, title_bar_but_txt_color, main_search_but_bg, main_search_but_acc, main_search_but_txt_color, \
     pad_val, main_search_but_ipadx, main_search_but_ipady, main_search_but_hover, loader_icon
 

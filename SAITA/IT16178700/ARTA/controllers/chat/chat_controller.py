@@ -1,18 +1,18 @@
 import copy
 
-from SAITA.IT16178700.constant import constants
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.error.analysis.scheduler import scanner
-from SAITA.IT16178700.error.analysis.userentered.application_path_identify import application_path_identify, check_port, \
+from ARTA.constant import constants
+from ARTA.data import variables
+from ARTA.error.analysis.scheduler import scanner
+from ARTA.error.analysis.userentered.application_path_identify import application_path_identify, check_port, \
     check_application_path
-from SAITA.IT16178700.model.Error import Error
-from SAITA.IT16178700.model.ESubDetail import ESubDetail
-from SAITA.IT16178700.model.Chat import TestChat
-from SAITA.IT16178700.model.SayText import SayText
-from SAITA.IT16178700.ontology import query
-from SAITA.IT16178700.controllers.ontology import query_controller
-from SAITA.IT16178700.controllers.shell_script import shell_script_controller as schell
-from SAITA.IT16178700.data.log import add_log, log_types
+from ARTA.model.Error import Error
+from ARTA.model.ESubDetail import ESubDetail
+from ARTA.model.Chat import TestChat
+from ARTA.model.SayText import SayText
+from ARTA.ontology import query
+from ARTA.controllers.ontology import query_controller
+from ARTA.controllers.shell_script import shell_script_controller as schell
+from ARTA.data.log import add_log, log_types
 import re
 
 

@@ -1,9 +1,9 @@
 import os
-from SAITA.IT16178700.constant import constants
-import SAITA.IT16178700.access_file_detail as access_file_detail
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.error.analysis.scheduler import drives_list
-from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
+from ARTA.constant import constants
+import ARTA.abstracterror.access_file_detail as access_file_detail
+from ARTA.data import variables
+from ARTA.error.analysis.scheduler import drives_list
+from ARTA.GUI.GuiPopupWindow import GuiPopupWindow
 
 
 # Identify System Drive List ex: C, D

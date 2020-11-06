@@ -1,4 +1,4 @@
-from SAITA.IT16178700.constant import constants
+from ARTA.constant import constants
 
 
 # MAC Implementation for check log path folder list

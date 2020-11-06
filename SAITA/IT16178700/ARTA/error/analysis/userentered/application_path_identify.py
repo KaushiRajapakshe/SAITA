@@ -2,15 +2,15 @@ import os
 import re
 import winapps
 
-from SAITA.IT16178700 import phrases
-from SAITA.IT16178700.controllers.ontology import query_controller
-from SAITA.IT16178700.data import validate
-from SAITA.IT16178700.data.log import add_log, log_types
-from SAITA.IT16178700.error.analysis.scheduler import drives_list
+from ARTA.typesoferrors import phrases
+from ARTA.controllers.ontology import query_controller
+from ARTA.data import validate
+from ARTA.data.log import add_log, log_types
+from ARTA.error.analysis.scheduler import drives_list
 
 # Identify application path from Application name
 # Get Error model details for identify
-from SAITA.IT16178700.ontology import query
+from ARTA.ontology import query
 
 
 def check_application_path(self):
