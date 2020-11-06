@@ -593,22 +593,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-
-
-
-    <!-- http://www.archive.org/download/saita_20200524/saita.owl/E0001 -->
-
-    <owl:NamedIndividual rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/E0001">
-        <rdf:type rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
-        <saita:application_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intellij</saita:application_name>
-        <saita:application_version rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2019_1_4</saita:application_version>
-        <saita:error_action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for /f &quot;tokens=5&quot; %a in (&apos;netstat -aon ^| find &quot;:8080&quot; ^| find &quot;LISTENING&quot;&apos;) do taskkill /f /pid %a</saita:error_action>
-        <saita:error_description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">port block</saita:error_description>
-        <rdfs:label>E0001</rdfs:label>
-    </owl:NamedIndividual>
-
-
-
     <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
