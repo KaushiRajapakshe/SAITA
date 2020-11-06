@@ -19,7 +19,7 @@ class DBConnection(object):
                 )
                 add_log(log_types[2], "DBConnection", "Create new DB object")
             except TimeoutError as err:
-                add_log(log_types[0], "DBConnection", "TimeoutError : "+str(err))
+                add_log(log_types[0], "DBConnection", "TimeoutError : " + str(err))
             except InterfaceError as err:
                 add_log(log_types[0], "DBConnection", "InterfaceError : " + str(err))
             except AttributeError as err:
@@ -32,7 +32,7 @@ class DBConnection(object):
     @classmethod
     def execute_query(cls, query, value, dic=True):
         """execute query on singleton db connection"""
-        add_log(log_types[2], "DBConnection", "values : "+str(value)+"  query :  "+str(query))
+        add_log(log_types[2], "DBConnection", "values : " + str(value) + "  query :  " + str(query))
         connection = cls.get_connection()
         try:
             cursor = connection.cursor(dictionary=dic)

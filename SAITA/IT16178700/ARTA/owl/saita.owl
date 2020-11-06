@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.archive.org/download/saita_20200524/saita.owl#"
+     xml:base="http://www.archive.org/download/saita_20200524/saita.owl"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:saita="http://www.archive.org/download/saita_20200524/saita.owl/">
+    <owl:Ontology rdf:about="http://www.archive.org/download/saita_20200524/saita.owl"/>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/hasCategory -->
+
+    <owl:ObjectProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/hasCategory">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Category"/>
+        <rdfs:range rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>hasCategory</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/hasGenre -->
+
+    <owl:ObjectProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/hasGenre">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Genre"/>
+        <rdfs:range rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>hasGenre</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/hasPlatform -->
+
+    <owl:ObjectProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/hasPlatform">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Platform"/>
+        <rdfs:range rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>hasPlatform</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/application_name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/application_name">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>application_name</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/application_path -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/application_path">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>application_path</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/application_version -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/application_version">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>application_version</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_action -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_action">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_action</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_description">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_description</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_name">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_name</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_priority -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_priority">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label>error_priority</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_resource -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_resource">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_resource</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_solution -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_solution">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_solution</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_status -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_status">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_status</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_target -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_target">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_target</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/error_type -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/error_type">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>error_type</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/log_application -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/log_application">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/LogError"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>log_application</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/log_description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/log_description">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/LogError"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>log_description</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/log_details -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/log_details">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/LogError"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>log_details</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/log_name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/log_name">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/LogError"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>log_name</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/log_path -->
+
+    <owl:DatatypeProperty rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/log_path">
+        <rdfs:domain rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/LogError"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>log_path</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Apache -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Apache">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>Apache</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Application -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Application">
+        <rdfs:label>Application</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Category -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Category">
+        <rdfs:label>Category</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Database -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Database">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/SingleType"/>
+        <rdfs:label>Database</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/DifferentType -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/DifferentType">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Category"/>
+        <owl:disjointWith rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/SingleType"/>
+        <rdfs:label>DifferentType</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Eclipse -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>Eclipse</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Genre -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Genre">
+        <rdfs:label>Genre</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Intellij -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Intellij">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>Intellij</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/LogError -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/LogError">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Genre"/>
+        <owl:disjointWith rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/UserEntered"/>
+        <rdfs:label>LogError</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
+        <rdfs:label>Oxygen_4_7</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
+        <rdfs:label>Photon_4_8</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Platform -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Platform">
+        <rdfs:label>Platform</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/SingleType -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/SingleType">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Category"/>
+        <rdfs:label>SingleType</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/UserEntered -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/UserEntered">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Genre"/>
+        <rdfs:label>UserEntered</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/VSCode -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/VSCode">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>VSCode</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Web -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Web">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/DifferentType"/>
+        <rdfs:label>Web</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/WindowsPlatform -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/WindowsPlatform">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Platform"/>
+        <rdfs:label>WindowsPlatform</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Windows_10 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Windows_10">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/WindowsPlatform"/>
+        <owl:disjointWith rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Windows_8"/>
+        <rdfs:label>Windows_10</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Windows_8 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Windows_8">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/WindowsPlatform"/>
+        <rdfs:label>Windows_8</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/WorkBench -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/WorkBench">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>WorkBench</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/Xampp -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Xampp">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+        <rdfs:label>Xampp</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
+        <rdfs:label>version_1_38_1</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_44 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_44">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
+        <rdfs:label>version_1_44</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/version_1_45 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_45">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
+        <rdfs:label>version_1_45</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2_4_41 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_41">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Apache"/>
+        <rdfs:label>2_4_41</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2_4_42 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_42">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Apache"/>
+        <rdfs:label>2_4_42</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2_4_43 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_43">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Apache"/>
+        <rdfs:label>2_4_43</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
+        <rdfs:label>2018_09_4_9</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
+        <rdfs:label>2018_12_4_10</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2019_1_4 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_1_4">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
+        <rdfs:label>2019_1_4</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2019_2 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_2">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
+        <rdfs:label>2019_2</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2019_3 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_3">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
+        <rdfs:label>2019_3</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/2020_1 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2020_1">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
+        <rdfs:label>2020_1</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/7_1_32 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_1_32">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Xampp"/>
+        <rdfs:label>7_1_32</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/7_2_30 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_2_30">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Xampp"/>
+        <rdfs:label>7_2_30</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/7_3_17 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_3_17">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Xampp"/>
+        <rdfs:label>7_3_17</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/7_4_5 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_4_5">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/Xampp"/>
+        <rdfs:label>7_4_5</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://www.archive.org/download/saita_20200524/saita.owl/8_0_20 -->
+
+    <owl:Class rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/8_0_20">
+        <rdfs:subClassOf rdf:resource="http://www.archive.org/download/saita_20200524/saita.owl/WorkBench"/>
+        <rdfs:label>8_0_20</rdfs:label>
+    </owl:Class>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Apache"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Eclipse"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Intellij"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/VSCode"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/WorkBench"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Xampp"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Application"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Category"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Genre"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Platform"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Oxygen_4_7"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/Photon_4_8"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_09_4_9"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2018_12_4_10"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_38_1"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_44"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/version_1_45"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_41"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_42"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2_4_43"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_1_4"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_2"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2019_3"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/2020_1"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_1_32"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_2_30"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_3_17"/>
+            <rdf:Description rdf:about="http://www.archive.org/download/saita_20200524/saita.owl/7_4_5"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

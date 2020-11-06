@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 
+# show error window
 class GuiError:
     error_root = None
 
@@ -18,7 +19,6 @@ class GuiError:
 
     def show2(self):
         MsgBox = tk.messagebox.showerror('Error : ', self.create_error())
-        
 
     @staticmethod
     def close_event():

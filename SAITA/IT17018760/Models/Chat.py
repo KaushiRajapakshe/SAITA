@@ -1,3 +1,4 @@
+#class testchat model class
 class TestChat:
     usrerep = []
     sitarep = [["hi"]]
