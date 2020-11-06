@@ -80,7 +80,7 @@ The main 4 components that are separated in to 4 members are the main modules of
 
 **Steps to Execute the individual code**
 
-[Meta database and storage data link] (https://www.dropbox.com/sh/odn0udq2c6paj8r/AAC5LEjYCNwnuLbZAK8fd5kDa?dl=0) <br />
+[Meta database and storage data link](https://www.dropbox.com/sh/odn0udq2c6paj8r/AAC5LEjYCNwnuLbZAK8fd5kDa?dl=0) <br />
 Each individual project contains a variables.py file that contains database and storage credentials and access data. Therefore, those access data have to be change according to your new setup details. <br /> <br/>
 IT16178700- <br />
 Software- PyCharm, Fuseki Server, Anaconda <br />
