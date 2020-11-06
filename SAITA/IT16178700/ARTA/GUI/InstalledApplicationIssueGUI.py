@@ -1,10 +1,10 @@
 from tkinter import Tk, Frame, Label, Button, X, BOTH, LEFT, RIGHT
 from PIL import ImageTk, Image
-from SAITA.IT16178700.GUI.GuiCanvas import work_area, acc_ra, create_full_show_window
-from SAITA.IT16178700.config import config_controller
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.data.log import add_log, log_types
-from SAITA.IT16178700.data.variables import logo, title_bar_bg, close_but_acc_bg, title_bar_but_txt_color, \
+from ARTA.GUI.GuiCanvas import work_area, acc_ra, create_full_show_window
+from ARTA.config import config_controller
+from ARTA.data import variables
+from ARTA.data.log import add_log, log_types
+from ARTA.data.variables import logo, title_bar_bg, close_but_acc_bg, title_bar_but_txt_color, \
     mini_but_acc_bg, title_bar_txt, title_bar_txt_color, logo_div, toggle_button_enable_fg_color, \
     toggle_button_enable_bg_color, toggle_button_disable_bg_color
 

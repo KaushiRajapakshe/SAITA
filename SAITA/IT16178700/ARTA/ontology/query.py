@@ -1,5 +1,5 @@
-from SAITA.IT16178700.constant import constants
-from SAITA.IT16178700.data.log import add_log, log_types
+from ARTA.constant import constants
+from ARTA.data.log import add_log, log_types
 
 
 # Ontology KB data extract query for SAITA Application related issue solver

@@ -1,5 +1,5 @@
 from tkinter import Label
-from SAITA.IT16178700.data.variables import message_body_color
+from ARTA.data.variables import message_body_color
 from PIL import Image, ImageTk
 
 

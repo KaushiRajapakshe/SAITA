@@ -2,7 +2,7 @@ import re
 import subprocess
 import sys
 
-from SAITA.IT16178700.data import variables
+from ARTA.data import variables
 
 
 # Write Shell Script and

@@ -3,8 +3,8 @@ import calendar
 
 
 # Define scheduler log error identify phrases
-from SAITA.IT16178700.controllers.ontology import query_controller
-from SAITA.IT16178700.ontology import query
+from ARTA.controllers.ontology import query_controller
+from ARTA.ontology import query
 
 
 def get_phrases():

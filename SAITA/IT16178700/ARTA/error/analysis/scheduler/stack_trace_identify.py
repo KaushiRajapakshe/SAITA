@@ -1,14 +1,14 @@
 import os
 import re
 
-import SAITA.IT16178700.access_file_detail as access_file_detail
-import SAITA.IT16178700.phrases as phrases
-from SAITA.IT16178700.abstracterror import error_detail
-from SAITA.IT16178700.config import config_controller
-from SAITA.IT16178700.data import variables
-from SAITA.IT16178700.data.log import add_log, log_types
-from SAITA.IT16178700.model.Error import Error
-from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
+import ARTA.abstracterror.access_file_detail as access_file_detail
+import ARTA.typesoferrors.phrases as phrases
+from ARTA.abstracterror import error_detail
+from ARTA.config import config_controller
+from ARTA.data import variables
+from ARTA.data.log import add_log, log_types
+from ARTA.model.Error import Error
+from ARTA.GUI.GuiPopupWindow import GuiPopupWindow
 
 
 # GET log file list for stack trace and error identify
@@ -47,7 +47,7 @@ def identify_stack_trace(work_area, acc_ra, roott):
     c = get_log_file()
 
     # initialise config object using the config_controller
-    app_config = config_controller.init_config(variables.app_config_path)
+    app_config = config_controller.init_config(variables.scanner_config_path)
 
     # get string value scheduler_current_date
     scheduler_current_date = app_config.get('default', 'scheduler_current_date')
