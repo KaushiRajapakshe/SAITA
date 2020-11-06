@@ -12,7 +12,6 @@ sql_password = "passw0rd"
 img_location = "http://192.168.1.151/SLIS/"
 file_location = "http://192.168.1.151/SLIS/"
 
-
 # variables for UI
 logo_div = 0.3
 zoom_dev = 0.08
@@ -95,7 +94,7 @@ img_hand_up_cart = "../Icon/hand_up_cart.png"
 img_zoom_in = "../Icon/zoom_in.png"
 img_zoom_out = "../Icon/zoom_out.png"
 
-#for run on BAT
+# for run on BAT
 
 # powershellcode_floder_location = "PowerShellCode/"
 # loader_icon = "Icon/loader.gif"
@@ -108,4 +107,3 @@ img_zoom_out = "../Icon/zoom_out.png"
 # img_hand_up_cart = "Icon/hand_up_cart.png"
 # img_zoom_in = "Icon/zoom_in.png"
 # img_zoom_out = "Icon/zoom_out.png"
-
