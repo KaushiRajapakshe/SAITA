@@ -6,6 +6,8 @@ import SAITA.IT16178700.error.analysis.scheduler.drives_list as drives_list
 from SAITA.IT16178700.GUI.GuiPopupWindow import GuiPopupWindow
 
 # Set any name with log pattern for identify log files
+from SAITA.IT16178700.data import variables
+
 pattern = "*log"
 # Define log no extension file path variable
 log_no_extension = []
@@ -57,4 +59,4 @@ def get_log_no_extension(work_area, acc_ra, roott):
 def add_log_no_extension_file(work_area, acc_ra, root):
     all_output_list = ['\n'.join(get_log_no_extension(work_area, acc_ra, root))]
 
-    access_file_detail.add_log_details(all_output_list, "../textfile/logNoExtension.txt")
+    access_file_detail.add_log_details(all_output_list, variables.log_no_extension)

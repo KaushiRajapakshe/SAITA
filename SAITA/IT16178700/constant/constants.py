@@ -1,3 +1,7 @@
+# CONSTANTS FOR
+# PRE SELECTED APPLICATION PROBLEM
+# SOLVING SYSTEM
+
 # MAC
 FOLDER_NAME_APPLICATIONS = '/Applications'
 FOLDER_NAME_USERS = '/Users'
@@ -73,3 +77,9 @@ LOG_PATH = 'log_path'
 HAS_CATEGORY = 'hasCategory'
 HAS_GENRE = 'hasGenre'
 HAS_PLATFORM = 'hasPlatform'
+
+# ERROR DESCRIPTION
+PORT_BLOCK = 'port block'
+
+# Final Variable
+QUERY = "Query : "

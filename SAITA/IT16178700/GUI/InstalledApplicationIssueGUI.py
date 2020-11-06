@@ -1,9 +1,12 @@
 from tkinter import Tk, Frame, Label, Button, X, BOTH, LEFT, RIGHT
 from PIL import ImageTk, Image
 from SAITA.IT16178700.GUI.GuiCanvas import work_area, acc_ra, create_full_show_window
+from SAITA.IT16178700.config import config_controller
+from SAITA.IT16178700.data import variables
 from SAITA.IT16178700.data.log import add_log, log_types
 from SAITA.IT16178700.data.variables import logo, title_bar_bg, close_but_acc_bg, title_bar_but_txt_color, \
-    mini_but_acc_bg, title_bar_txt, title_bar_txt_color, logo_div
+    mini_but_acc_bg, title_bar_txt, title_bar_txt_color, logo_div, toggle_button_enable_fg_color, \
+    toggle_button_enable_bg_color, toggle_button_disable_bg_color
 
 # Define TK main variable as root
 root = Tk()
@@ -71,8 +74,54 @@ mini_button = Button(title_bar,
                      highlightthickness=0
                      )
 
+
+def toggle(tog=[0]):
+
+    tog[0] = not tog[0]
+    if tog[0]:
+        scanner_button_button.config(text='Disable', fg=toggle_button_enable_fg_color, bg=toggle_button_enable_bg_color)
+    else:
+        scanner_button_button.config(text='Enable', bg=toggle_button_disable_bg_color, fg=title_bar_but_txt_color)
+    if str(tog[0]) == 'True':
+        value = 'disable'
+    else:
+        value = 'enable'
+
+    # initialise config object using the config_controller
+    app_config = config_controller.init_config(variables.app_config_path)
+
+    # remove option
+    app_config.remove_option("log", "scheduler_log_scan")
+
+    # remove section
+    app_config.remove_section("log")
+
+    # add section to the config file
+    app_config.add_section("log")
+
+    # set scheduler_log_scan string value
+    app_config.set("log", "scheduler_log_scan", value)
+    config_controller.save(variables.app_config_path, app_config)
+
+
 # window title
 title_name = Label(title_bar, text=title_bar_txt, bg=title_bar_bg, fg=title_bar_txt_color, font="bold")
+
+# scanner button title
+scanner_button_text = Label(title_bar, text="Scanner", font=("Verdana", 11, 'bold'), fg=title_bar_txt_color,
+                            bg=title_bar_bg)
+
+# scanner toggle button
+scanner_button_button = Button(title_bar,
+                               text="Enable",
+                               font=("Verdana", 11, 'bold'), width="6", command=toggle, bg=toggle_button_disable_bg_color,
+                               padx=5,
+                               pady=2,
+                               activebackground=mini_but_acc_bg,
+                               bd=0,
+                               fg=title_bar_but_txt_color,
+                               activeforeground=title_bar_but_txt_color,
+                               highlightthickness=0)
 
 # title bar img
 img = Image.open(logo)
@@ -93,6 +142,8 @@ title_img_set.pack(side=LEFT)
 title_name.pack(side=LEFT)
 close_button.pack(side=RIGHT)
 mini_button.pack(side=RIGHT)
+scanner_button_button.pack(side=RIGHT)
+scanner_button_text.pack(side=RIGHT)
 window.pack(expand=1, fill=BOTH)
 x_axis = None
 y_axis = None

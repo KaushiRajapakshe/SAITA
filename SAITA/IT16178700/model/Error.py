@@ -1,3 +1,6 @@
+# SAITA Pre selected Application related issue solving Agent
+# Error Model class
+
 class Error:
     # Error Class Attributes
     type: 'log error'

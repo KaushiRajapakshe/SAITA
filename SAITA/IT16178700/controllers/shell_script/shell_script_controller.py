@@ -15,8 +15,7 @@ def shell_script_write(script):
     for s in s_list:
         shell_file.write("\n" + s)
     # Execute power shell script solution
-    process = subprocess.Popen(["powershell.exe", "powershell -ExecutionPolicy ByPass -File "+variables.script_file],
-                     stdout=subprocess.PIPE)
-    result = process.communicate()[0]
-    return result
-
+    process = subprocess.Popen(["powershell.exe", "powershell -ExecutionPolicy ByPass -File " + variables.script_file],
+                               stdout=subprocess.PIPE)
+    result = process.stdout.readline()
+    return str(result).replace("b'", "").replace("\\r\\n'", "")

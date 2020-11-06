@@ -7,7 +7,7 @@ from SAITA.IT16178700.data import variables
 def upload_owl():
     url = variables.url + '/data'
     # Open OWL file
-    data = open('../../ontology/saita.owl').read()
+    data = open(variables.ontology_path).read()
     headers = {'Content-Type': 'application/rdf+xml; boundary=----WebKitFormBoundaryc8DYiSwZQFPx4yH1'}
     r = requests.post(url, data=data, headers=headers)
     if r.status_code == 200:

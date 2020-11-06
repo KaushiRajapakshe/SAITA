@@ -1,11 +1,16 @@
+# SAITA Pre selected Application related issue solving Agent
+# ESubDetail Model class
+
 class ESubDetail:
-    def __init__(self, error_id, error_category, pid, action, solution, final_resolution):
-        self._error_id = error_id
-        self._error_category = error_category
-        self._pid = pid
-        self._action = action
-        self._solution = solution
-        self._final_resolution = final_resolution
+    type: 'error details'
+
+    def __init__(self):
+        self._error_id = ''
+        self._error_category = ''
+        self._pid = ''
+        self._action = ''
+        self._solution = ''
+        self._final_resolution = ''
 
     # self._owner_name = owner_name
     # getter method error_id

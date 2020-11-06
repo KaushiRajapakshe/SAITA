@@ -22,6 +22,7 @@ class GuiPopupWindow:
     progress_num = None
     progress = None
     filecount = None
+    index = 0
 
     def __init__(self, master, acc_ra, work_area, massage_tital, data_in, poin_val, close=True, type="soft",
                  btn_txt=""):
@@ -205,3 +206,12 @@ class GuiPopupWindow:
         self.massage = Label(self.top_in_window_body, text=self.data[0], bg=message_body_color, font="bold")
         self.massage.config(font=("arial", fontsize))
         self.massage.pack(fill=X, pady=10)
+
+    def onNightMode(self):
+        if self.index:
+            self.text.config(font=('courier', 12, 'normal'), background='black', fg='green')
+
+        else:
+            self.text.config(font=('courier', 12, 'normal'))
+
+        self.index = not self.index
