@@ -112,7 +112,7 @@ Steps-
 -	Run the Project.
     
 IT17152938- <br />
-Software- PyCharm, Xampp(MySQL), Anaconda <br />
+Software- PyCharm, MySQL, Apache, Anaconda <br />
 Steps- 
 -	Download the Project.
 -	Import it17152938.sql to MySQL server
