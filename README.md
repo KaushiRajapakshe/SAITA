@@ -89,6 +89,14 @@ Steps-
 -	Run the Fuseki Server
 -	Upload saita.owl file to server.
 -	Open the IT16178700 Project in PyCharm.
+-   Open terminal on ADMIN -> src -> main -> resources -> ui folder
+-   Run `npm install` command
+-   Run `nmp run build` command
+-   Copy all files on ui -> build to ui -> public
+-   Open terminal on ADMIN folder
+-   Run `mvn clean install` command
+-   Open terminal on ADMIN -> target folder
+-   Run `java -jar SAITA_0.0.1-SNAPSHOT.jar` command
 -	Create a ‘Conda’ environment for the IT16178700 project.
 -	Install all the imported dependencies.
 -	Run the Project.

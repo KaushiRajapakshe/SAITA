@@ -1,4 +1,5 @@
 import copy
+import re
 
 from ARTA.constant import constants
 from ARTA.data import variables
@@ -13,7 +14,6 @@ from ARTA.ontology import query
 from ARTA.controllers.ontology import query_controller
 from ARTA.controllers.shell_script import shell_script_controller as schell
 from ARTA.data.log import add_log, log_types
-import re
 
 
 # Identify user entered application version
