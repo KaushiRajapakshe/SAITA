@@ -1,6 +1,4 @@
-import re
 import subprocess
-import sys
 
 from ARTA.data import variables
 
