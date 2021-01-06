@@ -46,9 +46,11 @@ class ChatController:
                      'Hi!!! This is SAITA pre selected application problem solving system.Do you like to run error '
                      'preventing scan for your operating system.? (Yes / No)',
                      'Please enter valid port for analyze the error.',
-                     'Please enter the scanner issue number to solve.']
+                     'Please enter the scanner issue number to solve.',
+                     'Your problem did not solved. Please contact our admin team.']
 
     global error_list, error_dist
+    res = ''
     error_dict = {}
     error_scan_list = []
 
@@ -104,18 +106,17 @@ class ChatController:
         # Execute Scheduler error solution scripts
         elif self.loop == 12:
             if type(int(self.chat.get_lastuserreply())) == int:
-                schell.shell_script_write(variables.script1)
                 self.error_scan_list[int(self.chat.get_lastuserreply())-1]
-
-                # Todo: Check error with KB data and execute solution by powershell script
-                self.chat.set_sitarep(self.application_q[6])
-                SayText.get_say_text().say(variables.q7)
-                self.loop = 8
+                # check error with KB data and get the solution
+                script = scanner.get_scanner_solution(self.error_scan_list[int(self.chat.get_lastuserreply())-1])
+                self.res = schell.shell_script_write(script[0])
+                self.chat.set_sitarep(self.application_q[4])
+                SayText.get_say_text().say(variables.q5)
+                self.loop = 13
             else:
                 self.chat.set_sitarep(self.application_q[0])
                 SayText.get_say_text().say(variables.q1)
                 self.loop = 12
-        #         Todo : Iterate for other errors
         # Check scheduler want to continue
         elif self.loop == 8:
             if re.search(r'\bno\b', self.chat.get_lastuserreply()) or re.search(r'\bNo\b',
@@ -148,7 +149,8 @@ class ChatController:
                     # Set Error application name
                     self.error.set_application_name(ap_name)
             # Check Application installed in OS
-            if check_application_path(self.error) != '' and self.loop == 2:
+            if (check_application_path(self.error) != '' or self.error.get_application_name() == 'VSCode' or
+                self.error.get_application_name() == 'Notepad') and self.loop == 2:
                 self.chat.set_sitarep(self.application_q[2])
                 SayText.get_say_text().say(variables.q3)
             elif self.error.get_application_name() != '' and check_application_path(self.error) == '':
@@ -236,11 +238,12 @@ class ChatController:
             else:
                 if re.search(r'\bprocess_name\b', error_target[0]):
                     # [Application name, application installed path, process name]
-                    for app in application_path_identify():
+                    for app in application_path_identify(self.error.get_application_name()):
                         process_name = str(app[2])
                         script = str(error_target[0]).replace('process_name', process_name[:-4])
                         result = schell.shell_script_write(script)
-                        if len(str(result)) < 10:
+                        if len(str(result)) < 10 and (self.error.get_application_name() != 'VSCode' and
+                                                      self.error.get_application_name() != 'Notepad'):
                             self.chat.set_sitarep("No issues to find." + self.application_q[8])
                             SayText.get_say_text().say(variables.q14+variables.q9)
                             self.loop = 7
@@ -255,6 +258,17 @@ class ChatController:
                             self.chat.set_sitarep(error_status[0] + self.application_q[5])
                             SayText.get_say_text().say(variables.q6)
                             self.loop = 6
+                else:
+                    query_type = query.get_error_status(constants.APPLICATION_NAME,
+                                                        constants.ERROR_DESCRIPTION,
+                                                        constants.APPLICATION_VERSION,
+                                                        self.error.get_application_name(),
+                                                        self.error.get_error_description(),
+                                                        self.error.get_application_version())
+                    error_status = query_controller.execute_query(query_type)
+                    self.chat.set_sitarep(error_status[0] + self.application_q[5])
+                    SayText.get_say_text().say(variables.q6)
+                    self.loop = 6
 
         # Application error action check
         elif self.loop == 6:
@@ -275,16 +289,18 @@ class ChatController:
                     script = str(error_action[0]).replace('port_number', port)
                 else:
                     script = copy.deepcopy(error_action[0])
+                    mme = script
                     # [Application name, application installed path, process name]
-                    for app in application_path_identify():
+                    for app in application_path_identify(self.error._application_name):
                         if app[0] == self.error.get_application_name():
                             if re.search(r'\bapplication_name\b', script):
-                                str(script).replace('application_name', app[0])
+                                mme = str(script).replace('application_name', app[0])
                             if re.search(r'\bapplication_path\b', script):
-                                str(script).replace('application_path', app[1])
+                                mme = str(script).replace('application_path', app[1])
                             if re.search(r'\bprocess_name\b', script):
-                                str(script).replace('process_name', app[2])
+                                mme = str(script).replace('process_name', app[2])
 
+                    script = mme
                 schell.shell_script_write(script)
                 self.chat.set_sitarep(self.application_q[6])
                 SayText.get_say_text().say(variables.q7)
@@ -309,6 +325,27 @@ class ChatController:
                 SayText.get_say_text().say(variables.q1)
                 self.loop = 0
 
+        elif self.loop == 9:
+            if re.search(r'\bno\b', self.chat.get_lastuserreply()) or re.search(r'\bNo\b',
+                                                                                self.chat.get_lastuserreply()):
+                self.chat.set_sitarep(self.application_q[10])
+                SayText.get_say_text().say(variables.q11)
+                self.loop = 0
+            elif re.search(r'\byes\b', self.chat.get_lastuserreply()) or re.search(r'\bYes\b',
+                                                                                   self.chat.get_lastuserreply()):
+                self.chat.set_sitarep(self.application_q[12])
+                SayText.get_say_text().say(variables.q13)
+                self.loop = 12
+
+        elif self.loop == 13:
+            if self.res == '1':
+                self.chat.set_sitarep(self.application_q[6])
+                SayText.get_say_text().say(variables.q7)
+                self.loop = 9
+            else:
+                self.chat.set_sitarep(self.application_q[13])
+                SayText.get_say_text().say(variables.q15)
+                self.loop = 9
         # No such type or error
         else:
             self.chat.set_sitarep(self.application_q[0])

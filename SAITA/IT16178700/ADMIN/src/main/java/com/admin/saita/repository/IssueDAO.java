@@ -44,6 +44,7 @@ public class IssueDAO {
         String sqlCheck = "SELECT COUNT(*) FROM `feedback` WHERE " +
                 "applicationName='" + issue.getApplicationName() + "' AND " +
                 "applicationVersion='" + issue.getApplicationVersion() + "' AND " +
+                "errorType='" + issue.getErrorType() + "' AND " +
                 "errorDescription='" + issue.getErrorDescription() + "'";
         Integer issueCount = jdbcTemplate.queryForObject(sqlCheck, Integer.class);
         if(issueCount >= 0){
@@ -51,12 +52,14 @@ public class IssueDAO {
             String sql = "INSERT INTO `feedback` ( " +
                     "`applicationName`, " +
                     "`applicationVersion`, " +
+                    "`errorType`, " +
                     "`errorDescription`, " +
-                    "`userFirstName`, " +
-                    "`userLastName`, " +
-                    "`userEmail`) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
+                    "`userName`, " +
+                    "`contactNumber`, " +
+                    "`userEmail`) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
                     "applicationName=values(applicationName), " +
                     "applicationVersion=values(applicationVersion), " +
+                    "errorType=values(errorType), " +
                     "errorDescription=values(errorDescription)";
 
             jdbcTemplate.update(new PreparedStatementCreator() {
@@ -65,10 +68,11 @@ public class IssueDAO {
                     PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     ps.setString(1, issue.getApplicationName());
                     ps.setString(2, issue.getApplicationVersion());
-                    ps.setString(3, issue.getErrorDescription());
-                    ps.setString(4, issue.getUserFirstName());
-                    ps.setString(5, issue.getUserLastName());
-                    ps.setString(6, issue.getUserEmail());
+                    ps.setString(3, issue.getErrorType());
+                    ps.setString(4, issue.getErrorDescription());
+                    ps.setString(5, issue.getUserName());
+                    ps.setString(6, issue.getContactNumber());
+                    ps.setString(7, issue.getUserEmail());
                     return ps;
                 }
             });
@@ -85,9 +89,10 @@ public class IssueDAO {
         String sql = "UPDATE `feedback` SET " +
                 "applicationName='" + issue.getApplicationName() +"', " +
                 "applicationVersion='" + issue.getApplicationVersion() + "', " +
+                "errorType='" + issue.getErrorType() + "', " +
                 "errorDescription='" + issue.getErrorDescription() + "', " +
-                "userFirstName='" + issue.getUserFirstName() + "', " +
-                "userLastName='" + issue.getUserLastName() + "', " +
+                "userName='" + issue.getUserName() + "', " +
+                "contactNumber='" + issue.getContactNumber() + "', " +
                 "userEmail='" + issue.getUserEmail() + "' " +
                 "WHERE id=" + id + "";
 

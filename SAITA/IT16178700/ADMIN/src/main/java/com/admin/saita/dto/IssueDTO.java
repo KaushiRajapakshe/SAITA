@@ -18,11 +18,12 @@ public class IssueDTO {
     private String applicationName;
     private String applicationVersion;
     private String errorDescription;
+    private String errorType;
     private String errorStatus;
     private String errorAction;
     private String errorTarget;
-    private String userFirstName;
-    private String userLastName;
+    private String userName;
+    private String contactNumber;
     private String userEmail;
     private List<IssueDTO> children;
 
@@ -30,20 +31,28 @@ public class IssueDTO {
         // create IssueDTO object
     }
 
-    public String getUserFirstName() {
-        return userFirstName;
+    public String getErrorType() {
+        return errorType;
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
+    public void setErrorType(String errorType) {
+        this.errorType = errorType;
     }
 
-    public String getUserLastName() {
-        return userLastName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getUserEmail() {

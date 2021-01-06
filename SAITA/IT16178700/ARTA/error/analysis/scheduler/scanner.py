@@ -1,4 +1,5 @@
 from ARTA.config import config_controller
+from ARTA.constant import constants
 from ARTA.data import validate, variables
 from ARTA.data.log import add_log, log_types
 from ARTA.error.analysis.scheduler import stack_trace_identify
@@ -39,7 +40,7 @@ def scanner_details(work_area, acc_ra, roott):
     # Get Application list from knowledge base
     query_type = query.get_application_type()
     application_list = query_controller.execute_query(query_type)
-    application_list.append('Protege')
+    application_list.append('Notepad')
 
     # Define Scanner list dictionary to store application error details with log data
     scanner_list = {}
@@ -50,7 +51,7 @@ def scanner_details(work_area, acc_ra, roott):
 
     for ap_name in application_list:
         for e in error_list:
-            if re.search(r'\b' + ap_name + '\\b', e.get_log_path(), re.IGNORECASE):
+            if re.search(ap_name, e.get_log_path(), re.IGNORECASE):
                 error_value = ap_name + ' Application : ' + e.get_error_description()
                 e.set_error_description(error_value)
                 e.set_application_name(ap_name)
@@ -107,3 +108,18 @@ def append_error_class_details(error_list_class):
                             if check_application_port(line, e) == 'True':
                                 pass
     return error_list_class
+
+
+def get_scanner_solution(e):
+    e_description = re.split(r':', e.get_error_description())
+    # Get Scanner error description list from knowledge base
+    query_type = query.get_error_type()
+    error_description_list = query_controller.execute_query(query_type)
+    for ed in error_description_list:
+        if (re.search(ed, e_description[1], re.IGNORECASE)):
+            # Get Scanner error solution from knowledge base
+            query_type = query.get_error_solution(constants.APPLICATION_NAME, constants.ERROR_DESCRIPTION,
+                                                  e.get_application_name(), ed)
+            error_action = query_controller.execute_query(query_type)
+
+    return error_action

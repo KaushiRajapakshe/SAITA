@@ -1,8 +1,61 @@
 /* Application Related issue Admin view UI css file */
+.main{
+  background-color: #222;
+  width: 100%;
+  font-family: "Oswald", sans-serif;
+}
 .App {
   text-align: center;
   width: 75vw;
   align-content: center;
   margin: auto;
-  margin-top: 4vh;
+}
+.toolbar{
+  background-color: #222;
+  flex: 1;
+  flex-direction: 'row';
+}
+.footer {
+  margin-top: 10vh;
+  padding-bottom: 15vh;
+}
+.element1 {
+  display:inline-block;margin-right:10px;
+  color: white;
+} 
+.element2 {
+  display:inline-block;
+  color: darkorange;
+} 
+.home{
+  align-content: center;
+  transition: opacity 300ms ease-in;
+}
+.home-content{
+  margin-left: 15vw;
+  margin-right: 15vw;
+  margin-top: 15vh;
+  align-content: center;
+}
+.home-title{
+  color: #ffc500;
+  align-content: center;
+  font-family: "Oswald", sans-serif;
+}
+.home-description{
+  margin-top: 8vh;
+  color: white;
+  align-content: center;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 15vh;
+}
+.line {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  width: 100%;
+  border-top: 1px solid #ffc500;
+}
+.feedback{
+  padding-bottom: 15vh;
 }

@@ -166,3 +166,36 @@ def get_error_type():
     """
     add_log(log_types[2], constants.QUERY, query10)
     return query10
+
+
+# GET Error description query
+def get_error_description():
+    query11 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT  ?error_description
+    {
+	    ?saita saita:error_description ?error_description ;
+    }
+    """
+    add_log(log_types[2], constants.QUERY, query11)
+    return query11
+
+
+# GET Error description query
+def get_error_solution(value1, value2, application_name, error_description):
+    query12 = """
+    PREFIX saita: <http://www.archive.org/download/saita_20200524/saita.owl/> 
+
+    SELECT  ?error_action 
+    WHERE { 
+        ?saita saita:application_name ?application_name ;
+            saita:error_description ?error_description ;
+            saita:application_version ?application_version ;
+            saita:error_action ?error_action ;
+            VALUES ?""" + value1 + """ {'""" + application_name + """'}.
+            VALUES ?""" + value2 + """ {'""" + error_description + """'}.
+    } 
+    """
+    add_log(log_types[2], constants.QUERY, query12)
+    return query12

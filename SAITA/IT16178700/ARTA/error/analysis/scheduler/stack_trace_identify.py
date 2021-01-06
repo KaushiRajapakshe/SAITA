@@ -1,3 +1,4 @@
+import copy
 import os
 import re
 
@@ -108,7 +109,8 @@ def identify_stack_trace(work_area, acc_ra, roott):
                                                         error.set_log_stack_trace(stack_trace)
                                                         error.set_error_description(set_phrase)
                                                         error.set_log_path(set_log)
-                                                        error_list = check_error_list(error, error_list)
+                                                        if check_error_list(error, error_list) is not Error:
+                                                            error_list.append(check_error_list(error, error_list))
                                                         error_detail.error_details(stack_trace, log)
                                                         stack_trace = []
                                                     stack_trace = [line]
@@ -121,7 +123,8 @@ def identify_stack_trace(work_area, acc_ra, roott):
                                                 error.set_log_stack_trace(stack_trace)
                                                 error.set_error_description(set_phrase)
                                                 error.set_log_path(set_log)
-                                                error_list = check_error_list(error, error_list)
+                                                if check_error_list(error, error_list) is not Error:
+                                                    error_list.append(check_error_list(error, error_list))
                                                 error_detail.error_details(stack_trace, log)
                                                 stack_trace = []
                                             stack_trace = [line]
@@ -161,13 +164,14 @@ def identify_stack_trace(work_area, acc_ra, roott):
 def check_error_list(error, error_list):
     count = 0
     log_true = 1
+    err = Error
     if not error_list:
-        error_list.append(error)
+        err = copy.deepcopy(error)
     else:
         for e in error_list:
             count += 1
             if e.get_log_path() in error.get_log_path() and e.get_error_description() in error.get_error_description():
                 log_true = 2
             elif log_true != 2 and len(error_list) == count:
-                error_list.append(error)
-    return error_list
+                err = copy.deepcopy(error)
+    return err

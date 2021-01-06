@@ -3,5 +3,7 @@ data_validate = [['Address already in use', 'HTTP']]
 
 application_validate = [['xampp', 'xampp-control.exe'],
                         ['pycharm', 'pycharm64.exe'],
-                        ['VSCode', 'Code.exe']]
+                        ['VSCode', 'Code.exe'],
+                        ['Intellij', 'idea64.exe'],
+                        ['Notepad', 'notepad.exe.exe']]
 
