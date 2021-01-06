@@ -12,6 +12,9 @@ def shell_script_write(script):
     s_list = script.split('\\n')
     for s in s_list:
         shell_file.write("\n" + s)
+
+    # Close opened file
+    shell_file.close()
     # Execute power shell script solution
     process = subprocess.Popen(["powershell.exe", "powershell -ExecutionPolicy ByPass -File " + variables.script_file],
                                stdout=subprocess.PIPE)

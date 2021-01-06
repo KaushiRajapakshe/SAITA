@@ -1,5 +1,7 @@
 from tkinter import Tk, Frame, Label, Button, X, BOTH, LEFT, RIGHT
 from PIL import ImageTk, Image
+
+from ARTA.GUI import GUIFeedback
 from ARTA.GUI.GuiCanvas import work_area, acc_ra, create_full_show_window
 from ARTA.config import config_controller
 from ARTA.data import variables
@@ -37,6 +39,10 @@ def mini_screen(event):
 def max_screen(event):
     add_log(log_types[2], "GuiMain.py", "max_screen : " + str(event))
     root.overrideredirect(True)
+
+
+def click_feedback():
+    GUIFeedback.click_feedback_ui()
 
 
 # make a frame for the title bar
@@ -114,7 +120,8 @@ scanner_button_text = Label(title_bar, text="Scanner", font=("Verdana", 11, 'bol
 # scanner toggle button
 scanner_button_button = Button(title_bar,
                                text="Enable",
-                               font=("Verdana", 11, 'bold'), width="6", command=toggle, bg=toggle_button_disable_bg_color,
+                               font=("Verdana", 11, 'bold'), width="6", command=toggle,
+                               bg=toggle_button_disable_bg_color,
                                padx=5,
                                pady=2,
                                activebackground=mini_but_acc_bg,
@@ -122,6 +129,23 @@ scanner_button_button = Button(title_bar,
                                fg=title_bar_but_txt_color,
                                activeforeground=title_bar_but_txt_color,
                                highlightthickness=0)
+
+# Creating a photo image object to use feedback image
+photo = Image.open(variables.feedback_icon)
+new_img_wi, new_img_hi = photo.size
+new_img_wi *= acc_ra * logo_div
+new_img_hi *= acc_ra * logo_div
+photo = photo.resize((round(new_img_wi - 2), round(new_img_hi - 2)))
+feedback_image = ImageTk.PhotoImage(photo)
+
+# feedback icon
+feedback_button = Button(title_bar, image=feedback_image, bg=variables.feedback_icon_color, padx=5, pady=2,
+                         fg=title_bar_but_txt_color,
+                         bd=0,
+                         activebackground=variables.feedback_icon_color,
+                         activeforeground=title_bar_but_txt_color,
+                         highlightthickness=0,
+                         command=click_feedback)
 
 # title bar img
 img = Image.open(logo)
@@ -131,7 +155,7 @@ new_img_h *= acc_ra * logo_div
 img = img.resize((round(new_img_w), round(new_img_h)))
 title_img = ImageTk.PhotoImage(img)
 # title_img = ImageTk.PhotoImage(Image.open(logo))
-title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg, )
+title_img_set = Label(title_bar, image=title_img, bg=title_bar_bg)
 
 # a canvas for the main area of the window
 window = create_full_show_window(root)
@@ -144,6 +168,7 @@ close_button.pack(side=RIGHT)
 mini_button.pack(side=RIGHT)
 scanner_button_button.pack(side=RIGHT)
 scanner_button_text.pack(side=RIGHT)
+feedback_button.pack(side=RIGHT)
 window.pack(expand=1, fill=BOTH)
 x_axis = None
 y_axis = None

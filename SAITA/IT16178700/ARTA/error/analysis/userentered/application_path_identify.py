@@ -5,8 +5,6 @@ import winapps
 from ARTA.typesoferrors import phrases
 from ARTA.controllers.ontology import query_controller
 from ARTA.data import validate
-from ARTA.data.log import add_log, log_types
-from ARTA.error.analysis.scheduler import drives_list
 
 # Identify application path from Application name
 # Get Error model details for identify
@@ -27,7 +25,7 @@ def check_application_path(self):
     return application_path
 
 
-def application_path_identify():
+def application_path_identify(application_name):
 
     # Define application list array
     application_list = []
@@ -36,25 +34,30 @@ def application_path_identify():
     query_type = query.get_application_type()
     application_name_list = query_controller.execute_query(query_type)
 
-    for application_name in application_name_list:
+    for application_n in application_name_list:
+        if application_n == application_name:
+            # Find installed application path from OS
+            for app in winapps.search_installed(application_name):
 
-        # Find installed application path from OS
-        for app in winapps.search_installed(application_name):
+                # Search Application Path on OS
+                if app.install_location != '':
+                    for root, dirs, files in os.walk(app.install_location):
+                        for d in dirs:
+                            for ap in validate.application_validate:
+                                if re.search(application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
+                                        str(ap[1]+"$"), str(d), re.IGNORECASE):
+                                    application_list.append([application_name, str(os.path.join(root, d)), ap[1]])
 
-            # Search Application Path on OS
-            if app.install_location != '':
-                for root, dirs, files in os.walk(app.install_location):
-                    for d in dirs:
-                        for ap in validate.application_validate:
-                            if re.search(application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
-                                    str(ap[1]+"$"), str(d), re.IGNORECASE):
-                                application_list.append([application_name, str(os.path.join(root, d)), ap[1]])
+                        for f in files:
+                            for ap in validate.application_validate:
+                                if re.search(r'\b' + application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
+                                        str(ap[1])+"$", str(f)):
+                                    application_list.append([application_name, str(os.path.join(root, f)), ap[1]])
 
-                    for f in files:
-                        for ap in validate.application_validate:
-                            if re.search(r'\b' + application_name + '\\b', str(ap[0]), re.IGNORECASE) and re.search(
-                                    str(ap[1])+"$", str(f)):
-                                application_list.append([application_name, str(os.path.join(root, f)), ap[1]])
+    if len(application_list) == 0:
+        for ap in validate.application_validate:
+            if re.search(application_name + '\\b', str(ap[0]), re.IGNORECASE):
+                application_list.append([application_name, '', ap[1]])
     # [Application name, application installed path, process name]
     return application_list
 
