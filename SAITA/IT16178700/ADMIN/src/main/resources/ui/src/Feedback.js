@@ -61,12 +61,12 @@ function Feedback() {
     var columns = [
         { title: "id", field: "id", hidden: true },
         { title: "Error Type", field: "errorType" },
-        { title: "Application Name", field: "applicationName" },
-        { title: "Application Version", field: "applicationVersion" },
         { title: "Error Description", field: "errorDescription" },
         { title: "User name", field: "userName" },
         { title: "Contact Number", field: "contactNumber" },
-        { title: "User Email", field: "userEmail" }
+        { title: "User Email", field: "userEmail" },
+        { title: "Application Name", field: "applicationName" },
+        { title: "Application Version", field: "applicationVersion" }
     ]
     const [data, setData] = useState([]); //table data
 

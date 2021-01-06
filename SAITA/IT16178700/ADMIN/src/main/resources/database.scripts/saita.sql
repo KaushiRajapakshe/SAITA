@@ -4,13 +4,13 @@ CREATE DATABASE `saita`;
 
 CREATE TABLE `saita`.`feedback`(
     id int(100) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    applicationName VARCHAR(35) NOT NULL,
-    applicationVersion VARCHAR(35) NOT NULL,
     errorType VARCHAR(135) NOT NULL,
     errorDescription VARCHAR(135) NOT NULL,
     userName VARCHAR(35) NOT NULL,
     contactNumber VARCHAR(35) NOT NULL,
     userEmail VARCHAR(35) NOT NULL,
+    applicationName VARCHAR(35) NOT NULL,
+    applicationVersion VARCHAR(35) NOT NULL,
     errorStatus VARCHAR(500),
     errorAction VARCHAR(500),
     errorTarget VARCHAR(500)
