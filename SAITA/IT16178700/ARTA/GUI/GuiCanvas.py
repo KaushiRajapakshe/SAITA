@@ -1,4 +1,6 @@
 from win32api import GetMonitorInfo, MonitorFromPoint
+
+from ARTA.config import config_controller
 from ARTA.controllers.chat.chat_controller import ChatController
 from tkinter import Frame, Label, BOTH, TOP, END, NORMAL, DISABLED, Text, Scrollbar, Button
 from PIL import ImageTk, Image
@@ -74,19 +76,25 @@ def create_head_show_window(full_window, win_root):
     clock.config(text="CLOCK:" + str(tick()))
 
     pil_image = Image.open(variables.file_in)
-    image200x100 = pil_image.resize((500, 500), Image.ANTIALIAS)
+    image200x100 = pil_image.resize((400, 400), Image.ANTIALIAS)
     tk_image1 = ImageTk.PhotoImage(image200x100)
     global img_show
     img_show = tk_image1
     label2 = tk.Label(head_window, image=img_show, bg="white").pack(padx=variables.label2_x, pady=0, side=tk.LEFT)
 
-    label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 55, 'bold'), fg="gray29", bg="white").place(
+    label4 = tk.Label(head_window, text="SAITA", font=("Square721 BT", 45, 'bold'), fg="gray29", bg="white").place(
         x=variables.label4_x, y=variables.label4_y)
     label5 = tk.Label(head_window, text="Smart Artificial Intelligent Troubleshooting Agent",
                       font=("Square721 BT", 14, 'bold'), fg="gray29", bg="white").place(x=variables.label5_x,
                                                                                         y=variables.label5_y)
     label3 = tk.Label(head_window, width=variables.label3_w, height=variables.label3_h,
                       bg="gray29").pack(padx=variables.label3_padx, pady=variables.label3_pady, side=tk.LEFT)
+
+    # initialise config object using the config_controller
+    app_config = config_controller.init_config(variables.app_config_path)
+    # set scheduler_log_scan string value
+    app_config.set("log", "scheduler_log_scan", 'enable')
+    config_controller.save(variables.app_config_path, app_config)
 
     def send(event, full_root):
         global chatcon, acc_ra, work_area
